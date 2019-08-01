@@ -4,10 +4,8 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.Consumer;
 
 public class UrlParamaterEncoder {
 	public static String Encode(Object obj)
@@ -69,7 +67,6 @@ public class UrlParamaterEncoder {
 		if (prop != null && IsPrimitive(obj.getClass())) {
 			map.put(path, obj);
 		} else if (prop != null & obj.getClass().isArray()) {
-			System.out.print("isArray");
 			int length = Array.getLength(obj);
 
 			for (int i = 0; i < length; ++i) {
@@ -80,7 +77,6 @@ public class UrlParamaterEncoder {
 				UrlEncode(map, name, element, box.getClass().getField("Item"));
 			}
 		} else if (prop != null && obj instanceof Iterable<?>) {
-			System.out.print("Iterable");
 			int index = 0;
 			Iterable<?> collection = (Iterable<?>) obj;
 
