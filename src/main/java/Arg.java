@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Arg {
 	public String Hello = "Hello World";
 	public Integer A = 12;
@@ -7,6 +10,13 @@ public class Arg {
 
 	protected class Inner {
 		public Integer A = 12;
-		public int[] List = new int[2];
+		public int[] List1 = new int[2];
+		public List<Integer> List2 = new ArrayList<Integer>();
+		
+		public Inner()
+		{
+			List2.add(12);
+			List2.add(13);
+		}
 	}
 }

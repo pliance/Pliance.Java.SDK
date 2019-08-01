@@ -1,4 +1,5 @@
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.net.URLEncoder;
@@ -6,6 +7,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Consumer;
 
 public class UrlParamaterEncoder {
 	public static String Encode(Object obj)
@@ -66,20 +68,29 @@ public class UrlParamaterEncoder {
 
 		if (prop != null && IsPrimitive(obj.getClass())) {
 			map.put(path, obj);
-		}
-        else if (prop!= null && obj instanceof Collection)
-        {
-            int index = 0;
-            Collection<?> collection = (Collection<?>)obj;
-            
-            for (Object element : collection)
-            {
-            	Box box = new Box(element);
-            	
-            	UrlEncode(map, String.format("%s[%d]", index++), element, box.getClass().getField("Item"));
-            }
-        }
-		else {
+		} else if (prop != null & obj.getClass().isArray()) {
+			System.out.print("isArray");
+			int length = Array.getLength(obj);
+
+			for (int i = 0; i < length; ++i) {
+				Object element = Array.get(obj, i);
+				Box box = new Box(element);
+				String name = String.format("%s[%d]", path, i);
+
+				UrlEncode(map, name, element, box.getClass().getField("Item"));
+			}
+		} else if (prop != null && obj instanceof Iterable<?>) {
+			System.out.print("Iterable");
+			int index = 0;
+			Iterable<?> collection = (Iterable<?>) obj;
+
+			for (Object element : collection) {
+				Box box = new Box(element);
+				String name = String.format("%s[%d]", path, index++);
+
+				UrlEncode(map, name, element, box.getClass().getField("Item"));
+			}
+		} else {
 			for (Field field : obj.getClass().getDeclaredFields()) {
 				String name = field.getName();
 				int modifiers = field.getModifiers();
