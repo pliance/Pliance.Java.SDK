@@ -3,7 +3,7 @@ public class Program {
 		Arg arg = new Arg();
 
 		try {
-			System.out.println(UrlParamaterEncoder.Encode(arg));
+			System.out.println(UrlParameterEncoder.Encode(arg));
 		} catch (Exception e) {
 			System.out.println("Exception");
 		}

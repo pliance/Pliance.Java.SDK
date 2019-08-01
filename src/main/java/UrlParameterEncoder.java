@@ -7,7 +7,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
-public class UrlParamaterEncoder {
+public class UrlParameterEncoder {
 	public static String Encode(Object obj)
 			throws IllegalArgumentException, IllegalAccessException, NoSuchFieldException, SecurityException {
 		if (obj == null) {
@@ -58,8 +58,6 @@ public class UrlParamaterEncoder {
 
 	private static void UrlEncode(Map<String, Object> map, String path, Object obj, Field prop)
 			throws IllegalArgumentException, IllegalAccessException, NoSuchFieldException, SecurityException {
-		System.out.println("Path: " + path);
-
 		if (obj == null) {
 			return;
 		}
