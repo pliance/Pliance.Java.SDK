@@ -1,11 +1,25 @@
+import Contracts.RegisterPersonCommand;
+
 public class Program {
 	public static void main(String[] args) {
-		Arg arg = new Arg();
+//		Arg arg = new Arg();
+//
+//		try {
+//			System.out.println(UrlParameterEncoder.Encode(arg));
+//		} catch (Exception e) {
+//			System.out.println("Exception");
+//		}
+
+		PlianceClientFactory factory = new PlianceClientFactory("secret", "Demo", "https://test.pliance.io", null);
+		IPlianceClient client = factory.Create("givenname", "subject");
+		RegisterPersonCommand command = new RegisterPersonCommand();
+
+		command.PersonReferenceId = "ref/1";
 
 		try {
-			System.out.println(UrlParameterEncoder.Encode(arg));
+			client.RegisterPerson(command);
 		} catch (Exception e) {
-			System.out.println("Exception");
+			e.printStackTrace();
 		}
 	}
 }
