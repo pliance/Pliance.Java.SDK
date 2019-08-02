@@ -3,6 +3,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Graph {
-	public List<Node> Nodes = new ArrayList<Node>();
-	public List<Link> Links = new ArrayList<Link>();
+	public List<Node> nodes = new ArrayList<Node>();
+	public List<Link> links = new ArrayList<Link>();
 }

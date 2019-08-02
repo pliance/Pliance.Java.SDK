@@ -1,7 +1,7 @@
 package pliance.sdk.Contracts;
 
 public class Birthdate {
-	public Integer Year;
-	public Integer Month;
-	public Integer Day;
+	public Integer year;
+	public Integer month;
+	public Integer day;
 }

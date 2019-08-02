@@ -1,8 +1,8 @@
 package pliance.sdk.Contracts;
 
 public class ClassifyHitCommand {
-	public String PersonReferenceId;
-	public String MatchId;
-	public String AliasId;
-	public ClassificationType Classification;
+	public String personReferenceId;
+	public String matchId;
+	public String aliasId;
+	public ClassificationType classification;
 }

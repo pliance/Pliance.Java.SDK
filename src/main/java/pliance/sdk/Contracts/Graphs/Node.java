@@ -1,9 +1,9 @@
 package pliance.sdk.Contracts.Graphs;
 
 public class Node {
-	public int Id;
-	public String Name;
-	public String Type;
-	public String Reference;
-	public boolean IsPep;
+	public int id;
+	public String name;
+	public String type;
+	public String reference;
+	public boolean isPep;
 }

@@ -4,9 +4,9 @@ import pliance.sdk.Contracts.Graphs.*;
 import java.util.List;
 
 public class ViewCompanyResponseData {
-	public String CompanyReferenceId;
-	public CompanyIdentity Identity;
-	public String Name;
-	public Graph Graph;
-	public List<Beneficiary> Beneficiaries;
+	public String companyReferenceId;
+	public CompanyIdentity identity;
+	public String name;
+	public Graph graph;
+	public List<Beneficiary> beneficiaries;
 }

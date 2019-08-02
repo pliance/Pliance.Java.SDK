@@ -34,9 +34,9 @@ public class AppTest extends TestCase {
 	public void testApp() throws Exception {
 		RegisterPersonCommand command = new RegisterPersonCommand();
 
-		command.PersonReferenceId = "reference-id";
-		command.FirstName = "Adam";
-		command.LastName = "Anvandare";
+		command.personReferenceId = "reference-id";
+		command.firstName = "Adam";
+		command.lastName = "Anvandare";
 
 		RegisterPersonResponse response = _client.RegisterPerson(command);
 		Gson gson = new Gson();

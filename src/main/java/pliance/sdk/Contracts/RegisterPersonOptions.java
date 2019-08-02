@@ -1,6 +1,6 @@
 package pliance.sdk.Contracts;
 
 public class RegisterPersonOptions {
-	public Order Order;
-	public Fuzziness Fuzziness;
+	public Order order;
+	public Fuzziness fuzziness;
 }

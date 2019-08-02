@@ -1,7 +1,7 @@
 package pliance.sdk.Contracts;
 
 public class Filter {
-	public Boolean IsPep;
-	public Boolean IsRca;
-	public Boolean IsSanction;
+	public Boolean isPep;
+	public Boolean isRca;
+	public Boolean isSanction;
 }

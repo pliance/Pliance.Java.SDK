@@ -3,15 +3,15 @@ package pliance.sdk.Contracts;
 import java.util.List;
 
 public class Hit {
-	public String MatchId;
-	public List<TextMatch> MatchedFirstName;
-	public List<TextMatch> MatchedLastName;
-	public Birthdate Birthdate;
-	public boolean IsPep;
-	public boolean IsRca;
-	public boolean IsSanction;
-	public String FirstName;
-	public String LastName;
-	public ClassificationType Classification;
-	public String AliasId;
+	public String matchId;
+	public List<TextMatch> matchedFirstName;
+	public List<TextMatch> matchedLastName;
+	public Birthdate birthdate;
+	public boolean isPep;
+	public boolean isRca;
+	public boolean isSanction;
+	public String firstName;
+	public String lastName;
+	public ClassificationType classification;
+	public String aliasId;
 }

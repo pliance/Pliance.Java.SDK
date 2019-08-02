@@ -1,5 +1,5 @@
 package pliance.sdk.Contracts;
 
 public class ViewPersonQuery {
-	public String PersonReferenceId;
+	public String personReferenceId;
 }

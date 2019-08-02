@@ -3,12 +3,12 @@ package pliance.sdk.Contracts;
 import java.util.List;
 
 public class ViewPersonResponseData {
-	public String PersonReferenceId;
-	public PersonIdentity Identity;
-	public String FirstName;
-	public String LastName;
-	public String Birthdate;
-	public List<Address> Addresses;
-	public List<List<Hit>> Hits;
-	public Gender Gender;
+	public String personReferenceId;
+	public PersonIdentity identity;
+	public String firstName;
+	public String lastName;
+	public String birthdate;
+	public List<Address> addresses;
+	public List<List<Hit>> hits;
+	public Gender gender;
 }

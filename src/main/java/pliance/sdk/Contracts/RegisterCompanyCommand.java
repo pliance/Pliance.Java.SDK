@@ -1,7 +1,7 @@
 package pliance.sdk.Contracts;
 
 public class RegisterCompanyCommand {
-	public String CompanyReferenceId;
-	public CompanyIdentity Identity;
-	public String Name;
+	public String companyReferenceId;
+	public CompanyIdentity identity;
+	public String name;
 }

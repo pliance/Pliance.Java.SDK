@@ -3,11 +3,11 @@ package pliance.sdk.Contracts;
 import java.util.List;
 
 public class PersonSearchResult {
-	public String PersonReferenceId;
-	public List<TextMatch> FirstName;
-	public List<TextMatch> LastName;
-	public boolean IsPep;
-	public boolean IsRca;
-	public boolean IsSanction;
-	public PersonIdentity Identity;
+	public String personReferenceId;
+	public List<TextMatch> firstName;
+	public List<TextMatch> lastName;
+	public boolean isPep;
+	public boolean isRca;
+	public boolean isSanction;
+	public PersonIdentity identity;
 }

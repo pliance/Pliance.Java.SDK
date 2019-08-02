@@ -1,7 +1,7 @@
 package pliance.sdk.Contracts;
 
 public class PersonSearchQuery {
-	public Page Page;
-	public Filter Filter;
-	public String Query = "";
+	public Page page;
+	public Filter filter;
+	public String query = "";
 }

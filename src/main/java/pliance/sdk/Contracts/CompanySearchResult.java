@@ -3,10 +3,10 @@ package pliance.sdk.Contracts;
 import java.util.List;
 
 public class CompanySearchResult {
-	public String CompanyReferenceId;
-	public List<TextMatch> Name;
-	public boolean IsPep;
-	public boolean IsRca;
-	public boolean IsSanction;
-	public CompanyIdentity Identity;
+	public String companyReferenceId;
+	public List<TextMatch> name;
+	public boolean isPep;
+	public boolean isRca;
+	public boolean isSanction;
+	public CompanyIdentity identity;
 }

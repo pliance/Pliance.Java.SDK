@@ -1,9 +1,9 @@
 package pliance.sdk.Contracts;
 
 public class Response {
-	public ResponseStatus Status;
-	public boolean Success; // => Status == ResponseStatus.Success
-	public String Message;
-	public String StackTrace;
+	public ResponseStatus status;
+	public boolean success; // => Status == ResponseStatus.Success
+	public String message;
+	public String stackTrace;
 	public String checkpoint;
 }

@@ -3,5 +3,5 @@ package pliance.sdk.Contracts;
 import java.util.List;
 
 public class RegisterPersonResponse extends Response {
-	public List<List<Hit>> Hits;
+	public List<List<Hit>> hits;
 }
