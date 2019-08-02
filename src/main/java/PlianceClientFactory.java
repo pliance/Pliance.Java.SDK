@@ -2,6 +2,7 @@ import java.util.Stack;
 import java.util.function.Function;
 //
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -9,6 +10,7 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.security.KeyStore;
+import java.security.KeyStore.LoadStoreParameter;
 import java.security.SecureRandom;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.KeyManager;
@@ -24,9 +26,9 @@ public class PlianceClientFactory {
 	private String _secret;
 	private String _issuer;
 	private String _baseUrl;
-	private char[] _certificate;
+	private byte[] _certificate;
 
-	public PlianceClientFactory(String secret, String issuer, String url, char[] certificate) {
+	public PlianceClientFactory(String secret, String issuer, String url, byte[] certificate) {
 		_secret = secret;
 		_issuer = issuer;
 		_baseUrl = url;
@@ -37,7 +39,8 @@ public class PlianceClientFactory {
 		return new PlianceClient(this, givenName, subject);
 	}
 
-	public <T> T Execute(Function<HttpsURLConnection, T> action, String path, String givenName, String subject) throws Exception {
+	public <T> T Execute(Function<HttpsURLConnection, T> action, String path, String givenName, String subject)
+			throws Exception {
 		HttpsURLConnection client = CreateHttpClient(path);
 
 		client.setRequestProperty("Authorization", "Bearer " + CreateJwtToken(givenName, subject));
@@ -51,7 +54,7 @@ public class PlianceClientFactory {
 
 	private HttpsURLConnection CreateHttpClient(String url) throws Exception {
 		KeyStore clientStore = KeyStore.getInstance("PKCS12");
-		clientStore.load(new FileInputStream(new File("client.pfx")), "".toCharArray());
+		clientStore.load(new ByteArrayInputStream(_certificate), "".toCharArray());
 		KeyManagerFactory kmf = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
 		kmf.init(clientStore, "".toCharArray());
 		KeyManager[] kms = kmf.getKeyManagers();
@@ -73,8 +76,9 @@ public class PlianceClientFactory {
 		Key signingKey = new SecretKeySpec(apiKeySecretBytes, signatureAlgorithm.getJcaName());
 		long expMillis = nowMillis + 1000 * 300;
 		Date exp = new Date(expMillis);
-		JwtBuilder builder = Jwts.builder().setId("id").setAudience("pliance.io").setIssuedAt(now).setExpiration(exp)
-				.setSubject(subject).setIssuer(_issuer).signWith(signatureAlgorithm, signingKey);
+		JwtBuilder builder = Jwts.builder().setAudience("pliance.io").setIssuedAt(now).setExpiration(exp)
+				.setSubject(subject).setIssuer(_issuer).claim("given_name", givenName)
+				.signWith(signingKey, signatureAlgorithm);
 
 		return builder.compact();
 	}
