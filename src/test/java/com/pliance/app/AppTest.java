@@ -12,6 +12,8 @@ import pliance.sdk.IPlianceClient;
 import pliance.sdk.PlianceClientFactory;
 import pliance.sdk.Contracts.RegisterPersonCommand;
 import pliance.sdk.Contracts.RegisterPersonResponse;
+import pliance.sdk.Contracts.ViewPersonQuery;
+import pliance.sdk.Contracts.ViewPersonQueryResult;
 
 public class AppTest extends TestCase {
 	private PlianceClientFactory _factory;
@@ -31,7 +33,7 @@ public class AppTest extends TestCase {
 		return new TestSuite(AppTest.class);
 	}
 
-	public void testApp() throws Exception {
+	public void testRegisterPersonCommand() throws Exception {
 		RegisterPersonCommand command = new RegisterPersonCommand();
 
 		command.personReferenceId = "reference-id";
@@ -44,4 +46,16 @@ public class AppTest extends TestCase {
 
 		System.out.println("response: " + json);
 	}
+	
+	public void testViewPerson() throws Exception {
+		ViewPersonQuery query = new ViewPersonQuery();
+
+		query.personReferenceId = "customer/2";
+
+		ViewPersonQueryResult response = _client.ViewPerson(query);
+		Gson gson = new Gson();
+		String json = gson.toJson(response);
+
+		System.out.println("response: " + json);
+	}	
 }

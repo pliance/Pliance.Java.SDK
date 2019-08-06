@@ -4,9 +4,6 @@ import com.google.gson.Gson;
 import pliance.sdk.Contracts.*;
 import pliance.sdk.Exceptions.*;
 import javax.net.ssl.HttpsURLConnection;
-
-import org.omg.CORBA.portable.OutputStream;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -103,9 +100,30 @@ public class PlianceClient implements IPlianceClient {
 	}
 
 	@Override
-	public ViewPersonQueryResult ViewPerson(ViewPersonQuery query) {
-		// TODO Auto-generated method stub
-		return null;
+	public ViewPersonQueryResult ViewPerson(ViewPersonQuery query) throws Exception {
+		if (query == null) {
+			throw new ArgumentNullException("query");
+		}
+
+		Gson gson = new Gson();
+
+		return Execute("api/PersonQuery/" + UrlParameterEncoder.Encode(query), (client) -> {
+			try {
+				client.setRequestMethod("GET");
+				if (client.getResponseCode() != 200) {
+					throw new PlianceApiException("Failed : HTTP error code : " + client.getResponseCode() + ", "
+							+ client.getResponseMessage());
+				}
+
+				String response = Convert(client.getInputStream());
+				System.out.println("Response: " + response);
+				return gson.fromJson(response, ViewPersonQueryResult.class);
+			} catch (Exception e) {
+				e.printStackTrace();
+				// throw new RuntimeException(e);
+				return null;
+			}
+		});
 	}
 
 	@Override

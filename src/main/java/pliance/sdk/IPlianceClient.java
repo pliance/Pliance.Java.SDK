@@ -34,7 +34,7 @@ public interface IPlianceClient {
 
 	PersonSearchQueryResult SearchPerson(PersonSearchQuery query);
 
-	ViewPersonQueryResult ViewPerson(ViewPersonQuery query);
+	ViewPersonQueryResult ViewPerson(ViewPersonQuery query) throws Exception;
 
 	void Ping();
 
