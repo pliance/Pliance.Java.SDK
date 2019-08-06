@@ -8,7 +8,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.util.function.Function;
 
 public class PlianceClient implements IPlianceClient {
@@ -54,9 +53,7 @@ public class PlianceClient implements IPlianceClient {
 				System.out.println("Response: " + response);
 				return gson.fromJson(response, RegisterPersonResponse.class);
 			} catch (Exception e) {
-				e.printStackTrace();
-				// throw new RuntimeException(e);
-				return null;
+				throw new RuntimeException(e);
 			}
 		});
 	}
@@ -76,27 +73,130 @@ public class PlianceClient implements IPlianceClient {
 	}
 
 	@Override
-	public ArchivePersonResponse ArchivePerson(ArchivePersonCommand command) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArchivePersonResponse ArchivePerson(ArchivePersonCommand command) throws Exception {
+		if (command == null) {
+			throw new ArgumentNullException("Command");
+		}
+
+		Gson gson = new Gson();
+		String json = gson.toJson(command);
+
+		return Execute("api/PersonCommand/Archive", (client) -> {
+			try {
+				client.setRequestMethod("POST");
+				java.io.OutputStream stream = client.getOutputStream();
+
+				System.out.println("Json: " + json);
+				stream.write(json.getBytes("UTF-8"));
+				stream.flush();
+				stream.close();
+
+				if (client.getResponseCode() != 200) {
+					throw new PlianceApiException("Failed : HTTP error code : " + client.getResponseCode() + ", "
+							+ client.getResponseMessage());
+				}
+
+				String response = Convert(client.getInputStream());
+
+				System.out.println("Response: " + response);
+				return gson.fromJson(response, ArchivePersonResponse.class);
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+			}
+		});
 	}
 
 	@Override
-	public DeletePersonResponse DeletePerson(DeletePersonCommand command) {
-		// TODO Auto-generated method stub
-		return null;
+	public DeletePersonResponse DeletePerson(DeletePersonCommand command) throws Exception {
+		if (command == null) {
+			throw new ArgumentNullException("Command");
+		}
+
+		Gson gson = new Gson();
+		String json = gson.toJson(command);
+
+		return Execute("api/PersonCommand", (client) -> {
+			try {
+				client.setRequestMethod("DELETE");
+				java.io.OutputStream stream = client.getOutputStream();
+
+				System.out.println("Json: " + json);
+				stream.write(json.getBytes("UTF-8"));
+				stream.flush();
+				stream.close();
+
+				if (client.getResponseCode() != 200) {
+					throw new PlianceApiException("Failed : HTTP error code : " + client.getResponseCode() + ", "
+							+ client.getResponseMessage());
+				}
+
+				String response = Convert(client.getInputStream());
+
+				System.out.println("Response: " + response);
+				return gson.fromJson(response, DeletePersonResponse.class);
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+			}
+		});
 	}
 
 	@Override
-	public ClassifyHitResponse ClassifyPersonHit(ClassifyHitCommand command) {
-		// TODO Auto-generated method stub
-		return null;
+	public ClassifyHitResponse ClassifyPersonHit(ClassifyHitCommand command) throws Exception {
+		if (command == null) {
+			throw new ArgumentNullException("Command");
+		}
+
+		Gson gson = new Gson();
+		String json = gson.toJson(command);
+
+		return Execute("api/PersonCommand/Classify", (client) -> {
+			try {
+				client.setRequestMethod("POST");
+				java.io.OutputStream stream = client.getOutputStream();
+
+				System.out.println("Json: " + json);
+				stream.write(json.getBytes("UTF-8"));
+				stream.flush();
+				stream.close();
+
+				if (client.getResponseCode() != 200) {
+					throw new PlianceApiException("Failed : HTTP error code : " + client.getResponseCode() + ", "
+							+ client.getResponseMessage());
+				}
+
+				String response = Convert(client.getInputStream());
+
+				System.out.println("Response: " + response);
+				return gson.fromJson(response, ClassifyHitResponse.class);
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+			}
+		});
 	}
 
 	@Override
-	public PersonSearchQueryResult SearchPerson(PersonSearchQuery query) {
-		// TODO Auto-generated method stub
-		return null;
+	public PersonSearchQueryResult SearchPerson(PersonSearchQuery query) throws Exception {
+		if (query == null) {
+			throw new ArgumentNullException("query");
+		}
+
+		Gson gson = new Gson();
+
+		return Execute("api/PersonQuery/Search/" + UrlParameterEncoder.Encode(query), (client) -> {
+			try {
+				client.setRequestMethod("GET");
+				if (client.getResponseCode() != 200) {
+					throw new PlianceApiException("Failed : HTTP error code : " + client.getResponseCode() + ", "
+							+ client.getResponseMessage());
+				}
+
+				String response = Convert(client.getInputStream());
+				System.out.println("Response: " + response);
+				return gson.fromJson(response, PersonSearchQueryResult.class);
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+			}
+		});
 	}
 
 	@Override
@@ -119,17 +219,30 @@ public class PlianceClient implements IPlianceClient {
 				System.out.println("Response: " + response);
 				return gson.fromJson(response, ViewPersonQueryResult.class);
 			} catch (Exception e) {
-				e.printStackTrace();
-				// throw new RuntimeException(e);
-				return null;
+				throw new RuntimeException(e);
 			}
 		});
 	}
 
 	@Override
-	public void Ping() {
-		// TODO Auto-generated method stub
+	public PingResponse Ping() throws Exception {
+		Gson gson = new Gson();
 
+		return Execute("api/Ping", (client) -> {
+			try {
+				client.setRequestMethod("GET");
+				if (client.getResponseCode() != 200) {
+					throw new PlianceApiException("Failed : HTTP error code : " + client.getResponseCode() + ", "
+							+ client.getResponseMessage());
+				}
+
+				String response = Convert(client.getInputStream());
+				System.out.println("Response: " + response);
+				return gson.fromJson(response, PingResponse.class);
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+			}
+		});
 	}
 
 	@Override

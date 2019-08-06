@@ -10,10 +10,7 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 import pliance.sdk.IPlianceClient;
 import pliance.sdk.PlianceClientFactory;
-import pliance.sdk.Contracts.RegisterPersonCommand;
-import pliance.sdk.Contracts.RegisterPersonResponse;
-import pliance.sdk.Contracts.ViewPersonQuery;
-import pliance.sdk.Contracts.ViewPersonQueryResult;
+import pliance.sdk.Contracts.*;
 
 public class AppTest extends TestCase {
 	private PlianceClientFactory _factory;
@@ -58,4 +55,12 @@ public class AppTest extends TestCase {
 
 		System.out.println("response: " + json);
 	}	
+	
+	public void testPing() throws Exception {
+		PingResponse response = _client.Ping();
+		Gson gson = new Gson();
+		String json = gson.toJson(response);
+
+		System.out.println("response: " + json);
+	}		
 }

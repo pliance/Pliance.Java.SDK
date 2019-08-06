@@ -7,3 +7,4 @@ public class Response {
 	public String stackTrace;
 	public String checkpoint;
 }
+

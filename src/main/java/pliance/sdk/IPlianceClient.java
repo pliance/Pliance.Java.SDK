@@ -1,42 +1,20 @@
 package pliance.sdk;
 import pliance.sdk.Contracts.*;
-import pliance.sdk.Contracts.ArchiveCompanyCommand;
-import pliance.sdk.Contracts.ArchiveCompanyResponse;
-import pliance.sdk.Contracts.ArchivePersonCommand;
-import pliance.sdk.Contracts.ArchivePersonResponse;
-import pliance.sdk.Contracts.ClassifyHitCommand;
-import pliance.sdk.Contracts.ClassifyHitResponse;
-import pliance.sdk.Contracts.CompanySearchQuery;
-import pliance.sdk.Contracts.CompanySearchQueryResult;
-import pliance.sdk.Contracts.DeleteCompanyCommand;
-import pliance.sdk.Contracts.DeleteCompanyResponse;
-import pliance.sdk.Contracts.DeletePersonCommand;
-import pliance.sdk.Contracts.DeletePersonResponse;
-import pliance.sdk.Contracts.PersonSearchQuery;
-import pliance.sdk.Contracts.PersonSearchQueryResult;
-import pliance.sdk.Contracts.RegisterCompanyCommand;
-import pliance.sdk.Contracts.RegisterCompanyResponse;
-import pliance.sdk.Contracts.RegisterPersonCommand;
-import pliance.sdk.Contracts.RegisterPersonResponse;
-import pliance.sdk.Contracts.ViewCompanyQuery;
-import pliance.sdk.Contracts.ViewCompanyQueryResult;
-import pliance.sdk.Contracts.ViewPersonQuery;
-import pliance.sdk.Contracts.ViewPersonQueryResult;
 
 public interface IPlianceClient {
 	RegisterPersonResponse RegisterPerson(RegisterPersonCommand command) throws Exception;
 
-	ArchivePersonResponse ArchivePerson(ArchivePersonCommand command);
+	ArchivePersonResponse ArchivePerson(ArchivePersonCommand command) throws Exception;
 
-	DeletePersonResponse DeletePerson(DeletePersonCommand command);
+	DeletePersonResponse DeletePerson(DeletePersonCommand command) throws Exception;
 
-	ClassifyHitResponse ClassifyPersonHit(ClassifyHitCommand command);
+	ClassifyHitResponse ClassifyPersonHit(ClassifyHitCommand command) throws Exception;
 
-	PersonSearchQueryResult SearchPerson(PersonSearchQuery query);
+	PersonSearchQueryResult SearchPerson(PersonSearchQuery query) throws Exception;
 
 	ViewPersonQueryResult ViewPerson(ViewPersonQuery query) throws Exception;
 
-	void Ping();
+	PingResponse Ping() throws Exception;
 
 	RegisterCompanyResponse RegisterCompany(RegisterCompanyCommand command);
 
