@@ -10,12 +10,12 @@ import pliance.sdk.IPlianceClient;
 import pliance.sdk.PlianceClientFactory;
 import pliance.sdk.contracts.*;
 
-public class AppTest extends TestCase {
+public class AppStage4Test extends TestCase {
 	private PlianceClientFactory _factory;
 	private IPlianceClient _client;
 	private Gson _gson;
 
-	public AppTest(String testName) throws Exception {
+	public AppStage4Test(String testName) throws Exception {
 		super(testName);
 
 		FileInputStream certificate = new FileInputStream(
@@ -27,7 +27,7 @@ public class AppTest extends TestCase {
 	}
 
 	public static Test suite() {
-		return new TestSuite(AppTest.class);
+		return new TestSuite(AppStage4Test.class);
 	}
 
 	public void testRegisterPersonCommand() throws Exception {
