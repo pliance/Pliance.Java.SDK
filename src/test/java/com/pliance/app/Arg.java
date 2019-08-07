@@ -1,4 +1,4 @@
-package pliance.sdk;
+package com.pliance.app;
 import java.util.ArrayList;
 import java.util.List;
 
