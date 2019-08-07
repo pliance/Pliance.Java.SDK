@@ -2,9 +2,7 @@ package com.pliance.app;
 
 import java.io.File;
 import java.io.FileInputStream;
-
 import com.google.gson.Gson;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;

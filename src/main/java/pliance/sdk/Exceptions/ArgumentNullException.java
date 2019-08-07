@@ -1,6 +1,6 @@
 package pliance.sdk.Exceptions;
 
-public class ArgumentNullException extends Exception {
+public class ArgumentNullException extends PlianceApiException {
 	public ArgumentNullException(String message) {
 		super(message);
 	}

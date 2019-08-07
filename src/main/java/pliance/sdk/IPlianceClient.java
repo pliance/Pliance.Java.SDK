@@ -1,5 +1,6 @@
 package pliance.sdk;
 import pliance.sdk.Contracts.*;
+import pliance.sdk.Exceptions.PlianceApiException;
 
 public interface IPlianceClient {
 	RegisterPersonResponse RegisterPerson(RegisterPersonCommand command) throws Exception;
