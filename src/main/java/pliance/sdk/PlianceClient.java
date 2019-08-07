@@ -1,10 +1,8 @@
 package pliance.sdk;
 
 import com.google.gson.Gson;
-
 import pliance.sdk.contracts.*;
 import pliance.sdk.exceptions.*;
-
 import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
 import java.io.IOException;
