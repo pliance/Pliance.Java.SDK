@@ -1,29 +1,30 @@
 package pliance.sdk;
-import pliance.sdk.Contracts.*;
-import pliance.sdk.Exceptions.PlianceApiException;
+
+import pliance.sdk.contracts.*;
+import pliance.sdk.exceptions.PlianceApiException;
 
 public interface IPlianceClient {
-	RegisterPersonResponse RegisterPerson(RegisterPersonCommand command) throws Exception;
+	RegisterPersonResponse RegisterPerson(RegisterPersonCommand command) throws PlianceApiException;
 
-	ArchivePersonResponse ArchivePerson(ArchivePersonCommand command) throws Exception;
+	ArchivePersonResponse ArchivePerson(ArchivePersonCommand command) throws PlianceApiException;
 
-	DeletePersonResponse DeletePerson(DeletePersonCommand command) throws Exception;
+	DeletePersonResponse DeletePerson(DeletePersonCommand command) throws PlianceApiException;
 
-	ClassifyHitResponse ClassifyPersonHit(ClassifyHitCommand command) throws Exception;
+	ClassifyHitResponse ClassifyPersonHit(ClassifyHitCommand command) throws PlianceApiException;
 
-	PersonSearchQueryResult SearchPerson(PersonSearchQuery query) throws Exception;
+	PersonSearchQueryResult SearchPerson(PersonSearchQuery query) throws PlianceApiException;
 
-	ViewPersonQueryResult ViewPerson(ViewPersonQuery query) throws Exception;
+	ViewPersonQueryResult ViewPerson(ViewPersonQuery query) throws PlianceApiException;
 
-	PingResponse Ping() throws Exception;
+	PingResponse Ping() throws PlianceApiException;
 
-	RegisterCompanyResponse RegisterCompany(RegisterCompanyCommand command);
+	RegisterCompanyResponse RegisterCompany(RegisterCompanyCommand command) throws PlianceApiException;
 
-	DeleteCompanyResponse DeleteCompany(DeleteCompanyCommand command);
+	DeleteCompanyResponse DeleteCompany(DeleteCompanyCommand command) throws PlianceApiException;
 
-	ArchiveCompanyResponse ArchiveCompany(ArchiveCompanyCommand command);
+	ArchiveCompanyResponse ArchiveCompany(ArchiveCompanyCommand command) throws PlianceApiException;
 
-	CompanySearchQueryResult SearchCompany(CompanySearchQuery request);
+	CompanySearchQueryResult SearchCompany(CompanySearchQuery request) throws PlianceApiException;
 
-	ViewCompanyQueryResult ViewCompany(ViewCompanyQuery request);
+	ViewCompanyQueryResult ViewCompany(ViewCompanyQuery request) throws PlianceApiException;
 }

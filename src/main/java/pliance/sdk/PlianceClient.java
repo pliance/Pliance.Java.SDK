@@ -1,8 +1,10 @@
 package pliance.sdk;
 
 import com.google.gson.Gson;
-import pliance.sdk.Contracts.*;
-import pliance.sdk.Exceptions.*;
+
+import pliance.sdk.contracts.*;
+import pliance.sdk.exceptions.*;
+
 import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -21,11 +23,11 @@ public class PlianceClient implements IPlianceClient {
 		_factory = factory;
 	}
 
-	private <T> T Execute(String path, Function<HttpsURLConnection, T> action) throws Exception {
+	private <T> T Execute(String path, Function<HttpsURLConnection, T> action) throws PlianceApiException {
 		return _factory.Execute(action, path, _givenName, _subject);
 	}
 
-	public RegisterPersonResponse RegisterPerson(RegisterPersonCommand command) throws Exception {
+	public RegisterPersonResponse RegisterPerson(RegisterPersonCommand command) throws PlianceApiException {
 		if (command == null) {
 			throw new ArgumentNullException("Command");
 		}
@@ -68,7 +70,7 @@ public class PlianceClient implements IPlianceClient {
 		return stringBuilder.toString();
 	}
 
-	public ArchivePersonResponse ArchivePerson(ArchivePersonCommand command) throws Exception {
+	public ArchivePersonResponse ArchivePerson(ArchivePersonCommand command) throws PlianceApiException {
 		if (command == null) {
 			throw new ArgumentNullException("Command");
 		}
@@ -97,7 +99,7 @@ public class PlianceClient implements IPlianceClient {
 		});
 	}
 
-	public DeletePersonResponse DeletePerson(DeletePersonCommand command) throws Exception {
+	public DeletePersonResponse DeletePerson(DeletePersonCommand command) throws PlianceApiException {
 		if (command == null) {
 			throw new ArgumentNullException("Command");
 		}
@@ -127,7 +129,7 @@ public class PlianceClient implements IPlianceClient {
 		});
 	}
 
-	public ClassifyHitResponse ClassifyPersonHit(ClassifyHitCommand command) throws Exception {
+	public ClassifyHitResponse ClassifyPersonHit(ClassifyHitCommand command) throws PlianceApiException {
 		if (command == null) {
 			throw new ArgumentNullException("Command");
 		}
@@ -157,7 +159,7 @@ public class PlianceClient implements IPlianceClient {
 		});
 	}
 
-	public PersonSearchQueryResult SearchPerson(PersonSearchQuery query) throws Exception {
+	public PersonSearchQueryResult SearchPerson(PersonSearchQuery query) throws PlianceApiException {
 		if (query == null) {
 			throw new ArgumentNullException("query");
 		}
@@ -180,7 +182,7 @@ public class PlianceClient implements IPlianceClient {
 		});
 	}
 
-	public ViewPersonQueryResult ViewPerson(ViewPersonQuery query) throws Exception {
+	public ViewPersonQueryResult ViewPerson(ViewPersonQuery query) throws PlianceApiException {
 		if (query == null) {
 			throw new ArgumentNullException("query");
 		}
@@ -203,7 +205,7 @@ public class PlianceClient implements IPlianceClient {
 		});
 	}
 
-	public PingResponse Ping() throws Exception {
+	public PingResponse Ping() throws PlianceApiException {
 		Gson gson = new Gson();
 
 		return Execute("api/Ping", (client) -> {
@@ -222,23 +224,23 @@ public class PlianceClient implements IPlianceClient {
 		});
 	}
 
-	public RegisterCompanyResponse RegisterCompany(RegisterCompanyCommand command) {
+	public RegisterCompanyResponse RegisterCompany(RegisterCompanyCommand command) throws PlianceApiException {
 		return null;
 	}
 
-	public DeleteCompanyResponse DeleteCompany(DeleteCompanyCommand command) {
+	public DeleteCompanyResponse DeleteCompany(DeleteCompanyCommand command) throws PlianceApiException {
 		return null;
 	}
 
-	public ArchiveCompanyResponse ArchiveCompany(ArchiveCompanyCommand command) {
+	public ArchiveCompanyResponse ArchiveCompany(ArchiveCompanyCommand command) throws PlianceApiException {
 		return null;
 	}
 
-	public CompanySearchQueryResult SearchCompany(CompanySearchQuery request) {
+	public CompanySearchQueryResult SearchCompany(CompanySearchQuery request) throws PlianceApiException {
 		return null;
 	}
 
-	public ViewCompanyQueryResult ViewCompany(ViewCompanyQuery request) {
+	public ViewCompanyQueryResult ViewCompany(ViewCompanyQuery request) throws PlianceApiException {
 		return null;
 	}
 }

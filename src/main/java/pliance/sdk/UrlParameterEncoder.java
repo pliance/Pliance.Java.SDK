@@ -1,4 +1,5 @@
 package pliance.sdk;
+
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
@@ -8,39 +9,45 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
+import pliance.sdk.exceptions.AggregatedException;
+import pliance.sdk.exceptions.PlianceApiException;
+
 public class UrlParameterEncoder {
-	public static String Encode(Object obj)
-			throws IllegalArgumentException, IllegalAccessException, NoSuchFieldException, SecurityException {
+	public static String Encode(Object obj) throws PlianceApiException {
 		if (obj == null) {
 			return "";
 		}
 
-		Map<String, Object> map = new HashMap<String, Object>();
+		try {
+			Map<String, Object> map = new HashMap<String, Object>();
 
-		UrlEncode(map, null, obj, null);
+			UrlEncode(map, null, obj, null);
 
-		if (map.size() == 0) {
-			return "";
-		}
-
-		StringBuilder builder = new StringBuilder();
-
-		builder.append("?");
-
-		boolean first = true;
-
-		for (Map.Entry<String, Object> entry : map.entrySet()) {
-			if (!first) {
-				builder.append("&");
+			if (map.size() == 0) {
+				return "";
 			}
 
-			builder.append(HtmlEncode(entry.getKey()));
-			builder.append("=");
-			builder.append(HtmlEncode(entry.getValue().toString()));
-			first = false;
-		}
+			StringBuilder builder = new StringBuilder();
 
-		return builder.toString();
+			builder.append("?");
+
+			boolean first = true;
+
+			for (Map.Entry<String, Object> entry : map.entrySet()) {
+				if (!first) {
+					builder.append("&");
+				}
+
+				builder.append(HtmlEncode(entry.getKey()));
+				builder.append("=");
+				builder.append(HtmlEncode(entry.getValue().toString()));
+				first = false;
+			}
+
+			return builder.toString();
+		} catch (Exception ex) {
+			throw new AggregatedException(ex);
+		}
 	}
 
 	private static String HtmlEncode(String value) {
@@ -51,7 +58,7 @@ public class UrlParameterEncoder {
 		}
 	}
 
-	private static boolean IsPrimitive(Class type) {
+	private static boolean IsPrimitive(Class<? extends Object> type) {
 		return type == Double.class || type == Float.class || type == Long.class || type == Integer.class
 				|| type == Short.class || type == Character.class || type == Byte.class || type == Boolean.class
 				|| type == String.class;

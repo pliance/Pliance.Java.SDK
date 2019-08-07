@@ -1,16 +1,9 @@
 package pliance.sdk;
-import java.util.Stack;
+
 import java.util.function.Function;
-//
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.security.KeyStore;
-import java.security.KeyStore.LoadStoreParameter;
 import java.security.SecureRandom;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.KeyManager;
@@ -19,6 +12,8 @@ import javax.net.ssl.SSLContext;
 import javax.crypto.spec.SecretKeySpec;
 import java.security.Key;
 import io.jsonwebtoken.*;
+import pliance.sdk.exceptions.*;
+
 import java.util.Date;
 
 public class PlianceClientFactory {
@@ -40,15 +35,16 @@ public class PlianceClientFactory {
 	}
 
 	public <T> T Execute(Function<HttpsURLConnection, T> action, String path, String givenName, String subject)
-			throws Exception {
-		HttpsURLConnection client = CreateHttpClient(path);
-
-		client.setRequestProperty("Authorization", "Bearer " + CreateJwtToken(givenName, subject));
+			throws PlianceApiException {
 
 		try {
+			HttpsURLConnection client = CreateHttpClient(path);
+
+			client.setRequestProperty("Authorization", "Bearer " + CreateJwtToken(givenName, subject));
+
 			return action.apply(client);
 		} catch (Exception ex) {
-			throw ex;
+			throw new AggregatedException(ex);
 		}
 	}
 
@@ -64,7 +60,7 @@ public class PlianceClientFactory {
 		System.out.println("Url: " + xurl);
 		HttpsURLConnection client = (HttpsURLConnection) xurl.openConnection();
 		client.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-		client.setRequestProperty("Accept", "application/json");		
+		client.setRequestProperty("Accept", "application/json");
 		client.setSSLSocketFactory(sslContext.getSocketFactory());
 		client.setDoInput(true);
 		client.setDoOutput(true);
@@ -80,8 +76,8 @@ public class PlianceClientFactory {
 		Key signingKey = new SecretKeySpec(apiKeySecretBytes, signatureAlgorithm.getJcaName());
 		long expMillis = nowMillis + 1000 * 300;
 		Date exp = new Date(expMillis);
-		JwtBuilder builder = Jwts.builder().setAudience("pliance.io").setNotBefore(now).setIssuedAt(now).setExpiration(exp)
-				.setSubject(subject).setIssuer(_issuer).claim("given_name", givenName)
+		JwtBuilder builder = Jwts.builder().setAudience("pliance.io").setNotBefore(now).setIssuedAt(now)
+				.setExpiration(exp).setSubject(subject).setIssuer(_issuer).claim("given_name", givenName)
 				.signWith(signingKey, signatureAlgorithm);
 
 		return builder.compact();

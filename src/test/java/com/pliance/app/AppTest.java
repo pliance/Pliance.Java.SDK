@@ -8,7 +8,7 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 import pliance.sdk.IPlianceClient;
 import pliance.sdk.PlianceClientFactory;
-import pliance.sdk.Contracts.*;
+import pliance.sdk.contracts.*;
 
 public class AppTest extends TestCase {
 	private PlianceClientFactory _factory;
