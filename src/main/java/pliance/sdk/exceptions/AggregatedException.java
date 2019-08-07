@@ -13,4 +13,9 @@ public class AggregatedException extends PlianceApiException {
 	public Exception getException() {
 		return _exception;
 	}
+
+	public String getMessage()
+	{
+		return _exception.getMessage();
+	}
 }

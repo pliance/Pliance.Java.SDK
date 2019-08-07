@@ -4,6 +4,8 @@ import pliance.sdk.contracts.*;
 import pliance.sdk.exceptions.*;
 
 public interface IPlianceClient {
+	String Source();
+
 	RegisterPersonResponse RegisterPerson(RegisterPersonCommand command) throws PlianceApiException;
 
 	ArchivePersonResponse ArchivePerson(ArchivePersonCommand command) throws PlianceApiException;

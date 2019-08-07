@@ -14,6 +14,7 @@ public class PlianceClient implements IPlianceClient {
 	private PlianceClientFactory _factory;
 	private String _givenName;
 	private String _subject;
+	public String _source = null;
 
 	public PlianceClient(PlianceClientFactory factory, String givenName, String subject) {
 		_subject = subject;
@@ -65,7 +66,8 @@ public class PlianceClient implements IPlianceClient {
 			}
 		}
 
-		return stringBuilder.toString();
+		_source = stringBuilder.toString();
+		return _source;
 	}
 
 	public ArchivePersonResponse ArchivePerson(ArchivePersonCommand command) throws PlianceApiException {
@@ -240,5 +242,9 @@ public class PlianceClient implements IPlianceClient {
 
 	public ViewCompanyQueryResult ViewCompany(ViewCompanyQuery request) throws PlianceApiException {
 		return null;
+	}
+
+	public String Source() {
+		return _source;
 	}
 }
