@@ -19,7 +19,7 @@ public class AppStage4Test extends TestCase {
 		super(testName);
 
 		FileInputStream certificate = new FileInputStream(
-				new File("/home/dyluck/Plisec/Examples/Java/Example/client.pfx"));
+				new File("client.pfx"));
 		_factory = new PlianceClientFactory("2bb80d537b1da3e38bd30361aa855686bde0eacd7162fef6a25fe97bf527a25b", "Test",
 				"https://test-stage4.pliance.io/", certificate);
 		_client = _factory.Create("givenname", "subject");
@@ -53,7 +53,7 @@ public class AppStage4Test extends TestCase {
 
 		assertEquals(_client.Source(), json);
 	}
-	
+
 	public void testSearchPerson() throws Exception {
 		PersonSearchQuery query = new PersonSearchQuery();
 

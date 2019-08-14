@@ -28,7 +28,6 @@ public class AppStage3Test extends TestCase {
 
 	public void testPing2() throws Exception {
 		PingResponse response = _client.Ping();
-
 		String json = _gson.toJson(response);
 
 		assertEquals(_client.Source(), json);

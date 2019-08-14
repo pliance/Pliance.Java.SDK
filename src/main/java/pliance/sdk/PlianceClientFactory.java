@@ -57,7 +57,7 @@ public class PlianceClientFactory {
 		SSLContext sslContext = SSLContext.getInstance("TLS");
 		sslContext.init(kms, null, new SecureRandom());
 		URL xurl = new URL(_baseUrl + url);
-//		System.out.println("Url: " + xurl);
+		System.out.println("Url: " + xurl);
 		HttpsURLConnection client = (HttpsURLConnection) xurl.openConnection();
 		client.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
 		client.setRequestProperty("Accept", "application/json");
