@@ -8,6 +8,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.util.function.Function;
 
 public class PlianceClient implements IPlianceClient {
@@ -22,7 +23,7 @@ public class PlianceClient implements IPlianceClient {
 		_factory = factory;
 	}
 
-	private <T> T Execute(String path, Function<HttpsURLConnection, T> action) throws PlianceApiException {
+	private <T> T Execute(String path, Function<HttpURLConnection, T> action) throws PlianceApiException {
 		return _factory.Execute(action, path, _givenName, _subject);
 	}
 

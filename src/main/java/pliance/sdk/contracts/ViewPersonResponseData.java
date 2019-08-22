@@ -9,6 +9,6 @@ public class ViewPersonResponseData {
 	public String lastName;
 	public String birthdate;
 	public List<Address> addresses;
-	public List<List<Hit>> hits;
+	public Hit[][] hits;
 	public Gender gender;
 }

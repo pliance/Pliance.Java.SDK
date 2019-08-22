@@ -2,6 +2,7 @@ package pliance.sdk;
 
 import java.util.function.Function;
 import java.io.FileInputStream;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.security.KeyStore;
 import java.security.SecureRandom;
@@ -34,11 +35,11 @@ public class PlianceClientFactory {
 		return new PlianceClient(this, givenName, subject);
 	}
 
-	public <T> T Execute(Function<HttpsURLConnection, T> action, String path, String givenName, String subject)
+	public <T> T Execute(Function<HttpURLConnection, T> action, String path, String givenName, String subject)
 			throws PlianceApiException {
 
 		try {
-			HttpsURLConnection client = CreateHttpClient(path);
+			HttpURLConnection client = CreateHttpClient(path);
 
 			client.setRequestProperty("Authorization", "Bearer " + CreateJwtToken(givenName, subject));
 
@@ -48,24 +49,35 @@ public class PlianceClientFactory {
 		}
 	}
 
-	private HttpsURLConnection CreateHttpClient(String url) throws Exception {
-		KeyStore clientStore = KeyStore.getInstance("PKCS12");
-		clientStore.load(_certificate, "".toCharArray());
-		KeyManagerFactory kmf = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
-		kmf.init(clientStore, "".toCharArray());
-		KeyManager[] kms = kmf.getKeyManagers();
-		SSLContext sslContext = SSLContext.getInstance("TLS");
-		sslContext.init(kms, null, new SecureRandom());
+	private HttpURLConnection CreateHttpClient(String url) throws Exception {
 		URL xurl = new URL(_baseUrl + url);
-		System.out.println("Url: " + xurl);
-		HttpsURLConnection client = (HttpsURLConnection) xurl.openConnection();
-		client.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-		client.setRequestProperty("Accept", "application/json");
-		client.setSSLSocketFactory(sslContext.getSocketFactory());
-		client.setDoInput(true);
-		client.setDoOutput(true);
 
-		return client;
+		if (xurl.getProtocol() == "https") {
+			KeyStore clientStore = KeyStore.getInstance("PKCS12");
+			clientStore.load(_certificate, "".toCharArray());
+			KeyManagerFactory kmf = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
+			kmf.init(clientStore, "".toCharArray());
+			KeyManager[] kms = kmf.getKeyManagers();
+			SSLContext sslContext = SSLContext.getInstance("TLS");
+			sslContext.init(kms, null, new SecureRandom());
+			System.out.println("Url: " + xurl);
+			HttpsURLConnection client = (HttpsURLConnection) xurl.openConnection();
+			client.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+			client.setRequestProperty("Accept", "application/json");
+			client.setSSLSocketFactory(sslContext.getSocketFactory());
+			client.setDoInput(true);
+			client.setDoOutput(true);
+			
+			return client;
+		} else {
+			HttpURLConnection client = client = (HttpURLConnection) xurl.openConnection();
+			client.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+			client.setRequestProperty("Accept", "application/json");
+			client.setDoInput(true);
+			client.setDoOutput(true);
+
+			return client;
+		}
 	}
 
 	private String CreateJwtToken(String givenName, String subject) {
