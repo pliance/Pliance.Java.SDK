@@ -127,6 +127,7 @@ public class AdamAuthenticationTest extends TestCase {
 		command.matchId = hit.matchId;
 		command.aliasId = hit.aliasId;
 		command.classification = ClassificationType.FalsePositive;
+		_client.ClassifyPersonHit(command);
 
 		Thread.sleep(200, 0);
 		ViewPersonQuery query = new ViewPersonQuery();
