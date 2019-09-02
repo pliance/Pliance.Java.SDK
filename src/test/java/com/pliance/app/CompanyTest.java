@@ -34,7 +34,7 @@ public class CompanyTest extends TestBase {
 		DeleteCompany();
 
 		Thread.sleep(200, 0);
-		assertNotNull(ViewCompany().data);
+		assertNull(ViewCompany().data);
 	}
 
 	public void test_Archive() throws Exception {
@@ -66,6 +66,9 @@ public class CompanyTest extends TestBase {
 		RegisterCompanyCommand command = new RegisterCompanyCommand();
 		command.companyReferenceId = _referenceId;
 		command.name = _name;
+		command.identity = new CompanyIdentity();
+		command.identity.country = "se";
+		command.identity.identity = _referenceId;
 
 		return _client.RegisterCompany(command);
 	}

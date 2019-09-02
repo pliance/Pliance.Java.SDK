@@ -30,11 +30,12 @@ public class PersonTest extends TestBase {
 	}
 
 	public void test_Delete() throws Exception {
+		System.out.println(_referenceId);
 		CreatePerson();
 		DeletePerson();
 
 		Thread.sleep(200, 0);
-		assertNotNull(ViewPerson().data);
+		assertNull(ViewPerson().data);
 	}
 
 	public void test_Archive() throws Exception {

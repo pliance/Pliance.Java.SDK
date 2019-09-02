@@ -134,16 +134,10 @@ public class PlianceClient implements IPlianceClient {
 		}
 
 		Gson gson = new Gson();
-		String json = gson.toJson(command);
 
-		return Execute("api/PersonCommand", (client) -> {
+		return Execute("api/PersonCommand" + UrlParameterEncoder.Encode(command), (client) -> {
 			try {
 				client.setRequestMethod("DELETE");
-				java.io.OutputStream stream = client.getOutputStream();
-
-				stream.write(json.getBytes("UTF-8"));
-				stream.flush();
-				stream.close();
 
 				if (client.getResponseCode() != 200) {
 					throw new HttpException("Failed : HTTP error code : " + client.getResponseCode() + ", "
@@ -288,16 +282,10 @@ public class PlianceClient implements IPlianceClient {
 		}
 
 		Gson gson = new Gson();
-		String json = gson.toJson(command);
 
-		return Execute("api/CompanyCommand", (client) -> {
+		return Execute("api/CompanyCommand" + UrlParameterEncoder.Encode(command), (client) -> {
 			try {
 				client.setRequestMethod("DELETE");
-				java.io.OutputStream stream = client.getOutputStream();
-
-				stream.write(json.getBytes("UTF-8"));
-				stream.flush();
-				stream.close();
 
 				if (client.getResponseCode() != 200) {
 					throw new HttpException("Failed : HTTP error code : " + client.getResponseCode() + ", "
