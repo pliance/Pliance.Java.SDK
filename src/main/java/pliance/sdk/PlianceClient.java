@@ -3,7 +3,6 @@ package pliance.sdk;
 import com.google.gson.Gson;
 import pliance.sdk.contracts.*;
 import pliance.sdk.exceptions.*;
-import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -255,27 +254,166 @@ public class PlianceClient implements IPlianceClient {
 	}
 
 	public RegisterCompanyResponse RegisterCompany(RegisterCompanyCommand command) throws PlianceApiException {
-		throw new NotImplementedException("RegisterCompany");
+		if (command == null) {
+			throw new ArgumentNullException("Command");
+		}
+
+		Gson gson = new Gson();
+		String json = gson.toJson(command);
+
+		return Execute("api/CompanyCommand", (client) -> {
+			try {
+				client.setRequestMethod("PUT");
+				java.io.OutputStream stream = client.getOutputStream();
+				stream.write(json.getBytes("UTF-8"));
+				stream.flush();
+				stream.close();
+
+				if (client.getResponseCode() != 200) {
+					throw new HttpException("Failed : HTTP error code : " + client.getResponseCode() + ", "
+							+ client.getResponseMessage());
+				}
+
+				String response = Convert(client.getInputStream());
+				return gson.fromJson(response, RegisterCompanyResponse.class);
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+			}
+		});
 	}
 
 	public DeleteCompanyResponse DeleteCompany(DeleteCompanyCommand command) throws PlianceApiException {
-		throw new NotImplementedException("DeleteCompanyCommand");
+		if (command == null) {
+			throw new ArgumentNullException("Command");
+		}
+
+		Gson gson = new Gson();
+		String json = gson.toJson(command);
+
+		return Execute("api/CompanyCommand", (client) -> {
+			try {
+				client.setRequestMethod("DELETE");
+				java.io.OutputStream stream = client.getOutputStream();
+
+				stream.write(json.getBytes("UTF-8"));
+				stream.flush();
+				stream.close();
+
+				if (client.getResponseCode() != 200) {
+					throw new HttpException("Failed : HTTP error code : " + client.getResponseCode() + ", "
+							+ client.getResponseMessage());
+				}
+
+				String response = Convert(client.getInputStream());
+				return gson.fromJson(response, DeleteCompanyResponse.class);
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+			}
+		});
 	}
 
 	public ArchiveCompanyResponse ArchiveCompany(ArchiveCompanyCommand command) throws PlianceApiException {
-		throw new NotImplementedException("ArchiveCompanyCommand");
+		if (command == null) {
+			throw new ArgumentNullException("Command");
+		}
+
+		Gson gson = new Gson();
+		String json = gson.toJson(command);
+
+		return Execute("api/CompanyCommand/Archive", (client) -> {
+			try {
+				client.setRequestMethod("POST");
+				java.io.OutputStream stream = client.getOutputStream();
+				stream.write(json.getBytes("UTF-8"));
+				stream.flush();
+				stream.close();
+
+				if (client.getResponseCode() != 200) {
+					throw new HttpException("Failed : HTTP error code : " + client.getResponseCode() + ", "
+							+ client.getResponseMessage());
+				}
+
+				String response = Convert(client.getInputStream());
+				return gson.fromJson(response, ArchiveCompanyResponse.class);
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+			}
+		});
 	}
 
 	public UnarchiveCompanyResponse UnarchiveCompany(UnarchiveCompanyCommand command) throws PlianceApiException {
-		throw new NotImplementedException("UnarchiveCompanyCommand");
+		if (command == null) {
+			throw new ArgumentNullException("Command");
+		}
+
+		Gson gson = new Gson();
+		String json = gson.toJson(command);
+
+		return Execute("api/CompanyCommand/Unarchive", (client) -> {
+			try {
+				client.setRequestMethod("POST");
+				java.io.OutputStream stream = client.getOutputStream();
+				stream.write(json.getBytes("UTF-8"));
+				stream.flush();
+				stream.close();
+
+				if (client.getResponseCode() != 200) {
+					throw new HttpException("Failed : HTTP error code : " + client.getResponseCode() + ", "
+							+ client.getResponseMessage());
+				}
+
+				String response = Convert(client.getInputStream());
+				return gson.fromJson(response, UnarchiveCompanyResponse.class);
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+			}
+		});
 	}
 
-	public CompanySearchQueryResult SearchCompany(CompanySearchQuery request) throws PlianceApiException {
-		throw new NotImplementedException("CompanySearchQuery");
+	public CompanySearchQueryResult SearchCompany(CompanySearchQuery query) throws PlianceApiException {
+		if (query == null) {
+			throw new ArgumentNullException("query");
+		}
+
+		Gson gson = new Gson();
+
+		return Execute("api/CompanyQuery/Search/" + UrlParameterEncoder.Encode(query), (client) -> {
+			try {
+				client.setRequestMethod("GET");
+				if (client.getResponseCode() != 200) {
+					throw new HttpException("Failed : HTTP error code : " + client.getResponseCode() + ", "
+							+ client.getResponseMessage());
+				}
+
+				String response = Convert(client.getInputStream());
+				return gson.fromJson(response, CompanySearchQueryResult.class);
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+			}
+		});
 	}
 
-	public ViewCompanyQueryResult ViewCompany(ViewCompanyQuery request) throws PlianceApiException {
-		throw new NotImplementedException("ViewCompanyQuery");
+	public ViewCompanyQueryResult ViewCompany(ViewCompanyQuery query) throws PlianceApiException {
+		if (query == null) {
+			throw new ArgumentNullException("query");
+		}
+
+		Gson gson = new Gson();
+
+		return Execute("api/CompanyQuery/" + UrlParameterEncoder.Encode(query), (client) -> {
+			try {
+				client.setRequestMethod("GET");
+				if (client.getResponseCode() != 200) {
+					throw new HttpException("Failed : HTTP error code : " + client.getResponseCode() + ", "
+							+ client.getResponseMessage());
+				}
+
+				String response = Convert(client.getInputStream());
+				return gson.fromJson(response, ViewCompanyQueryResult.class);
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+			}
+		});
 	}
 
 	public String Source() {

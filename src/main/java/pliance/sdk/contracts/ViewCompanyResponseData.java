@@ -9,4 +9,5 @@ public class ViewCompanyResponseData {
 	public String name;
 	public Graph graph;
 	public List<Beneficiary> beneficiaries;
+	public boolean archived;
 }

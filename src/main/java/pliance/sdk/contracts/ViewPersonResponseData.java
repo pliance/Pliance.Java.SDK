@@ -11,4 +11,5 @@ public class ViewPersonResponseData {
 	public List<Address> addresses;
 	public Hit[][] hits;
 	public Gender gender;
+	public boolean archived;
 }
