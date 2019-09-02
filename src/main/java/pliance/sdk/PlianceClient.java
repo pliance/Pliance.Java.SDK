@@ -99,7 +99,7 @@ public class PlianceClient implements IPlianceClient {
 			}
 		});
 	}
-	
+
 	public UnarchivePersonResponse UnarchivePerson(UnarchivePersonCommand command) throws PlianceApiException {
 		if (command == null) {
 			throw new ArgumentNullException("Command");
@@ -255,27 +255,27 @@ public class PlianceClient implements IPlianceClient {
 	}
 
 	public RegisterCompanyResponse RegisterCompany(RegisterCompanyCommand command) throws PlianceApiException {
-		return null;
+		throw new NotImplementedException("RegisterCompany");
 	}
 
 	public DeleteCompanyResponse DeleteCompany(DeleteCompanyCommand command) throws PlianceApiException {
-		return null;
+		throw new NotImplementedException("DeleteCompanyCommand");
 	}
 
 	public ArchiveCompanyResponse ArchiveCompany(ArchiveCompanyCommand command) throws PlianceApiException {
-		return null;
+		throw new NotImplementedException("ArchiveCompanyCommand");
 	}
-	
+
 	public UnarchiveCompanyResponse UnarchiveCompany(UnarchiveCompanyCommand command) throws PlianceApiException {
-		return null;
-	}	
+		throw new NotImplementedException("UnarchiveCompanyCommand");
+	}
 
 	public CompanySearchQueryResult SearchCompany(CompanySearchQuery request) throws PlianceApiException {
-		return null;
+		throw new NotImplementedException("CompanySearchQuery");
 	}
 
 	public ViewCompanyQueryResult ViewCompany(ViewCompanyQuery request) throws PlianceApiException {
-		return null;
+		throw new NotImplementedException("ViewCompanyQuery");
 	}
 
 	public String Source() {
