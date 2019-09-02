@@ -77,9 +77,9 @@ public class AdamAuthenticationTest extends TestCase {
 			action.apply(null);
 			throw new RuntimeException();
 		} catch (Throwable ex) {
-//			if (type.isInstance(ex)) {
-//				return;
-//			}
+			if (type.isInstance(ex)) {
+				return;
+			}
 		}
 	}
 

@@ -10,6 +10,8 @@ public interface IPlianceClient {
 
 	ArchivePersonResponse ArchivePerson(ArchivePersonCommand command) throws PlianceApiException;
 
+	UnarchivePersonResponse UnarchivePerson(UnarchivePersonCommand command) throws PlianceApiException;
+
 	DeletePersonResponse DeletePerson(DeletePersonCommand command) throws PlianceApiException;
 
 	ClassifyHitResponse ClassifyPersonHit(ClassifyHitCommand command) throws PlianceApiException;
@@ -25,6 +27,8 @@ public interface IPlianceClient {
 	DeleteCompanyResponse DeleteCompany(DeleteCompanyCommand command) throws PlianceApiException;
 
 	ArchiveCompanyResponse ArchiveCompany(ArchiveCompanyCommand command) throws PlianceApiException;
+
+	UnarchiveCompanyResponse UnarchiveCompany(UnarchiveCompanyCommand command) throws PlianceApiException;
 
 	CompanySearchQueryResult SearchCompany(CompanySearchQuery request) throws PlianceApiException;
 

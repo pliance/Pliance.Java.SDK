@@ -99,6 +99,35 @@ public class PlianceClient implements IPlianceClient {
 			}
 		});
 	}
+	
+	public UnarchivePersonResponse UnarchivePerson(UnarchivePersonCommand command) throws PlianceApiException {
+		if (command == null) {
+			throw new ArgumentNullException("Command");
+		}
+
+		Gson gson = new Gson();
+		String json = gson.toJson(command);
+
+		return Execute("api/PersonCommand/Unarchive", (client) -> {
+			try {
+				client.setRequestMethod("POST");
+				java.io.OutputStream stream = client.getOutputStream();
+				stream.write(json.getBytes("UTF-8"));
+				stream.flush();
+				stream.close();
+
+				if (client.getResponseCode() != 200) {
+					throw new HttpException("Failed : HTTP error code : " + client.getResponseCode() + ", "
+							+ client.getResponseMessage());
+				}
+
+				String response = Convert(client.getInputStream());
+				return gson.fromJson(response, UnarchivePersonResponse.class);
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+			}
+		});
+	}
 
 	public DeletePersonResponse DeletePerson(DeletePersonCommand command) throws PlianceApiException {
 		if (command == null) {
@@ -236,6 +265,10 @@ public class PlianceClient implements IPlianceClient {
 	public ArchiveCompanyResponse ArchiveCompany(ArchiveCompanyCommand command) throws PlianceApiException {
 		return null;
 	}
+	
+	public UnarchiveCompanyResponse UnarchiveCompany(UnarchiveCompanyCommand command) throws PlianceApiException {
+		return null;
+	}	
 
 	public CompanySearchQueryResult SearchCompany(CompanySearchQuery request) throws PlianceApiException {
 		return null;
