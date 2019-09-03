@@ -39,7 +39,7 @@ public class PersonTest extends TestBase {
 		Thread.sleep(200, 0);
 		AssertThrows(() -> {
 			ViewPerson();
-		});		
+		});
 	}
 
 	public void test_Archive() throws Exception {
@@ -62,7 +62,7 @@ public class PersonTest extends TestBase {
 	public void test_SearchPerson() throws Exception {
 		_firstName = UUID.randomUUID().toString();
 		CreatePerson();
-		
+
 		Thread.sleep(200, 0);
 		SearchPerson();
 	}
@@ -125,11 +125,11 @@ public class PersonTest extends TestBase {
 
 		return _client.ViewPerson(query);
 	}
-	
+
 	private PersonSearchQueryResult SearchPerson() throws Exception {
 		PersonSearchQuery query = new PersonSearchQuery();
 		query.query = _firstName;
 
 		return _client.SearchPerson(query);
-	}	
+	}
 }

@@ -7,6 +7,7 @@ import java.util.function.Function;
 import junit.framework.TestCase;
 import pliance.sdk.IPlianceClient;
 import pliance.sdk.PlianceClientFactory;
+import pliance.sdk.exceptions.PlianceApiException;
 import pliance.sdk.Action;
 import pliance.sdk.Func;
 

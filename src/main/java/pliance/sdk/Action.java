@@ -1,6 +1,6 @@
 package pliance.sdk;
 
 @FunctionalInterface
-public interface Action<E extends Throwable> {
+public interface Action<E extends Exception> {
 	void accept() throws E;
 }

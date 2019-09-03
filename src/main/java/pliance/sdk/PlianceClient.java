@@ -2,8 +2,7 @@ package pliance.sdk;
 
 import com.google.gson.Gson;
 import pliance.sdk.contracts.*;
-import pliance.sdk.exceptions.*;
-import java.io.BufferedReader;
+import pliance.sdk.exceptions.*;import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -21,11 +20,16 @@ public class PlianceClient implements IPlianceClient {
 		_factory = factory;
 	}
 
-	private <T> T Execute(String path, Func1<HttpURLConnection, T, Exception> action) throws Exception {
-		return _factory.Execute(action, path, _givenName, _subject);
+	private <T> T Execute(String method, String path, Func1<HttpURLConnection, T, Exception> action)
+			throws PlianceApiException {
+		try {
+			return _factory.Execute(method, action, path, _givenName, _subject);
+		} catch (Exception ex) {
+			throw new PlianceApiException(ex.getMessage(), ex);
+		}
 	}
 
-	public RegisterPersonResponse RegisterPerson(RegisterPersonCommand command) throws Exception {
+	public RegisterPersonResponse RegisterPerson(RegisterPersonCommand command) throws PlianceApiException {
 		if (command == null) {
 			throw new ArgumentNullException("Command");
 		}
@@ -33,8 +37,7 @@ public class PlianceClient implements IPlianceClient {
 		Gson gson = new Gson();
 		String json = gson.toJson(command);
 
-		return Execute("api/PersonCommand", (client) -> {
-			client.setRequestMethod("PUT");
+		return Execute("PUT", "api/PersonCommand", (client) -> {
 			java.io.OutputStream stream = client.getOutputStream();
 			stream.write(json.getBytes("UTF-8"));
 			stream.flush();
@@ -71,7 +74,7 @@ public class PlianceClient implements IPlianceClient {
 		return _source;
 	}
 
-	public ArchivePersonResponse ArchivePerson(ArchivePersonCommand command) throws Exception {
+	public ArchivePersonResponse ArchivePerson(ArchivePersonCommand command) throws PlianceApiException {
 		if (command == null) {
 			throw new ArgumentNullException("Command");
 		}
@@ -79,8 +82,7 @@ public class PlianceClient implements IPlianceClient {
 		Gson gson = new Gson();
 		String json = gson.toJson(command);
 
-		return Execute("api/PersonCommand/Archive", (client) -> {
-			client.setRequestMethod("POST");
+		return Execute("POST", "api/PersonCommand/Archive", (client) -> {
 			java.io.OutputStream stream = client.getOutputStream();
 			stream.write(json.getBytes("UTF-8"));
 			stream.flush();
@@ -102,7 +104,7 @@ public class PlianceClient implements IPlianceClient {
 		});
 	}
 
-	public UnarchivePersonResponse UnarchivePerson(UnarchivePersonCommand command) throws Exception {
+	public UnarchivePersonResponse UnarchivePerson(UnarchivePersonCommand command) throws PlianceApiException {
 		if (command == null) {
 			throw new ArgumentNullException("Command");
 		}
@@ -110,8 +112,7 @@ public class PlianceClient implements IPlianceClient {
 		Gson gson = new Gson();
 		String json = gson.toJson(command);
 
-		return Execute("api/PersonCommand/Unarchive", (client) -> {
-			client.setRequestMethod("POST");
+		return Execute("POST", "api/PersonCommand/Unarchive", (client) -> {
 			java.io.OutputStream stream = client.getOutputStream();
 			stream.write(json.getBytes("UTF-8"));
 			stream.flush();
@@ -133,16 +134,14 @@ public class PlianceClient implements IPlianceClient {
 		});
 	}
 
-	public DeletePersonResponse DeletePerson(DeletePersonCommand command) throws Exception {
+	public DeletePersonResponse DeletePerson(DeletePersonCommand command) throws PlianceApiException {
 		if (command == null) {
 			throw new ArgumentNullException("Command");
 		}
 
 		Gson gson = new Gson();
 
-		return Execute("api/PersonCommand" + UrlParameterEncoder.Encode(command), (client) -> {
-			client.setRequestMethod("DELETE");
-
+		return Execute("DELETE", "api/PersonCommand" + UrlParameterEncoder.Encode(command), (client) -> {
 			if (client.getResponseCode() != 200) {
 				throw new HttpException(
 						"Failed : HTTP error code : " + client.getResponseCode() + ", " + client.getResponseMessage());
@@ -159,7 +158,7 @@ public class PlianceClient implements IPlianceClient {
 		});
 	}
 
-	public ClassifyHitResponse ClassifyPersonHit(ClassifyHitCommand command) throws Exception {
+	public ClassifyHitResponse ClassifyPersonHit(ClassifyHitCommand command) throws PlianceApiException {
 		if (command == null) {
 			throw new ArgumentNullException("Command");
 		}
@@ -167,8 +166,7 @@ public class PlianceClient implements IPlianceClient {
 		Gson gson = new Gson();
 		String json = gson.toJson(command);
 
-		return Execute("api/PersonCommand/Classify", (client) -> {
-			client.setRequestMethod("POST");
+		return Execute("POST", "api/PersonCommand/Classify", (client) -> {
 			java.io.OutputStream stream = client.getOutputStream();
 
 			stream.write(json.getBytes("UTF-8"));
@@ -191,15 +189,14 @@ public class PlianceClient implements IPlianceClient {
 		});
 	}
 
-	public PersonSearchQueryResult SearchPerson(PersonSearchQuery query) throws Exception {
+	public PersonSearchQueryResult SearchPerson(PersonSearchQuery query) throws PlianceApiException {
 		if (query == null) {
 			throw new ArgumentNullException("query");
 		}
 
 		Gson gson = new Gson();
 
-		return Execute("api/PersonQuery/Search/" + UrlParameterEncoder.Encode(query), (client) -> {
-			client.setRequestMethod("GET");
+		return Execute("GET", "api/PersonQuery/Search/" + UrlParameterEncoder.Encode(query), (client) -> {
 			if (client.getResponseCode() != 200) {
 				throw new HttpException(
 						"Failed : HTTP error code : " + client.getResponseCode() + ", " + client.getResponseMessage());
@@ -216,15 +213,14 @@ public class PlianceClient implements IPlianceClient {
 		});
 	}
 
-	public ViewPersonQueryResult ViewPerson(ViewPersonQuery query) throws Exception {
+	public ViewPersonQueryResult ViewPerson(ViewPersonQuery query) throws PlianceApiException {
 		if (query == null) {
 			throw new ArgumentNullException("query");
 		}
 
 		Gson gson = new Gson();
 
-		return Execute("api/PersonQuery/" + UrlParameterEncoder.Encode(query), (client) -> {
-			client.setRequestMethod("GET");
+		return Execute("GET", "api/PersonQuery/" + UrlParameterEncoder.Encode(query), (client) -> {
 			if (client.getResponseCode() != 200) {
 				throw new HttpException(
 						"Failed : HTTP error code : " + client.getResponseCode() + ", " + client.getResponseMessage());
@@ -241,11 +237,10 @@ public class PlianceClient implements IPlianceClient {
 		});
 	}
 
-	public PingResponse Ping() throws Exception {
+	public PingResponse Ping() throws PlianceApiException {
 		Gson gson = new Gson();
 
-		return Execute("api/Ping", (client) -> {
-			client.setRequestMethod("GET");
+		return Execute("GET", "api/Ping", (client) -> {
 			if (client.getResponseCode() != 200) {
 				throw new HttpException(
 						"Failed : HTTP error code : " + client.getResponseCode() + ", " + client.getResponseMessage());
@@ -262,7 +257,7 @@ public class PlianceClient implements IPlianceClient {
 		});
 	}
 
-	public RegisterCompanyResponse RegisterCompany(RegisterCompanyCommand command) throws Exception {
+	public RegisterCompanyResponse RegisterCompany(RegisterCompanyCommand command) throws PlianceApiException {
 		if (command == null) {
 			throw new ArgumentNullException("Command");
 		}
@@ -270,8 +265,7 @@ public class PlianceClient implements IPlianceClient {
 		Gson gson = new Gson();
 		String json = gson.toJson(command);
 
-		return Execute("api/CompanyCommand", (client) -> {
-			client.setRequestMethod("PUT");
+		return Execute("PUT", "api/CompanyCommand", (client) -> {
 			java.io.OutputStream stream = client.getOutputStream();
 			stream.write(json.getBytes("UTF-8"));
 			stream.flush();
@@ -293,16 +287,14 @@ public class PlianceClient implements IPlianceClient {
 		});
 	}
 
-	public DeleteCompanyResponse DeleteCompany(DeleteCompanyCommand command) throws Exception {
+	public DeleteCompanyResponse DeleteCompany(DeleteCompanyCommand command) throws PlianceApiException {
 		if (command == null) {
 			throw new ArgumentNullException("Command");
 		}
 
 		Gson gson = new Gson();
 
-		return Execute("api/CompanyCommand" + UrlParameterEncoder.Encode(command), (client) -> {
-			client.setRequestMethod("DELETE");
-
+		return Execute("DELETE", "api/CompanyCommand" + UrlParameterEncoder.Encode(command), (client) -> {
 			if (client.getResponseCode() != 200) {
 				throw new HttpException(
 						"Failed : HTTP error code : " + client.getResponseCode() + ", " + client.getResponseMessage());
@@ -319,7 +311,7 @@ public class PlianceClient implements IPlianceClient {
 		});
 	}
 
-	public ArchiveCompanyResponse ArchiveCompany(ArchiveCompanyCommand command) throws Exception {
+	public ArchiveCompanyResponse ArchiveCompany(ArchiveCompanyCommand command) throws PlianceApiException {
 		if (command == null) {
 			throw new ArgumentNullException("Command");
 		}
@@ -327,8 +319,7 @@ public class PlianceClient implements IPlianceClient {
 		Gson gson = new Gson();
 		String json = gson.toJson(command);
 
-		return Execute("api/CompanyCommand/Archive", (client) -> {
-			client.setRequestMethod("POST");
+		return Execute("POST", "api/CompanyCommand/Archive", (client) -> {
 			java.io.OutputStream stream = client.getOutputStream();
 			stream.write(json.getBytes("UTF-8"));
 			stream.flush();
@@ -350,7 +341,7 @@ public class PlianceClient implements IPlianceClient {
 		});
 	}
 
-	public UnarchiveCompanyResponse UnarchiveCompany(UnarchiveCompanyCommand command) throws Exception {
+	public UnarchiveCompanyResponse UnarchiveCompany(UnarchiveCompanyCommand command) throws PlianceApiException {
 		if (command == null) {
 			throw new ArgumentNullException("Command");
 		}
@@ -358,8 +349,7 @@ public class PlianceClient implements IPlianceClient {
 		Gson gson = new Gson();
 		String json = gson.toJson(command);
 
-		return Execute("api/CompanyCommand/Unarchive", (client) -> {
-			client.setRequestMethod("POST");
+		return Execute("POST", "api/CompanyCommand/Unarchive", (client) -> {
 			java.io.OutputStream stream = client.getOutputStream();
 			stream.write(json.getBytes("UTF-8"));
 			stream.flush();
@@ -381,15 +371,14 @@ public class PlianceClient implements IPlianceClient {
 		});
 	}
 
-	public CompanySearchQueryResult SearchCompany(CompanySearchQuery query) throws Exception {
+	public CompanySearchQueryResult SearchCompany(CompanySearchQuery query) throws PlianceApiException {
 		if (query == null) {
 			throw new ArgumentNullException("query");
 		}
 
 		Gson gson = new Gson();
 
-		return Execute("api/CompanyQuery/Search/" + UrlParameterEncoder.Encode(query), (client) -> {
-			client.setRequestMethod("GET");
+		return Execute("GET", "api/CompanyQuery/Search/" + UrlParameterEncoder.Encode(query), (client) -> {
 			if (client.getResponseCode() != 200) {
 				throw new HttpException(
 						"Failed : HTTP error code : " + client.getResponseCode() + ", " + client.getResponseMessage());
@@ -406,15 +395,14 @@ public class PlianceClient implements IPlianceClient {
 		});
 	}
 
-	public ViewCompanyQueryResult ViewCompany(ViewCompanyQuery query) throws Exception {
+	public ViewCompanyQueryResult ViewCompany(ViewCompanyQuery query) throws PlianceApiException {
 		if (query == null) {
 			throw new ArgumentNullException("query");
 		}
 
 		Gson gson = new Gson();
 
-		return Execute("api/CompanyQuery/" + UrlParameterEncoder.Encode(query), (client) -> {
-			client.setRequestMethod("GET");
+		return Execute("GET", "api/CompanyQuery/" + UrlParameterEncoder.Encode(query), (client) -> {
 			if (client.getResponseCode() != 200) {
 				throw new HttpException(
 						"Failed : HTTP error code : " + client.getResponseCode() + ", " + client.getResponseMessage());
