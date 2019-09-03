@@ -1,8 +1,6 @@
 package com.pliance.app;
 
 import java.util.UUID;
-import java.util.function.Function;
-
 import junit.framework.Test;
 import junit.framework.TestSuite;
 import pliance.sdk.contracts.*;

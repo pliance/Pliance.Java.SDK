@@ -12,7 +12,6 @@ import javax.net.ssl.SSLContext;
 import javax.crypto.spec.SecretKeySpec;
 import java.security.Key;
 import io.jsonwebtoken.*;
-import pliance.sdk.exceptions.PlianceApiException;
 
 import java.util.Date;
 
@@ -66,7 +65,7 @@ public class PlianceClientFactory {
 
 			return client;
 		} else {
-			HttpURLConnection client = client = (HttpURLConnection) xurl.openConnection();
+			HttpURLConnection client = (HttpURLConnection) xurl.openConnection();
 			client.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
 			client.setRequestProperty("Accept", "application/json");
 			client.setDoInput(true);

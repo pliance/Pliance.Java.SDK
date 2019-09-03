@@ -1,8 +1,6 @@
 package pliance.sdk;
 
-import pliance.sdk.exceptions.PlianceApiException;
-
 @FunctionalInterface
-public interface Func<T, E extends Exception> {
+public interface Func<T, E extends Throwable> {
 	T accept() throws E;
 }
