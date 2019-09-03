@@ -7,7 +7,8 @@ import java.util.function.Function;
 import junit.framework.TestCase;
 import pliance.sdk.IPlianceClient;
 import pliance.sdk.PlianceClientFactory;
-import pliance.sdk.ThrowingConsumer;
+import pliance.sdk.Action;
+import pliance.sdk.Func;
 
 public abstract class TestBase extends TestCase {
 	protected PlianceClientFactory _factory;
@@ -32,11 +33,11 @@ public abstract class TestBase extends TestCase {
 		return new PlianceClientFactory(_secret, _issuer, _url, _certificate);
 	}	
 	
-	protected <T extends Throwable> void AssertThrows(ThrowingConsumer<Object, Exception> func) throws Exception
+	protected <T extends Throwable> void AssertThrows(Action<Exception> func) throws Exception
 	{
 		try
 		{
-			func.accept(null);
+			func.accept();
 			throw new Exception();
 		}
 		catch (Exception ex)

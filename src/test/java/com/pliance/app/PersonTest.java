@@ -37,7 +37,7 @@ public class PersonTest extends TestBase {
 		DeletePerson();
 
 		Thread.sleep(200, 0);
-		AssertThrows((a) -> {
+		AssertThrows(() -> {
 			ViewPerson();
 		});		
 	}

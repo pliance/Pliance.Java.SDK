@@ -1,6 +1,5 @@
 package pliance.sdk;
 
-import java.util.function.Function;
 import java.io.FileInputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -13,7 +12,6 @@ import javax.net.ssl.SSLContext;
 import javax.crypto.spec.SecretKeySpec;
 import java.security.Key;
 import io.jsonwebtoken.*;
-import pliance.sdk.exceptions.*;
 
 import java.util.Date;
 
@@ -35,18 +33,14 @@ public class PlianceClientFactory {
 		return new PlianceClient(this, givenName, subject);
 	}
 
-	public <T> T Execute(Function<HttpURLConnection, T> action, String path, String givenName, String subject)
-			throws PlianceApiException {
+	public <T> T Execute(Func1<HttpURLConnection, T, Exception> action, String path, String givenName,
+			String subject) throws Exception {
 
-		try {
-			HttpURLConnection client = CreateHttpClient(path);
+		HttpURLConnection client = CreateHttpClient(path);
 
-			client.setRequestProperty("Authorization", "Bearer " + CreateJwtToken(givenName, subject));
+		client.setRequestProperty("Authorization", "Bearer " + CreateJwtToken(givenName, subject));
 
-			return action.apply(client);
-		} catch (Exception ex) {
-			throw new AggregatedException(ex);
-		}
+		return action.accept(client);
 	}
 
 	private HttpURLConnection CreateHttpClient(String url) throws Exception {
@@ -67,7 +61,7 @@ public class PlianceClientFactory {
 			client.setSSLSocketFactory(sslContext.getSocketFactory());
 			client.setDoInput(true);
 			client.setDoOutput(true);
-			
+
 			return client;
 		} else {
 			HttpURLConnection client = client = (HttpURLConnection) xurl.openConnection();

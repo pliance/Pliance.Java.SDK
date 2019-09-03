@@ -34,7 +34,7 @@ public class CompanyTest extends TestBase {
 		DeleteCompany();
 
 		Thread.sleep(200, 0);
-		AssertThrows((a) -> {
+		AssertThrows(() -> {
 			ViewCompany();
 		});
 	}
