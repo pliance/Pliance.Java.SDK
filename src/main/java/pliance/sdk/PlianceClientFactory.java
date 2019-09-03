@@ -12,6 +12,7 @@ import javax.net.ssl.SSLContext;
 import javax.crypto.spec.SecretKeySpec;
 import java.security.Key;
 import io.jsonwebtoken.*;
+import pliance.sdk.exceptions.PlianceApiException;
 
 import java.util.Date;
 
@@ -33,14 +34,18 @@ public class PlianceClientFactory {
 		return new PlianceClient(this, givenName, subject);
 	}
 
-	public <T> T Execute(String method, Func1<HttpURLConnection, T, Exception> action, String path, String givenName,
-			String subject) throws Exception {
+	public <T> T Execute(String method, Func1<HttpURLConnection, T, Exception> action, String path,
+			String givenName, String subject) throws PlianceApiException {
 
-		HttpURLConnection client = CreateHttpClient(path, method);
+		try {
+			HttpURLConnection client = CreateHttpClient(path, method);
 
-		client.setRequestProperty("Authorization", "Bearer " + CreateJwtToken(givenName, subject));
+			client.setRequestProperty("Authorization", "Bearer " + CreateJwtToken(givenName, subject));
 
-		return action.accept(client);
+			return action.accept(client);
+		} catch (Exception ex) {
+			throw new PlianceApiException(ex.getMessage(), ex);
+		}
 	}
 
 	private HttpURLConnection CreateHttpClient(String url, String method) throws Exception {

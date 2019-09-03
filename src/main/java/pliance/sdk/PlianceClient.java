@@ -2,7 +2,8 @@ package pliance.sdk;
 
 import com.google.gson.Gson;
 import pliance.sdk.contracts.*;
-import pliance.sdk.exceptions.*;import java.io.BufferedReader;
+import pliance.sdk.exceptions.*;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -22,11 +23,7 @@ public class PlianceClient implements IPlianceClient {
 
 	private <T> T Execute(String method, String path, Func1<HttpURLConnection, T, Exception> action)
 			throws PlianceApiException {
-		try {
-			return _factory.Execute(method, action, path, _givenName, _subject);
-		} catch (Exception ex) {
-			throw new PlianceApiException(ex.getMessage(), ex);
-		}
+		return _factory.Execute(method, action, path, _givenName, _subject);
 	}
 
 	public RegisterPersonResponse RegisterPerson(RegisterPersonCommand command) throws PlianceApiException {
