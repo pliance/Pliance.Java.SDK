@@ -18,10 +18,6 @@ public class PersonTest extends TestBase {
 		_lastName = "Bin Laden";
 	}
 
-	public void test_Ping() throws Exception {
-		_client.Ping();
-	}
-
 	public void test_Create() throws Exception {
 		CreatePerson();
 
