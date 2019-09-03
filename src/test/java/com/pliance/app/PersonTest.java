@@ -1,6 +1,8 @@
 package com.pliance.app;
 
 import java.util.UUID;
+import java.util.function.Function;
+
 import junit.framework.Test;
 import junit.framework.TestSuite;
 import pliance.sdk.contracts.*;
@@ -35,7 +37,9 @@ public class PersonTest extends TestBase {
 		DeletePerson();
 
 		Thread.sleep(200, 0);
-		assertNull(ViewPerson().data);
+		AssertThrows((a) -> {
+			ViewPerson();
+		});		
 	}
 
 	public void test_Archive() throws Exception {

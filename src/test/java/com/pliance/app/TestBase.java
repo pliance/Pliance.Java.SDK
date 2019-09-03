@@ -2,10 +2,12 @@ package com.pliance.app;
 
 import java.io.FileInputStream;
 import java.util.UUID;
+import java.util.function.Function;
 
 import junit.framework.TestCase;
 import pliance.sdk.IPlianceClient;
 import pliance.sdk.PlianceClientFactory;
+import pliance.sdk.ThrowingConsumer;
 
 public abstract class TestBase extends TestCase {
 	protected PlianceClientFactory _factory;
@@ -28,5 +30,17 @@ public abstract class TestBase extends TestCase {
 
 	private PlianceClientFactory CreateFactory() {
 		return new PlianceClientFactory(_secret, _issuer, _url, _certificate);
+	}	
+	
+	protected <T extends Throwable> void AssertThrows(ThrowingConsumer<Object, Exception> func) throws Exception
+	{
+		try
+		{
+			func.accept(null);
+			throw new Exception();
+		}
+		catch (Exception ex)
+		{
+		}
 	}
 }

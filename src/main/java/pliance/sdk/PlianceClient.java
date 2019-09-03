@@ -48,7 +48,13 @@ public class PlianceClient implements IPlianceClient {
 				}
 
 				String response = Convert(client.getInputStream());
-				return gson.fromJson(response, RegisterPersonResponse.class);
+				RegisterPersonResponse result = gson.fromJson(response, RegisterPersonResponse.class);
+
+				if (!result.success) {
+					throw new HttpException("bad result");
+				}
+
+				return result;
 			} catch (Exception e) {
 				throw new RuntimeException(e);
 			}
@@ -92,7 +98,13 @@ public class PlianceClient implements IPlianceClient {
 				}
 
 				String response = Convert(client.getInputStream());
-				return gson.fromJson(response, ArchivePersonResponse.class);
+				ArchivePersonResponse result = gson.fromJson(response, ArchivePersonResponse.class);
+
+				if (!result.success) {
+					throw new HttpException("bad result");
+				}
+
+				return result;				
 			} catch (Exception e) {
 				throw new RuntimeException(e);
 			}
@@ -121,7 +133,13 @@ public class PlianceClient implements IPlianceClient {
 				}
 
 				String response = Convert(client.getInputStream());
-				return gson.fromJson(response, UnarchivePersonResponse.class);
+				UnarchivePersonResponse result = gson.fromJson(response, UnarchivePersonResponse.class);
+
+				if (!result.success) {
+					throw new HttpException("bad result");
+				}
+
+				return result;				
 			} catch (Exception e) {
 				throw new RuntimeException(e);
 			}
@@ -145,7 +163,13 @@ public class PlianceClient implements IPlianceClient {
 				}
 
 				String response = Convert(client.getInputStream());
-				return gson.fromJson(response, DeletePersonResponse.class);
+				DeletePersonResponse result = gson.fromJson(response, DeletePersonResponse.class);
+
+				if (!result.success) {
+					throw new HttpException("bad result");
+				}
+
+				return result;				
 			} catch (Exception e) {
 				throw new RuntimeException(e);
 			}
@@ -175,7 +199,13 @@ public class PlianceClient implements IPlianceClient {
 				}
 
 				String response = Convert(client.getInputStream());
-				return gson.fromJson(response, ClassifyHitResponse.class);
+				ClassifyHitResponse result = gson.fromJson(response, ClassifyHitResponse.class);
+
+				if (!result.success) {
+					throw new HttpException("bad result");
+				}
+
+				return result;				
 			} catch (Exception e) {
 				throw new RuntimeException(e);
 			}
@@ -198,7 +228,13 @@ public class PlianceClient implements IPlianceClient {
 				}
 
 				String response = Convert(client.getInputStream());
-				return gson.fromJson(response, PersonSearchQueryResult.class);
+				PersonSearchQueryResult result = gson.fromJson(response, PersonSearchQueryResult.class);
+
+				if (!result.success) {
+					throw new HttpException("bad result");
+				}
+
+				return result;				
 			} catch (Exception e) {
 				throw new RuntimeException(e);
 			}
@@ -221,7 +257,13 @@ public class PlianceClient implements IPlianceClient {
 				}
 
 				String response = Convert(client.getInputStream());
-				return gson.fromJson(response, ViewPersonQueryResult.class);
+				ViewPersonQueryResult result = gson.fromJson(response, ViewPersonQueryResult.class);
+
+				if (!result.success) {
+					throw new HttpException("bad result");
+				}
+
+				return result;				
 			} catch (Exception e) {
 				throw new RuntimeException(e);
 			}
@@ -240,7 +282,13 @@ public class PlianceClient implements IPlianceClient {
 				}
 
 				String response = Convert(client.getInputStream());
-				return gson.fromJson(response, PingResponse.class);
+				PingResponse result = gson.fromJson(response, PingResponse.class);
+
+				if (!result.success) {
+					throw new HttpException("bad result");
+				}
+
+				return result;				
 			} catch (Exception e) {
 				throw new RuntimeException(e);
 			}
@@ -269,7 +317,13 @@ public class PlianceClient implements IPlianceClient {
 				}
 
 				String response = Convert(client.getInputStream());
-				return gson.fromJson(response, RegisterCompanyResponse.class);
+				RegisterCompanyResponse result = gson.fromJson(response, RegisterCompanyResponse.class);
+
+				if (!result.success) {
+					throw new HttpException("bad result");
+				}
+
+				return result;				
 			} catch (Exception e) {
 				throw new RuntimeException(e);
 			}
@@ -293,7 +347,13 @@ public class PlianceClient implements IPlianceClient {
 				}
 
 				String response = Convert(client.getInputStream());
-				return gson.fromJson(response, DeleteCompanyResponse.class);
+				DeleteCompanyResponse result = gson.fromJson(response, DeleteCompanyResponse.class);
+
+				if (!result.success) {
+					throw new HttpException("bad result");
+				}
+
+				return result;				
 			} catch (Exception e) {
 				throw new RuntimeException(e);
 			}
@@ -322,7 +382,13 @@ public class PlianceClient implements IPlianceClient {
 				}
 
 				String response = Convert(client.getInputStream());
-				return gson.fromJson(response, ArchiveCompanyResponse.class);
+				ArchiveCompanyResponse result = gson.fromJson(response, ArchiveCompanyResponse.class);
+
+				if (!result.success) {
+					throw new HttpException("bad result");
+				}
+
+				return result;				
 			} catch (Exception e) {
 				throw new RuntimeException(e);
 			}
@@ -351,7 +417,13 @@ public class PlianceClient implements IPlianceClient {
 				}
 
 				String response = Convert(client.getInputStream());
-				return gson.fromJson(response, UnarchiveCompanyResponse.class);
+				UnarchiveCompanyResponse result = gson.fromJson(response, UnarchiveCompanyResponse.class);
+
+				if (!result.success) {
+					throw new HttpException("bad result");
+				}
+
+				return result;				
 			} catch (Exception e) {
 				throw new RuntimeException(e);
 			}
@@ -374,7 +446,13 @@ public class PlianceClient implements IPlianceClient {
 				}
 
 				String response = Convert(client.getInputStream());
-				return gson.fromJson(response, CompanySearchQueryResult.class);
+				CompanySearchQueryResult result = gson.fromJson(response, CompanySearchQueryResult.class);
+
+				if (!result.success) {
+					throw new HttpException("bad result");
+				}
+
+				return result;				
 			} catch (Exception e) {
 				throw new RuntimeException(e);
 			}
@@ -397,7 +475,13 @@ public class PlianceClient implements IPlianceClient {
 				}
 
 				String response = Convert(client.getInputStream());
-				return gson.fromJson(response, ViewCompanyQueryResult.class);
+				ViewCompanyQueryResult result = gson.fromJson(response, ViewCompanyQueryResult.class);
+
+				if (!result.success) {
+					throw new HttpException("bad result");
+				}
+
+				return result;				
 			} catch (Exception e) {
 				throw new RuntimeException(e);
 			}
