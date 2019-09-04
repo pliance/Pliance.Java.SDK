@@ -19,50 +19,50 @@ public class PersonTest extends TestBase {
 	}
 
 	public void test_Create() throws Exception {
-		CreatePerson();
+		createPerson();
 
 		Thread.sleep(200, 0);
-		assertNotNull(ViewPerson().data);
+		assertNotNull(viewPerson().data);
 	}
 
 	public void test_Delete() throws Exception {
 		System.out.println(_referenceId);
-		CreatePerson();
-		DeletePerson();
+		createPerson();
+		deletePerson();
 
 		Thread.sleep(200, 0);
-		AssertThrows(() -> {
-			ViewPerson();
+		assertThrows(() -> {
+			viewPerson();
 		});
 	}
 
 	public void test_Archive() throws Exception {
-		CreatePerson();
+		createPerson();
 		ArchivePerson();
 
 		Thread.sleep(200, 0);
-		assertTrue(ViewPerson().data.archived);
+		assertTrue(viewPerson().data.archived);
 	}
 
 	public void test_Unarchive() throws Exception {
-		CreatePerson();
+		createPerson();
 		ArchivePerson();
-		UnarchivePerson();
+		unarchivePerson();
 
 		Thread.sleep(200, 0);
-		assertFalse(ViewPerson().data.archived);
+		assertFalse(viewPerson().data.archived);
 	}
 
 	public void test_SearchPerson() throws Exception {
 		_firstName = UUID.randomUUID().toString();
-		CreatePerson();
+		createPerson();
 
 		Thread.sleep(200, 0);
-		SearchPerson();
+		searchPerson();
 	}
 
 	public void testClassify() throws Exception {
-		RegisterPersonResponse result = CreatePerson();
+		RegisterPersonResponse result = createPerson();
 		Hit hit = result.hits[0][0];
 
 		ClassifyHitCommand command = new ClassifyHitCommand();
@@ -70,60 +70,60 @@ public class PersonTest extends TestBase {
 		command.matchId = hit.matchId;
 		command.aliasId = hit.aliasId;
 		command.classification = ClassificationType.FalsePositive;
-		_client.ClassifyPersonHit(command);
+		_client.classifyPersonHit(command);
 
 		Thread.sleep(200, 0);
 		ViewPersonQuery query = new ViewPersonQuery();
 		query.personReferenceId = _referenceId;
 
-		ViewPersonQueryResult view = _client.ViewPerson(query);
+		ViewPersonQueryResult view = _client.viewPerson(query);
 
 		Hit hit2 = view.data.hits[0][0];
 
 		assertEquals(ClassificationType.FalsePositive, hit2.classification);
 	}
 
-	private RegisterPersonResponse CreatePerson() throws Exception {
+	private RegisterPersonResponse createPerson() throws Exception {
 		RegisterPersonCommand command = new RegisterPersonCommand();
 		command.personReferenceId = _referenceId;
 		command.firstName = _firstName;
 		command.lastName = _lastName;
 
-		return _client.RegisterPerson(command);
+		return _client.registerPerson(command);
 	}
 
-	private DeletePersonResponse DeletePerson() throws Exception {
+	private DeletePersonResponse deletePerson() throws Exception {
 		DeletePersonCommand command = new DeletePersonCommand();
 		command.personReferenceId = _referenceId;
 
-		return _client.DeletePerson(command);
+		return _client.deletePerson(command);
 	}
 
 	private ArchivePersonResponse ArchivePerson() throws Exception {
 		ArchivePersonCommand command = new ArchivePersonCommand();
 		command.personReferenceId = _referenceId;
 
-		return _client.ArchivePerson(command);
+		return _client.archivePerson(command);
 	}
 
-	private UnarchivePersonResponse UnarchivePerson() throws Exception {
+	private UnarchivePersonResponse unarchivePerson() throws Exception {
 		UnarchivePersonCommand command = new UnarchivePersonCommand();
 		command.personReferenceId = _referenceId;
 
-		return _client.UnarchivePerson(command);
+		return _client.unarchivePerson(command);
 	}
 
-	private ViewPersonQueryResult ViewPerson() throws Exception {
+	private ViewPersonQueryResult viewPerson() throws Exception {
 		ViewPersonQuery query = new ViewPersonQuery();
 		query.personReferenceId = _referenceId;
 
-		return _client.ViewPerson(query);
+		return _client.viewPerson(query);
 	}
 
-	private PersonSearchQueryResult SearchPerson() throws Exception {
+	private PersonSearchQueryResult searchPerson() throws Exception {
 		PersonSearchQuery query = new PersonSearchQuery();
 		query.query = _firstName;
 
-		return _client.SearchPerson(query);
+		return _client.searchPerson(query);
 	}
 }

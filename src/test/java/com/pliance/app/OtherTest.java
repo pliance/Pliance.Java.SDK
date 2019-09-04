@@ -12,6 +12,6 @@ public class OtherTest extends TestBase {
 	}
 
 	public void test_Ping() throws Exception {
-		_client.Ping();
+		_client.ping();
 	}
 }

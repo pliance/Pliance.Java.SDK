@@ -19,41 +19,41 @@ public class CompanyTest extends TestBase {
 	}
 	
 	public void test_Ping() throws Exception {
-		_client.Ping();
+		_client.ping();
 	}
 
 	public void test_Create() throws Exception {
 		CreateCompany();
 
 		Thread.sleep(200, 0);
-		assertNotNull(ViewCompany().data);
+		assertNotNull(viewCompany().data);
 	}
 
 	public void test_Delete() throws Exception {
 		CreateCompany();
-		DeleteCompany();
+		deleteCompany();
 
 		Thread.sleep(200, 0);
-		AssertThrows(() -> {
-			ViewCompany();
+		assertThrows(() -> {
+			viewCompany();
 		});
 	}
 
 	public void test_Archive() throws Exception {
 		CreateCompany();
-		ArchiveCompany();
+		archiveCompany();
 
 		Thread.sleep(200, 0);
-		assertTrue(ViewCompany().data.archived);
+		assertTrue(viewCompany().data.archived);
 	}
 
 	public void test_Unarchive() throws Exception {
 		CreateCompany();
-		ArchiveCompany();
-		UnarchiveCompany();
+		archiveCompany();
+		unarchiveCompany();
 
 		Thread.sleep(200, 0);
-		assertFalse(ViewCompany().data.archived);
+		assertFalse(viewCompany().data.archived);
 	}
 
 	public void test_SearchCompany() throws Exception {
@@ -61,7 +61,7 @@ public class CompanyTest extends TestBase {
 		CreateCompany();
 		
 		Thread.sleep(200, 0);
-		SearchCompany();
+		searchCompany();
 	}
 
 	private RegisterCompanyResponse CreateCompany() throws Exception {
@@ -72,41 +72,41 @@ public class CompanyTest extends TestBase {
 		command.identity.country = "se";
 		command.identity.identity = _referenceId;
 
-		return _client.RegisterCompany(command);
+		return _client.registerCompany(command);
 	}
 
-	private DeleteCompanyResponse DeleteCompany() throws Exception {
+	private DeleteCompanyResponse deleteCompany() throws Exception {
 		DeleteCompanyCommand command = new DeleteCompanyCommand();
 		command.companyReferenceId = _referenceId;
 
-		return _client.DeleteCompany(command);
+		return _client.deleteCompany(command);
 	}
 
-	private ArchiveCompanyResponse ArchiveCompany() throws Exception {
+	private ArchiveCompanyResponse archiveCompany() throws Exception {
 		ArchiveCompanyCommand command = new ArchiveCompanyCommand();
 		command.companyReferenceId = _referenceId;
 
-		return _client.ArchiveCompany(command);
+		return _client.archiveCompany(command);
 	}
 
-	private UnarchiveCompanyResponse UnarchiveCompany() throws Exception {
+	private UnarchiveCompanyResponse unarchiveCompany() throws Exception {
 		UnarchiveCompanyCommand command = new UnarchiveCompanyCommand();
 		command.companyReferenceId = _referenceId;
 
-		return _client.UnarchiveCompany(command);
+		return _client.unarchiveCompany(command);
 	}
 
-	private ViewCompanyQueryResult ViewCompany() throws Exception {
+	private ViewCompanyQueryResult viewCompany() throws Exception {
 		ViewCompanyQuery query = new ViewCompanyQuery();
 		query.companyReferenceId = _referenceId;
 
-		return _client.ViewCompany(query);
+		return _client.viewCompany(query);
 	}
 	
-	private CompanySearchQueryResult SearchCompany() throws Exception {
+	private CompanySearchQueryResult searchCompany() throws Exception {
 		CompanySearchQuery query = new CompanySearchQuery();
 		query.query = _name;
 
-		return _client.SearchCompany(query);
+		return _client.searchCompany(query);
 	}	
 }

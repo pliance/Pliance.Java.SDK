@@ -6,31 +6,31 @@ import pliance.sdk.exceptions.*;
 public interface IPlianceClient {
 	String Source();
 
-	RegisterPersonResponse RegisterPerson(RegisterPersonCommand command) throws PlianceApiException;
+	RegisterPersonResponse registerPerson(RegisterPersonCommand command) throws PlianceApiException;
 
-	ArchivePersonResponse ArchivePerson(ArchivePersonCommand command) throws PlianceApiException;
+	ArchivePersonResponse archivePerson(ArchivePersonCommand command) throws PlianceApiException;
 
-	UnarchivePersonResponse UnarchivePerson(UnarchivePersonCommand command) throws PlianceApiException;
+	UnarchivePersonResponse unarchivePerson(UnarchivePersonCommand command) throws PlianceApiException;
 
-	DeletePersonResponse DeletePerson(DeletePersonCommand command) throws PlianceApiException;
+	DeletePersonResponse deletePerson(DeletePersonCommand command) throws PlianceApiException;
 
-	ClassifyHitResponse ClassifyPersonHit(ClassifyHitCommand command) throws PlianceApiException;
+	ClassifyHitResponse classifyPersonHit(ClassifyHitCommand command) throws PlianceApiException;
 
-	PersonSearchQueryResult SearchPerson(PersonSearchQuery query) throws PlianceApiException;
+	PersonSearchQueryResult searchPerson(PersonSearchQuery query) throws PlianceApiException;
 
-	ViewPersonQueryResult ViewPerson(ViewPersonQuery query) throws PlianceApiException;
+	ViewPersonQueryResult viewPerson(ViewPersonQuery query) throws PlianceApiException;
 
-	PingResponse Ping() throws PlianceApiException;
+	PingResponse ping() throws PlianceApiException;
 
-	RegisterCompanyResponse RegisterCompany(RegisterCompanyCommand command) throws PlianceApiException;
+	RegisterCompanyResponse registerCompany(RegisterCompanyCommand command) throws PlianceApiException;
 
-	DeleteCompanyResponse DeleteCompany(DeleteCompanyCommand command) throws PlianceApiException;
+	DeleteCompanyResponse deleteCompany(DeleteCompanyCommand command) throws PlianceApiException;
 
-	ArchiveCompanyResponse ArchiveCompany(ArchiveCompanyCommand command) throws PlianceApiException;
+	ArchiveCompanyResponse archiveCompany(ArchiveCompanyCommand command) throws PlianceApiException;
 
-	UnarchiveCompanyResponse UnarchiveCompany(UnarchiveCompanyCommand command) throws PlianceApiException;
+	UnarchiveCompanyResponse unarchiveCompany(UnarchiveCompanyCommand command) throws PlianceApiException;
 
-	CompanySearchQueryResult SearchCompany(CompanySearchQuery request) throws PlianceApiException;
+	CompanySearchQueryResult searchCompany(CompanySearchQuery request) throws PlianceApiException;
 
-	ViewCompanyQueryResult ViewCompany(ViewCompanyQuery request) throws PlianceApiException;
+	ViewCompanyQueryResult viewCompany(ViewCompanyQuery request) throws PlianceApiException;
 }

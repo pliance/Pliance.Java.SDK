@@ -13,7 +13,7 @@ import pliance.sdk.exceptions.AggregatedException;
 import pliance.sdk.exceptions.PlianceApiException;
 
 public class UrlParameterEncoder {
-	public static String Encode(Object obj) throws PlianceApiException {
+	public static String encode(Object obj) throws PlianceApiException {
 		if (obj == null) {
 			return "";
 		}
@@ -21,7 +21,7 @@ public class UrlParameterEncoder {
 		try {
 			Map<String, Object> map = new HashMap<String, Object>();
 
-			UrlEncode(map, null, obj, null);
+			urlEncode(map, null, obj, null);
 
 			if (map.size() == 0) {
 				return "";
@@ -38,9 +38,9 @@ public class UrlParameterEncoder {
 					builder.append("&");
 				}
 
-				builder.append(HtmlEncode(entry.getKey()));
+				builder.append(htmlEncode(entry.getKey()));
 				builder.append("=");
-				builder.append(HtmlEncode(entry.getValue().toString()));
+				builder.append(htmlEncode(entry.getValue().toString()));
 				first = false;
 			}
 
@@ -50,7 +50,7 @@ public class UrlParameterEncoder {
 		}
 	}
 
-	private static String HtmlEncode(String value) {
+	private static String htmlEncode(String value) {
 		try {
 			return URLEncoder.encode(value, StandardCharsets.UTF_8.toString());
 		} catch (UnsupportedEncodingException ex) {
@@ -58,19 +58,19 @@ public class UrlParameterEncoder {
 		}
 	}
 
-	private static boolean IsPrimitive(Class<? extends Object> type) {
+	private static boolean isPrimitive(Class<? extends Object> type) {
 		return type == Double.class || type == Float.class || type == Long.class || type == Integer.class
 				|| type == Short.class || type == Character.class || type == Byte.class || type == Boolean.class
 				|| type == String.class;
 	}
 
-	private static void UrlEncode(Map<String, Object> map, String path, Object obj, Field prop)
+	private static void urlEncode(Map<String, Object> map, String path, Object obj, Field prop)
 			throws IllegalArgumentException, IllegalAccessException, NoSuchFieldException, SecurityException {
 		if (obj == null) {
 			return;
 		}
 
-		if (prop != null && IsPrimitive(obj.getClass())) {
+		if (prop != null && isPrimitive(obj.getClass())) {
 			map.put(path, obj);
 		} else if (prop != null & obj.getClass().isArray()) {
 			int length = Array.getLength(obj);
@@ -80,7 +80,7 @@ public class UrlParameterEncoder {
 				Box box = new Box(element);
 				String name = String.format("%s[%d]", path, i);
 
-				UrlEncode(map, name, element, box.getClass().getField("Item"));
+				urlEncode(map, name, element, box.getClass().getField("Item"));
 			}
 		} else if (prop != null && obj instanceof Iterable<?>) {
 			int index = 0;
@@ -90,7 +90,7 @@ public class UrlParameterEncoder {
 				Box box = new Box(element);
 				String name = String.format("%s[%d]", path, index++);
 
-				UrlEncode(map, name, element, box.getClass().getField("Item"));
+				urlEncode(map, name, element, box.getClass().getField("Item"));
 			}
 		} else {
 			for (Field field : obj.getClass().getDeclaredFields()) {
@@ -111,7 +111,7 @@ public class UrlParameterEncoder {
 					continue;
 				}
 
-				UrlEncode(map, name, value, field);
+				urlEncode(map, name, value, field);
 			}
 		}
 	}

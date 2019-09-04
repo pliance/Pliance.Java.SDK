@@ -21,16 +21,16 @@ public abstract class TestBase extends TestCase {
 		_issuer = "Demo";
 		_url = "http://localhost:5777/";
 		_certificate = null;
-		_factory = CreateFactory();
-		_client = _factory.Create("Adam", "42");
+		_factory = createFactory();
+		_client = _factory.create("Adam", "42");
 		_referenceId = UUID.randomUUID().toString();
 	}
 
-	private PlianceClientFactory CreateFactory() {
+	private PlianceClientFactory createFactory() {
 		return new PlianceClientFactory(_secret, _issuer, _url, _certificate);
 	}	
 	
-	protected <T extends Throwable> void AssertThrows(Action<Exception> func) throws Exception
+	protected <T extends Throwable> void assertThrows(Action<Exception> func) throws Exception
 	{
 		try
 		{

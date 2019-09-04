@@ -30,17 +30,17 @@ public class PlianceClientFactory {
 		_certificate = certificate;
 	}
 
-	public IPlianceClient Create(String givenName, String subject) {
+	public IPlianceClient create(String givenName, String subject) {
 		return new PlianceClient(this, givenName, subject);
 	}
 
-	public <T> T Execute(String method, Func1<HttpURLConnection, T, Exception> action, String path,
+	public <T> T execute(String method, Func1<HttpURLConnection, T, Exception> action, String path,
 			String givenName, String subject) throws PlianceApiException {
 
 		try {
-			HttpURLConnection client = CreateHttpClient(path, method);
+			HttpURLConnection client = createHttpClient(path, method);
 
-			client.setRequestProperty("Authorization", "Bearer " + CreateJwtToken(givenName, subject));
+			client.setRequestProperty("Authorization", "Bearer " + createJwtToken(givenName, subject));
 
 			return action.accept(client);
 		} catch (Exception ex) {
@@ -48,7 +48,7 @@ public class PlianceClientFactory {
 		}
 	}
 
-	private HttpURLConnection CreateHttpClient(String url, String method) throws Exception {
+	private HttpURLConnection createHttpClient(String url, String method) throws Exception {
 		URL xurl = new URL(_baseUrl + url);
 
 		if (xurl.getProtocol() == "https") {
@@ -81,7 +81,7 @@ public class PlianceClientFactory {
 		}
 	}
 
-	private String CreateJwtToken(String givenName, String subject) {
+	private String createJwtToken(String givenName, String subject) {
 		SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
 		long nowMillis = System.currentTimeMillis();
 		Date now = new Date(nowMillis);
