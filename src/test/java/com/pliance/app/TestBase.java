@@ -28,17 +28,17 @@ public abstract class TestBase extends TestCase {
 
 	private PlianceClientFactory createFactory() {
 		return new PlianceClientFactory(_secret, _issuer, _url, _certificate);
-	}	
-	
-	protected <T extends Throwable> void assertThrows(Action<Exception> func) throws Exception
-	{
-		try
-		{
+	}
+
+	protected <T extends Throwable> void assertThrows(Class<T> exceptionType, Action<Exception> func) throws Exception {
+		try {
 			func.accept();
-			throw new Exception();
-		}
-		catch (Exception ex)
-		{
+		} catch (Exception ex) {
+			if (exceptionType.isInstance(ex)) {
+				return;
+			} else {
+				throw ex;
+			}
 		}
 	}
 }

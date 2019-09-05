@@ -4,6 +4,7 @@ import java.util.UUID;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 import pliance.sdk.contracts.*;
+import pliance.sdk.exceptions.PlianceApiException;
 
 public class PersonTest extends TestBase {
 	private String _firstName;
@@ -31,7 +32,7 @@ public class PersonTest extends TestBase {
 		deletePerson();
 
 		Thread.sleep(200, 0);
-		assertThrows(() -> {
+		assertThrows(PlianceApiException.class, () -> {
 			viewPerson();
 		});
 	}
