@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.github.pliance</groupId>
   <artifactId>pliance.sdk</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>1.0.0</version>
   <name>Pliance.SDK.Java</name>
   <url>https://github.com/pliance/Pliance.Java.SDK</url>
   <description>Pliance Java SDK</description>
@@ -33,14 +33,6 @@
       <id>ossrh</id>
       <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
     </repository>
-    <!-- <snapshotRepository>
-      <id>ossrh</id>
-      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-    </snapshotRepository>
-    <repository>
-      <id>ossrh</id>
-      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-    </repository> -->
   </distributionManagement>
   <scm>
     <url>https://github.com/pliance/Pliance.Java.SDK.git</url>
