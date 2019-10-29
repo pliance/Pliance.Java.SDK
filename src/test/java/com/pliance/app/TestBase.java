@@ -19,7 +19,7 @@ public abstract class TestBase extends TestCase {
 	protected TestBase() {
 		_secret = "2bb80d537b1da3e38bd30361aa855686bde0eacd7162fef6a25fe97bf527a25b";
 		_issuer = "Demo";
-		_url = "http://localhost:5777/";
+		_url = "https://secure.pliance.io/";
 		_certificate = null;
 		_factory = createFactory();
 		_client = _factory.create("Adam", "42");
