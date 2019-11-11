@@ -1,4 +1,4 @@
 package pliance.sdk.contracts;
 
-public class RegisterCompanyResponse extends Response {
+public class RegisterCompanyResponse extends ResponseGeneric<ViewCompanyResponseData> {
 }
