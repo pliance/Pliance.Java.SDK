@@ -10,4 +10,6 @@ public class ViewCompanyResponseData {
 	public Graph graph;
 	public List<Beneficiary> beneficiaries;
 	public boolean archived;
+	public LastChanged lastChanged;
+	public CompanyHit[][] hits;
 }

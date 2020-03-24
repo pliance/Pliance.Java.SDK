@@ -2,10 +2,34 @@ package pliance.sdk;
 
 import com.google.gson.Gson;
 import pliance.sdk.contracts.*;
-import pliance.sdk.contracts.models.CompanySearchQueryResult;
-import pliance.sdk.contracts.models.PersonSearchQueryResult;
-import pliance.sdk.contracts.models.ViewCompanyQueryResult;
-import pliance.sdk.contracts.models.ViewPersonQueryResult;
+import pliance.sdk.contracts.models.company.ArchiveCompanyCommand;
+import pliance.sdk.contracts.models.company.ArchiveCompanyResponse;
+import pliance.sdk.contracts.models.company.ClassifyCompanyHitCommand;
+import pliance.sdk.contracts.models.company.ClassifyCompanyHitResponse;
+import pliance.sdk.contracts.models.company.CompanySearchQuery;
+import pliance.sdk.contracts.models.company.CompanySearchQueryResult;
+import pliance.sdk.contracts.models.company.DeleteCompanyCommand;
+import pliance.sdk.contracts.models.company.DeleteCompanyResponse;
+import pliance.sdk.contracts.models.company.RegisterCompanyCommand;
+import pliance.sdk.contracts.models.company.RegisterCompanyResponse;
+import pliance.sdk.contracts.models.company.UnarchiveCompanyCommand;
+import pliance.sdk.contracts.models.company.UnarchiveCompanyResponse;
+import pliance.sdk.contracts.models.company.ViewCompanyQuery;
+import pliance.sdk.contracts.models.company.ViewCompanyQueryResult;
+import pliance.sdk.contracts.person.ArchivePersonCommand;
+import pliance.sdk.contracts.person.ArchivePersonResponse;
+import pliance.sdk.contracts.person.ClassifyPersonHitCommand;
+import pliance.sdk.contracts.person.ClassifyPersonHitResponse;
+import pliance.sdk.contracts.person.DeletePersonCommand;
+import pliance.sdk.contracts.person.DeletePersonResponse;
+import pliance.sdk.contracts.person.PersonSearchQuery;
+import pliance.sdk.contracts.person.PersonSearchQueryResult;
+import pliance.sdk.contracts.person.RegisterPersonCommand;
+import pliance.sdk.contracts.person.RegisterPersonResponse;
+import pliance.sdk.contracts.person.UnarchivePersonCommand;
+import pliance.sdk.contracts.person.UnarchivePersonResponse;
+import pliance.sdk.contracts.person.ViewPersonQuery;
+import pliance.sdk.contracts.person.ViewPersonQueryResult;
 import pliance.sdk.contracts.responses.Response;
 import pliance.sdk.exceptions.*;
 import java.io.BufferedReader;
@@ -15,16 +39,14 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 
 /**
- * @author      Firstname Lastname address@example.com
- * @version     1.6                 (current version number of program)
- * @since       1.2          (the version of the package this class was first added to)
+ * @author Firstname Lastname address@example.com
+ * @version 1.6 (current version number of program)
+ * @since 1.2 (the version of the package this class was first added to)
  */
 public class PlianceClient implements IPlianceClient {
 	private PlianceClientFactory _factory;
 	private String _givenName;
 	private String _subject;
-	public String _source = null;
-	private Gson _gson = new Gson();
 
 	public PlianceClient(PlianceClientFactory factory, String givenName, String subject) {
 		_subject = subject;
@@ -32,7 +54,7 @@ public class PlianceClient implements IPlianceClient {
 		_factory = factory;
 	}
 
-	private <T> T execute(String method, String path, Func1<HttpURLConnection, T, Exception> action)
+	private <T> T execute(String method, String path, Func<HttpURLConnection, T, Exception> action)
 			throws PlianceApiException {
 		return _factory.execute(method, action, path, _givenName, _subject);
 	}
@@ -48,8 +70,7 @@ public class PlianceClient implements IPlianceClient {
 			}
 		}
 
-		_source = stringBuilder.toString();
-		return _source;
+		return stringBuilder.toString();
 	}
 
 	public RegisterPersonResponse registerPerson(RegisterPersonCommand command) throws PlianceApiException {
@@ -57,14 +78,8 @@ public class PlianceClient implements IPlianceClient {
 			throw new ArgumentNullException("Command");
 		}
 
-		String json = _gson.toJson(command);
-
 		return execute("PUT", "api/PersonCommand", (client) -> {
-			java.io.OutputStream stream = client.getOutputStream();
-			stream.write(json.getBytes("UTF-8"));
-			stream.flush();
-			stream.close();
-
+			writePayload(client, command);
 			return handleResponse(client, RegisterPersonResponse.class);
 		});
 	}
@@ -76,7 +91,8 @@ public class PlianceClient implements IPlianceClient {
 		}
 
 		String response = convert(client.getInputStream());
-		T result = _gson.fromJson(response, type);
+		Gson gson = new Gson();
+		T result = gson.fromJson(response, type);
 
 		if (!result.success) {
 			throw new HttpException("bad result");
@@ -90,14 +106,8 @@ public class PlianceClient implements IPlianceClient {
 			throw new ArgumentNullException("Command");
 		}
 
-		String json = _gson.toJson(command);
-
 		return execute("POST", "api/PersonCommand/Archive", (client) -> {
-			java.io.OutputStream stream = client.getOutputStream();
-			stream.write(json.getBytes("UTF-8"));
-			stream.flush();
-			stream.close();
-
+			writePayload(client, command);
 			return handleResponse(client, ArchivePersonResponse.class);
 		});
 	}
@@ -107,14 +117,8 @@ public class PlianceClient implements IPlianceClient {
 			throw new ArgumentNullException("Command");
 		}
 
-		String json = _gson.toJson(command);
-
 		return execute("POST", "api/PersonCommand/Unarchive", (client) -> {
-			java.io.OutputStream stream = client.getOutputStream();
-			stream.write(json.getBytes("UTF-8"));
-			stream.flush();
-			stream.close();
-
+			writePayload(client, command);
 			return handleResponse(client, UnarchivePersonResponse.class);
 		});
 	}
@@ -134,17 +138,19 @@ public class PlianceClient implements IPlianceClient {
 			throw new ArgumentNullException("Command");
 		}
 
-		String json = _gson.toJson(command);
-
 		return execute("POST", "api/PersonCommand/Classify", (client) -> {
-			java.io.OutputStream stream = client.getOutputStream();
-
-			stream.write(json.getBytes("UTF-8"));
-			stream.flush();
-			stream.close();
-
+			writePayload(client, command);
 			return handleResponse(client, ClassifyPersonHitResponse.class);
 		});
+	}
+
+	private <T> void writePayload(HttpURLConnection client, T json) throws Exception {
+		java.io.OutputStream stream = client.getOutputStream();
+		Gson gson = new Gson();
+
+		stream.write(gson.toJson(json).getBytes("UTF-8"));
+		stream.flush();
+		stream.close();
 	}
 
 	public PersonSearchQueryResult searchPerson(PersonSearchQuery query) throws PlianceApiException {
@@ -168,7 +174,6 @@ public class PlianceClient implements IPlianceClient {
 	}
 
 	public PingResponse ping() throws PlianceApiException {
-
 		return execute("GET", "api/Ping", (client) -> {
 			return handleResponse(client, PingResponse.class);
 		});
@@ -179,14 +184,8 @@ public class PlianceClient implements IPlianceClient {
 			throw new ArgumentNullException("Command");
 		}
 
-		String json = _gson.toJson(command);
-
 		return execute("PUT", "api/CompanyCommand", (client) -> {
-			java.io.OutputStream stream = client.getOutputStream();
-			stream.write(json.getBytes("UTF-8"));
-			stream.flush();
-			stream.close();
-
+			writePayload(client, command);
 			return handleResponse(client, RegisterCompanyResponse.class);
 		});
 	}
@@ -206,14 +205,8 @@ public class PlianceClient implements IPlianceClient {
 			throw new ArgumentNullException("Command");
 		}
 
-		String json = _gson.toJson(command);
-
 		return execute("POST", "api/CompanyCommand/Archive", (client) -> {
-			java.io.OutputStream stream = client.getOutputStream();
-			stream.write(json.getBytes("UTF-8"));
-			stream.flush();
-			stream.close();
-
+			writePayload(client, command);
 			return handleResponse(client, ArchiveCompanyResponse.class);
 		});
 	}
@@ -223,14 +216,8 @@ public class PlianceClient implements IPlianceClient {
 			throw new ArgumentNullException("Command");
 		}
 
-		String json = _gson.toJson(command);
-
 		return execute("POST", "api/CompanyCommand/Unarchive", (client) -> {
-			java.io.OutputStream stream = client.getOutputStream();
-			stream.write(json.getBytes("UTF-8"));
-			stream.flush();
-			stream.close();
-
+			writePayload(client, command);
 			return handleResponse(client, UnarchiveCompanyResponse.class);
 		});
 	}
@@ -255,24 +242,13 @@ public class PlianceClient implements IPlianceClient {
 		});
 	}
 
-	public String Source() {
-		return _source;
-	}
-
 	public ClassifyCompanyHitResponse classifyCompanyHit(ClassifyCompanyHitCommand command) throws PlianceApiException {
 		if (command == null) {
 			throw new ArgumentNullException("Command");
 		}
 
-		String json = _gson.toJson(command);
-
 		return execute("POST", "api/CompanyCommand/Classify", (client) -> {
-			java.io.OutputStream stream = client.getOutputStream();
-
-			stream.write(json.getBytes("UTF-8"));
-			stream.flush();
-			stream.close();
-
+			writePayload(client, command);
 			return handleResponse(client, ClassifyCompanyHitResponse.class);
 		});
 	}

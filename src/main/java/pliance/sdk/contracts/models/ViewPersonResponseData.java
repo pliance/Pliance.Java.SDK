@@ -9,7 +9,8 @@ public class ViewPersonResponseData {
 	public String lastName;
 	public String birthdate;
 	public List<Address> addresses;
-	public Hit[][] hits;
+	public PersonHit[][] hits;
 	public Gender gender;
 	public boolean archived;
+	public LastChanged lastChanged;
 }

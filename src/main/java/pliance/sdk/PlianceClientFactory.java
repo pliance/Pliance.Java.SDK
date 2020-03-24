@@ -1,6 +1,5 @@
 package pliance.sdk;
 
-import java.io.FileInputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.security.KeyStore;
@@ -33,7 +32,7 @@ public class PlianceClientFactory {
 		return new PlianceClient(this, givenName, subject);
 	}
 
-	public <T> T execute(String method, Func1<HttpURLConnection, T, Exception> action, String path, String givenName,
+	public <T> T execute(String method, Func<HttpURLConnection, T, Exception> action, String path, String givenName,
 			String subject) throws PlianceApiException {
 
 		try {

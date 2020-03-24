@@ -5,9 +5,20 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 import pliance.sdk.contracts.*;
 import pliance.sdk.contracts.models.ClassificationType;
-import pliance.sdk.contracts.models.Hit;
-import pliance.sdk.contracts.models.PersonSearchQueryResult;
-import pliance.sdk.contracts.models.ViewPersonQueryResult;
+import pliance.sdk.contracts.models.PersonHit;
+import pliance.sdk.contracts.person.ArchivePersonCommand;
+import pliance.sdk.contracts.person.ArchivePersonResponse;
+import pliance.sdk.contracts.person.ClassifyPersonHitCommand;
+import pliance.sdk.contracts.person.DeletePersonCommand;
+import pliance.sdk.contracts.person.DeletePersonResponse;
+import pliance.sdk.contracts.person.PersonSearchQuery;
+import pliance.sdk.contracts.person.PersonSearchQueryResult;
+import pliance.sdk.contracts.person.RegisterPersonCommand;
+import pliance.sdk.contracts.person.RegisterPersonResponse;
+import pliance.sdk.contracts.person.UnarchivePersonCommand;
+import pliance.sdk.contracts.person.UnarchivePersonResponse;
+import pliance.sdk.contracts.person.ViewPersonQuery;
+import pliance.sdk.contracts.person.ViewPersonQueryResult;
 import pliance.sdk.exceptions.PlianceApiException;
 
 public class PersonTest extends TestBase {
@@ -67,7 +78,7 @@ public class PersonTest extends TestBase {
 
 	public void test_Classify() throws Exception {
 		RegisterPersonResponse result = createPerson();
-		Hit hit = result.hits[0][0];
+		PersonHit hit = result.hits[0][0];
 
 		ClassifyPersonHitCommand command = new ClassifyPersonHitCommand();
 		command.personReferenceId = _referenceId;
@@ -82,7 +93,7 @@ public class PersonTest extends TestBase {
 
 		ViewPersonQueryResult view = _client.viewPerson(query);
 
-		Hit hit2 = view.data.hits[0][0];
+		PersonHit hit2 = view.data.hits[0][0];
 
 		assertEquals(ClassificationType.FalsePositive, hit2.classification);
 	}

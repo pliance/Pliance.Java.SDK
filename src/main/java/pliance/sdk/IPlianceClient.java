@@ -1,15 +1,11 @@
 package pliance.sdk;
 
 import pliance.sdk.contracts.*;
-import pliance.sdk.contracts.models.CompanySearchQueryResult;
-import pliance.sdk.contracts.models.PersonSearchQueryResult;
-import pliance.sdk.contracts.models.ViewCompanyQueryResult;
-import pliance.sdk.contracts.models.ViewPersonQueryResult;
+import pliance.sdk.contracts.models.company.*;
+import pliance.sdk.contracts.person.*;
 import pliance.sdk.exceptions.*;
 
 public interface IPlianceClient {
-	String Source();
-
 	RegisterPersonResponse registerPerson(RegisterPersonCommand command) throws PlianceApiException;
 
 	ArchivePersonResponse archivePerson(ArchivePersonCommand command) throws PlianceApiException;
