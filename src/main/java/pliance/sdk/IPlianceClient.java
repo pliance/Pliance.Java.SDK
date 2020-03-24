@@ -1,6 +1,10 @@
 package pliance.sdk;
 
 import pliance.sdk.contracts.*;
+import pliance.sdk.contracts.models.CompanySearchQueryResult;
+import pliance.sdk.contracts.models.PersonSearchQueryResult;
+import pliance.sdk.contracts.models.ViewCompanyQueryResult;
+import pliance.sdk.contracts.models.ViewPersonQueryResult;
 import pliance.sdk.exceptions.*;
 
 public interface IPlianceClient {
@@ -14,7 +18,7 @@ public interface IPlianceClient {
 
 	DeletePersonResponse deletePerson(DeletePersonCommand command) throws PlianceApiException;
 
-	ClassifyHitResponse classifyPersonHit(ClassifyHitCommand command) throws PlianceApiException;
+	ClassifyPersonHitResponse classifyPersonHit(ClassifyPersonHitCommand command) throws PlianceApiException;
 
 	PersonSearchQueryResult searchPerson(PersonSearchQuery query) throws PlianceApiException;
 
@@ -33,4 +37,6 @@ public interface IPlianceClient {
 	CompanySearchQueryResult searchCompany(CompanySearchQuery request) throws PlianceApiException;
 
 	ViewCompanyQueryResult viewCompany(ViewCompanyQuery request) throws PlianceApiException;
+
+	ClassifyCompanyHitResponse classifyCompanyHit(ClassifyCompanyHitCommand command) throws PlianceApiException;
 }

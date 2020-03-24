@@ -8,7 +8,6 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
-
 import pliance.sdk.exceptions.AggregatedException;
 import pliance.sdk.exceptions.PlianceApiException;
 

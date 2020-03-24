@@ -6,12 +6,15 @@ import java.util.UUID;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 import pliance.sdk.contracts.*;
+import pliance.sdk.contracts.models.CompanyIdentity;
+import pliance.sdk.contracts.models.CompanySearchQueryResult;
+import pliance.sdk.contracts.models.ViewCompanyQueryResult;
 import pliance.sdk.exceptions.PlianceApiException;
 
 public class CompanyTest extends TestBase {
 	private String _name;
 	
-	public CompanyTest() {
+	public CompanyTest() throws Exception {
 		_name = "A Company AB";
 	}
 

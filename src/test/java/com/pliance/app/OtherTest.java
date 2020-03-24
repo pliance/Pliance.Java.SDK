@@ -8,7 +8,7 @@ public class OtherTest extends TestBase {
 		return new TestSuite(OtherTest.class);
 	}
 
-	public OtherTest() {
+	public OtherTest() throws Exception {
 	}
 
 	public void test_Ping() throws Exception {

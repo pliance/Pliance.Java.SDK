@@ -13,7 +13,6 @@ import javax.crypto.spec.SecretKeySpec;
 import java.security.Key;
 import io.jsonwebtoken.*;
 import pliance.sdk.exceptions.PlianceApiException;
-
 import java.util.Date;
 
 public class PlianceClientFactory {
@@ -21,9 +20,9 @@ public class PlianceClientFactory {
 	private String _secret;
 	private String _issuer;
 	private String _baseUrl;
-	private FileInputStream _certificate;
+	private KeyStore _certificate;
 
-	public PlianceClientFactory(String secret, String issuer, String url, FileInputStream certificate) {
+	public PlianceClientFactory(String secret, String issuer, String url, KeyStore certificate) {
 		_secret = secret;
 		_issuer = issuer;
 		_baseUrl = url;
@@ -34,8 +33,8 @@ public class PlianceClientFactory {
 		return new PlianceClient(this, givenName, subject);
 	}
 
-	public <T> T execute(String method, Func1<HttpURLConnection, T, Exception> action, String path,
-			String givenName, String subject) throws PlianceApiException {
+	public <T> T execute(String method, Func1<HttpURLConnection, T, Exception> action, String path, String givenName,
+			String subject) throws PlianceApiException {
 
 		try {
 			HttpURLConnection client = createHttpClient(path, method);
@@ -52,18 +51,19 @@ public class PlianceClientFactory {
 		URL xurl = new URL(_baseUrl + url);
 
 		if (xurl.getProtocol() == "https") {
-			KeyStore clientStore = KeyStore.getInstance("PKCS12");
-			clientStore.load(_certificate, "".toCharArray());
-			KeyManagerFactory kmf = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
-			kmf.init(clientStore, "".toCharArray());
-			KeyManager[] kms = kmf.getKeyManagers();
-			SSLContext sslContext = SSLContext.getInstance("TLS");
-			sslContext.init(kms, null, new SecureRandom());
-			System.out.println("Url: " + xurl);
 			HttpsURLConnection client = (HttpsURLConnection) xurl.openConnection();
 			client.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
 			client.setRequestProperty("Accept", "application/json");
-			client.setSSLSocketFactory(sslContext.getSocketFactory());
+
+			if (_certificate != null) {
+				KeyManagerFactory kmf = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
+				kmf.init(_certificate, "".toCharArray());
+				KeyManager[] kms = kmf.getKeyManagers();
+				SSLContext sslContext = SSLContext.getInstance("TLS");
+				sslContext.init(kms, null, new SecureRandom());
+				client.setSSLSocketFactory(sslContext.getSocketFactory());
+			}
+
 			client.setDoInput(true);
 			client.setDoOutput(true);
 			client.setRequestMethod(method);

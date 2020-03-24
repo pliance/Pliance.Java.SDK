@@ -4,6 +4,10 @@ import java.util.UUID;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 import pliance.sdk.contracts.*;
+import pliance.sdk.contracts.models.ClassificationType;
+import pliance.sdk.contracts.models.Hit;
+import pliance.sdk.contracts.models.PersonSearchQueryResult;
+import pliance.sdk.contracts.models.ViewPersonQueryResult;
 import pliance.sdk.exceptions.PlianceApiException;
 
 public class PersonTest extends TestBase {
@@ -14,16 +18,15 @@ public class PersonTest extends TestBase {
 		return new TestSuite(PersonTest.class);
 	}
 
-	public PersonTest() {
+	public PersonTest() throws Exception {
 		_firstName = "Osama";
 		_lastName = "Bin Laden";
 	}
 
 	public void test_Create() throws Exception {
-		createPerson();
+		RegisterPersonResponse response = createPerson();
 
-		Thread.sleep(200, 0);
-		assertNotNull(viewPerson().data);
+		assertNotNull(response.data);
 	}
 
 	public void test_Delete() throws Exception {
@@ -62,11 +65,11 @@ public class PersonTest extends TestBase {
 		searchPerson();
 	}
 
-	public void testClassify() throws Exception {
+	public void test_Classify() throws Exception {
 		RegisterPersonResponse result = createPerson();
 		Hit hit = result.hits[0][0];
 
-		ClassifyHitCommand command = new ClassifyHitCommand();
+		ClassifyPersonHitCommand command = new ClassifyPersonHitCommand();
 		command.personReferenceId = _referenceId;
 		command.matchId = hit.matchId;
 		command.aliasId = hit.aliasId;

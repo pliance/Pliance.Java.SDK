@@ -2,6 +2,11 @@ package pliance.sdk;
 
 import com.google.gson.Gson;
 import pliance.sdk.contracts.*;
+import pliance.sdk.contracts.models.CompanySearchQueryResult;
+import pliance.sdk.contracts.models.PersonSearchQueryResult;
+import pliance.sdk.contracts.models.ViewCompanyQueryResult;
+import pliance.sdk.contracts.models.ViewPersonQueryResult;
+import pliance.sdk.contracts.responses.Response;
 import pliance.sdk.exceptions.*;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -120,16 +125,11 @@ public class PlianceClient implements IPlianceClient {
 		}
 
 		return execute("DELETE", "api/PersonCommand" + UrlParameterEncoder.encode(command), (client) -> {
-			if (client.getResponseCode() != 200) {
-				throw new HttpException(
-						"Failed : HTTP error code : " + client.getResponseCode() + ", " + client.getResponseMessage());
-			}
-
 			return handleResponse(client, DeletePersonResponse.class);
 		});
 	}
 
-	public ClassifyHitResponse classifyPersonHit(ClassifyHitCommand command) throws PlianceApiException {
+	public ClassifyPersonHitResponse classifyPersonHit(ClassifyPersonHitCommand command) throws PlianceApiException {
 		if (command == null) {
 			throw new ArgumentNullException("Command");
 		}
@@ -143,7 +143,7 @@ public class PlianceClient implements IPlianceClient {
 			stream.flush();
 			stream.close();
 
-			return handleResponse(client, ClassifyHitResponse.class);
+			return handleResponse(client, ClassifyPersonHitResponse.class);
 		});
 	}
 
@@ -153,11 +153,6 @@ public class PlianceClient implements IPlianceClient {
 		}
 
 		return execute("GET", "api/PersonQuery/Search/" + UrlParameterEncoder.encode(query), (client) -> {
-			if (client.getResponseCode() != 200) {
-				throw new HttpException(
-						"Failed : HTTP error code : " + client.getResponseCode() + ", " + client.getResponseMessage());
-			}
-
 			return handleResponse(client, PersonSearchQueryResult.class);
 		});
 	}
@@ -262,5 +257,23 @@ public class PlianceClient implements IPlianceClient {
 
 	public String Source() {
 		return _source;
+	}
+
+	public ClassifyCompanyHitResponse classifyCompanyHit(ClassifyCompanyHitCommand command) throws PlianceApiException {
+		if (command == null) {
+			throw new ArgumentNullException("Command");
+		}
+
+		String json = _gson.toJson(command);
+
+		return execute("POST", "api/CompanyCommand/Classify", (client) -> {
+			java.io.OutputStream stream = client.getOutputStream();
+
+			stream.write(json.getBytes("UTF-8"));
+			stream.flush();
+			stream.close();
+
+			return handleResponse(client, ClassifyCompanyHitResponse.class);
+		});
 	}
 }

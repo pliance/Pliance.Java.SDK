@@ -2,6 +2,12 @@ package com.pliance.app;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.security.KeyStore;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.cert.CertificateException;
 import java.util.UUID;
 import junit.framework.TestCase;
 import pliance.sdk.IPlianceClient;
@@ -14,10 +20,10 @@ public abstract class TestBase extends TestCase {
 	protected String _secret;
 	protected String _issuer;
 	protected String _url;
-	protected FileInputStream _certificate;
+	protected KeyStore _certificate;
 	protected String _referenceId;
 
-	protected TestBase() {
+	protected TestBase() throws Exception {
 		FileInputStream file = null;
 
 		try {
@@ -32,6 +38,8 @@ public abstract class TestBase extends TestCase {
 		_factory = createFactory();
 		_client = _factory.create("Adam", "42");
 		_referenceId = UUID.randomUUID().toString();
+		_certificate = KeyStore.getInstance("PKCS12");
+		_certificate.load(new FileInputStream("client.pfx"), "".toCharArray());
 	}
 
 	private PlianceClientFactory createFactory() {

@@ -2,6 +2,11 @@ package pliance.sdk.contracts;
 
 import java.util.List;
 
+import pliance.sdk.contracts.models.Address;
+import pliance.sdk.contracts.models.Birthdate;
+import pliance.sdk.contracts.models.PersonIdentity;
+import pliance.sdk.contracts.models.RegisterPersonOptions;
+
 public class RegisterPersonCommand {
 	public String personReferenceId;
 	public PersonIdentity identity;
