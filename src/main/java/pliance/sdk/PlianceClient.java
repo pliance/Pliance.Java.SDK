@@ -38,11 +38,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 
-/**
- * @author Firstname Lastname address@example.com
- * @version 1.6 (current version number of program)
- * @since 1.2 (the version of the package this class was first added to)
- */
 public class PlianceClient implements IPlianceClient {
 	private PlianceClientFactory _factory;
 	private String _givenName;
