@@ -23,24 +23,17 @@ public abstract class TestBase extends TestCase {
 	protected String _referenceId;
 
 	protected TestBase() throws Exception {
-		FileInputStream file = null;
-
-		try {
-			file = new FileInputStream(new File("client.pfx"));
-		} catch (Exception e) {
-		}
-
 		_secret = "2bb80d537b1da3e38bd30361aa855686bde0eacd7162fef6a25fe97bf527a25b";
 		_issuer = "Demo";
 		_url = "https://local.pliance.io/";
-		_factory = createFactory();
-		_client = _factory.create("Adam", "42");
 		_referenceId = UUID.randomUUID().toString();
 		_certificate = KeyStore.getInstance("PKCS12");
 		_certificate.load(new FileInputStream("client.pfx"), "".toCharArray());
+		_factory = createFactory();
+		_client = _factory.create("Adam", "42");
 	}
 
-	private PlianceClientFactory createFactory() {
+	protected PlianceClientFactory createFactory() {
 		return new PlianceClientFactory(_secret, _issuer, _url, _certificate);
 	}
 

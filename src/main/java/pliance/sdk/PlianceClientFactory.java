@@ -8,6 +8,7 @@ import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.KeyManager;
 import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;
+import javax.net.ssl.X509KeyManager;
 import javax.crypto.spec.SecretKeySpec;
 import java.security.Key;
 import io.jsonwebtoken.*;
@@ -36,9 +37,12 @@ public class PlianceClientFactory {
 			String subject) throws PlianceApiException {
 
 		try {
-			HttpURLConnection client = createHttpClient(path, method);
+			HttpURLConnection client = createHttpClient(path);
 
 			client.setRequestProperty("Authorization", "Bearer " + createJwtToken(givenName, subject));
+			client.setDoInput(true);
+			client.setDoOutput(true);
+			client.setRequestMethod(method);
 
 			return action.accept(client);
 		} catch (Exception ex) {
@@ -46,11 +50,12 @@ public class PlianceClientFactory {
 		}
 	}
 
-	private HttpURLConnection createHttpClient(String url, String method) throws Exception {
-		URL xurl = new URL(_baseUrl + url);
-
-		if (xurl.getProtocol() == "https") {
-			HttpsURLConnection client = (HttpsURLConnection) xurl.openConnection();
+	private HttpURLConnection createHttpClient(String path) throws Exception {
+		URL url = new URL(_baseUrl + path);
+		String protocol = url.getProtocol();
+		
+		if (protocol.equals("https")) {
+			HttpsURLConnection client = (HttpsURLConnection) url.openConnection();
 			client.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
 			client.setRequestProperty("Accept", "application/json");
 
@@ -63,20 +68,15 @@ public class PlianceClientFactory {
 				client.setSSLSocketFactory(sslContext.getSocketFactory());
 			}
 
-			client.setDoInput(true);
-			client.setDoOutput(true);
-			client.setRequestMethod(method);
+			return client;
+		} else if (protocol.equals("http")) {
+			HttpURLConnection client = (HttpURLConnection) url.openConnection();
+			client.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+			client.setRequestProperty("Accept", "application/json");
 
 			return client;
 		} else {
-			HttpURLConnection client = (HttpURLConnection) xurl.openConnection();
-			client.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-			client.setRequestProperty("Accept", "application/json");
-			client.setDoInput(true);
-			client.setDoOutput(true);
-			client.setRequestMethod(method);
-
-			return client;
+			throw new Exception("Unknown protocol: '" + protocol + "'");
 		}
 	}
 
