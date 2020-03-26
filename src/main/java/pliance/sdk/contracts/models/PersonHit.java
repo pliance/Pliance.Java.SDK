@@ -6,7 +6,6 @@ public class PersonHit {
 	public String matchId;
 	public List<TextMatch> matchedFirstName;
 	public List<TextMatch> matchedLastName;
-	public Birthdate birthdate;
 	public boolean isPep;
 	public boolean isRca;
 	public boolean isSanction;

@@ -1,15 +1,14 @@
 package pliance.sdk.contracts.models;
 import java.util.List;
 
-import pliance.sdk.contracts.models.graphs.*;
-
 public class ViewCompanyResponseData {
 	public String companyReferenceId;
 	public CompanyIdentity identity;
 	public String name;
-	public Graph graph;
-	public List<Beneficiary> beneficiaries;
+	public List<ViewPersonResponseData> beneficiaries;
 	public boolean archived;
-	public LastChanged lastChanged;
+	public boolean highRiskCountry;
 	public CompanyHit[][] hits;
+	public LastChanged lastChanged;
+	public boolean isSanction;
 }

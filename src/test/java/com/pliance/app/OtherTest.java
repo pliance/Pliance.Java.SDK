@@ -2,7 +2,7 @@ package com.pliance.app;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
-import pliance.sdk.contracts.person.ViewPersonQuery;
+import pliance.sdk.contracts.models.person.ViewPersonQuery;
 import pliance.sdk.exceptions.PlianceApiException;
 
 public class OtherTest extends TestBase {

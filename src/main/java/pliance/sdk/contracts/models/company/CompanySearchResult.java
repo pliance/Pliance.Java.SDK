@@ -12,4 +12,5 @@ public class CompanySearchResult {
 	public boolean isRca;
 	public boolean isSanction;
 	public CompanyIdentity identity;
+	public boolean archived;
 }

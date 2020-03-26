@@ -2,7 +2,7 @@ package pliance.sdk;
 
 import pliance.sdk.contracts.*;
 import pliance.sdk.contracts.models.company.*;
-import pliance.sdk.contracts.person.*;
+import pliance.sdk.contracts.models.person.*;
 import pliance.sdk.exceptions.*;
 
 public interface IPlianceClient {
@@ -35,4 +35,11 @@ public interface IPlianceClient {
 	ViewCompanyQueryResult viewCompany(ViewCompanyQuery request) throws PlianceApiException;
 
 	ClassifyCompanyHitResponse classifyCompanyHit(ClassifyCompanyHitCommand command) throws PlianceApiException;
+	
+//feed
+//webhook put
+//webhook get
+//watchlist1
+//watchlist2
+//watchlist/company
 }

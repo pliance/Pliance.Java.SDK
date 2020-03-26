@@ -1,4 +1,4 @@
-package pliance.sdk.contracts.person;
+package pliance.sdk.contracts.models.person;
 
 import pliance.sdk.contracts.models.PersonHit;
 import pliance.sdk.contracts.models.ViewPersonResponseData;

@@ -3,7 +3,7 @@ package pliance.sdk;
 import com.google.gson.Gson;
 import pliance.sdk.contracts.*;
 import pliance.sdk.contracts.models.company.*;
-import pliance.sdk.contracts.person.*;
+import pliance.sdk.contracts.models.person.*;
 import pliance.sdk.contracts.responses.Response;
 import pliance.sdk.exceptions.*;
 import java.io.BufferedReader;

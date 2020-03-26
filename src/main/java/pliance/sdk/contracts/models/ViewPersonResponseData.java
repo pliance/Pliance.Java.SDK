@@ -12,5 +12,10 @@ public class ViewPersonResponseData {
 	public PersonHit[][] hits;
 	public Gender gender;
 	public boolean archived;
+    public boolean IsPep;
+    public boolean IsRca;
+    public boolean IsSanction;
+    public Birthdate Birth;
+    public boolean highRiskCountry;
 	public LastChanged lastChanged;
 }
