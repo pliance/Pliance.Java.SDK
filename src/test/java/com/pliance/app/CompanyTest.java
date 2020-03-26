@@ -5,7 +5,6 @@ import java.util.UUID;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
-import pliance.sdk.contracts.*;
 import pliance.sdk.contracts.models.CompanyIdentity;
 import pliance.sdk.contracts.models.company.ArchiveCompanyCommand;
 import pliance.sdk.contracts.models.company.ArchiveCompanyResponse;
@@ -37,48 +36,48 @@ public class CompanyTest extends TestBase {
 	}
 
 	public void test_Create() throws Exception {
-		CreateCompany();
+		createCompany();
 
-		Thread.sleep(200, 0);
 		assertNotNull(viewCompany().data);
 	}
 
 	public void test_Delete() throws Exception {
-		CreateCompany();
+		createCompany();
 		deleteCompany();
 
-		Thread.sleep(200, 0);
+		Sync();
 		assertThrows(PlianceApiException.class, () -> {
 			viewCompany();
 		});
 	}
 
 	public void test_Archive() throws Exception {
-		CreateCompany();
+		createCompany();
 		archiveCompany();
 
-		Thread.sleep(200, 0);
+		Sync();
 		assertTrue(viewCompany().data.archived);
 	}
 
 	public void test_Unarchive() throws Exception {
-		CreateCompany();
+		createCompany();
 		archiveCompany();
 		unarchiveCompany();
 
-		Thread.sleep(200, 0);
+		Sync();
 		assertFalse(viewCompany().data.archived);
 	}
 
 	public void test_SearchCompany() throws Exception {
 		_name = UUID.randomUUID().toString();
-		CreateCompany();
+		createCompany();
 		
-		Thread.sleep(200, 0);
-		searchCompany();
+		Sync();
+		CompanySearchQueryResult result = searchCompany();
+		assertEquals(1, result.data.result.size());		
 	}
 
-	private RegisterCompanyResponse CreateCompany() throws Exception {
+	private RegisterCompanyResponse createCompany() throws Exception {
 		RegisterCompanyCommand command = new RegisterCompanyCommand();
 		command.companyReferenceId = _referenceId;
 		command.name = _name;

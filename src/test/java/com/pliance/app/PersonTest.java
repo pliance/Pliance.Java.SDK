@@ -3,7 +3,6 @@ package com.pliance.app;
 import java.util.UUID;
 import junit.framework.Test;
 import junit.framework.TestSuite;
-import pliance.sdk.contracts.*;
 import pliance.sdk.contracts.models.ClassificationType;
 import pliance.sdk.contracts.models.PersonHit;
 import pliance.sdk.contracts.person.ArchivePersonCommand;
@@ -19,7 +18,6 @@ import pliance.sdk.contracts.person.UnarchivePersonCommand;
 import pliance.sdk.contracts.person.UnarchivePersonResponse;
 import pliance.sdk.contracts.person.ViewPersonQuery;
 import pliance.sdk.contracts.person.ViewPersonQueryResult;
-import pliance.sdk.exceptions.PlianceApiException;
 
 public class PersonTest extends TestBase {
 	private String _firstName;
@@ -41,6 +39,7 @@ public class PersonTest extends TestBase {
 	}
 
 	public void test_Delete() throws Exception {
+		createPerson();
 		deletePerson();
 	}
 
@@ -48,7 +47,7 @@ public class PersonTest extends TestBase {
 		createPerson();
 		ArchivePerson();
 
-		Thread.sleep(200, 0);
+		Sync();
 		assertTrue(viewPerson().data.archived);
 	}
 
@@ -57,7 +56,7 @@ public class PersonTest extends TestBase {
 		ArchivePerson();
 		unarchivePerson();
 
-		Thread.sleep(200, 0);
+		Sync();
 		assertFalse(viewPerson().data.archived);
 	}
 
@@ -65,8 +64,9 @@ public class PersonTest extends TestBase {
 		_firstName = UUID.randomUUID().toString();
 		createPerson();
 
-		Thread.sleep(200, 0);
-		searchPerson();
+		Sync();
+		PersonSearchQueryResult result = searchPerson();
+		assertEquals(1, result.data.result.size());
 	}
 
 	public void test_Classify() throws Exception {
@@ -80,15 +80,13 @@ public class PersonTest extends TestBase {
 		command.classification = ClassificationType.FalsePositive;
 		_client.classifyPersonHit(command);
 
-		Thread.sleep(200, 0);
+		Sync();
 		ViewPersonQuery query = new ViewPersonQuery();
 		query.personReferenceId = _referenceId;
 
 		ViewPersonQueryResult view = _client.viewPerson(query);
 
-		PersonHit hit2 = view.data.hits[0][0];
-
-		assertEquals(ClassificationType.FalsePositive, hit2.classification);
+		assertEquals(ClassificationType.FalsePositive, view.data.hits[0][0].classification);
 	}
 
 	private RegisterPersonResponse createPerson() throws Exception {

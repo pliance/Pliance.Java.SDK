@@ -26,16 +26,4 @@ public class OtherTest extends TestBase {
 			_client.viewPerson(query);
 		});
 	}
-	
-	public void test_NoCert() throws Exception
-	{
-		_certificate = null;
-		_url = "https://local-no-cert.pliance.io/";
-		assertThrows(PlianceApiException.class, () -> {
-			ViewPersonQuery query = new ViewPersonQuery();
-			query.personReferenceId = _referenceId;
-
-			_client.viewPerson(query);
-		});
-	}	
 }

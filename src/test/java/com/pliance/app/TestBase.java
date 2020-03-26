@@ -1,13 +1,7 @@
 package com.pliance.app;
 
-import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.security.KeyStore;
-import java.security.KeyStoreException;
-import java.security.NoSuchAlgorithmException;
-import java.security.cert.CertificateException;
 import java.util.UUID;
 import junit.framework.TestCase;
 import pliance.sdk.IPlianceClient;
@@ -36,10 +30,16 @@ public abstract class TestBase extends TestCase {
 	protected PlianceClientFactory createFactory() {
 		return new PlianceClientFactory(_secret, _issuer, _url, _certificate);
 	}
+	
+	protected void Sync() throws Exception
+	{
+		Thread.sleep(200, 0);		
+	}
 
 	protected <T extends Throwable> void assertThrows(Class<T> exceptionType, Action<Exception> func) throws Exception {
 		try {
 			func.accept();
+			throw new Exception(exceptionType.getTypeName() + " wasn't thrown");
 		} catch (Exception ex) {
 			if (exceptionType.isInstance(ex)) {
 				return;
