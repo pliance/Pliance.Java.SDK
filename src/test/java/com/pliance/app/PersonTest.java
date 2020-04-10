@@ -3,21 +3,7 @@ package com.pliance.app;
 import java.util.UUID;
 import junit.framework.Test;
 import junit.framework.TestSuite;
-import pliance.sdk.contracts.models.ClassificationType;
-import pliance.sdk.contracts.models.PersonHit;
-import pliance.sdk.contracts.models.person.ArchivePersonCommand;
-import pliance.sdk.contracts.models.person.ArchivePersonResponse;
-import pliance.sdk.contracts.models.person.ClassifyPersonHitCommand;
-import pliance.sdk.contracts.models.person.DeletePersonCommand;
-import pliance.sdk.contracts.models.person.DeletePersonResponse;
-import pliance.sdk.contracts.models.person.PersonSearchQuery;
-import pliance.sdk.contracts.models.person.PersonSearchQueryResult;
-import pliance.sdk.contracts.models.person.RegisterPersonCommand;
-import pliance.sdk.contracts.models.person.RegisterPersonResponse;
-import pliance.sdk.contracts.models.person.UnarchivePersonCommand;
-import pliance.sdk.contracts.models.person.UnarchivePersonResponse;
-import pliance.sdk.contracts.models.person.ViewPersonQuery;
-import pliance.sdk.contracts.models.person.ViewPersonQueryResult;
+import pliance.sdk.contracts.*;
 
 public class PersonTest extends TestBase {
 	private String _firstName;
@@ -66,12 +52,12 @@ public class PersonTest extends TestBase {
 
 		Sync();
 		PersonSearchQueryResult result = searchPerson();
-		assertEquals(1, result.data.result.size());
+		assertEquals(1, result.data.result.length);
 	}
 
 	public void test_Classify() throws Exception {
 		RegisterPersonResponse result = createPerson();
-		PersonHit hit = result.hits[0][0];
+		PersonHit hit = result.data.hits[0][0];
 
 		ClassifyPersonHitCommand command = new ClassifyPersonHitCommand();
 		command.personReferenceId = _referenceId;

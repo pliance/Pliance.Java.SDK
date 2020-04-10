@@ -5,7 +5,9 @@ import java.util.Date;
 import pliance.sdk.contracts.responses.Response;
 import pliance.sdk.contracts.responses.ResponseGeneric;
 
-public class PingResponse extends Response 
+public class LastChanged 
 {
+	public String checkpoint;
+	public Date timestampUtc;
 }
 

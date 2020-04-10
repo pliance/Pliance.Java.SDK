@@ -5,7 +5,11 @@ import java.util.Date;
 import pliance.sdk.contracts.responses.Response;
 import pliance.sdk.contracts.responses.ResponseGeneric;
 
-public class PingResponse extends Response 
+public class ClassifyCompanyHitCommand 
 {
+	public String aliasId;
+	public ClassificationType classification;
+	public String companyReferenceId;
+	public String matchId;
 }
 

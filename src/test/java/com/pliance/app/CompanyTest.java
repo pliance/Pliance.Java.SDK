@@ -5,19 +5,7 @@ import java.util.UUID;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
-import pliance.sdk.contracts.models.CompanyIdentity;
-import pliance.sdk.contracts.models.company.ArchiveCompanyCommand;
-import pliance.sdk.contracts.models.company.ArchiveCompanyResponse;
-import pliance.sdk.contracts.models.company.CompanySearchQuery;
-import pliance.sdk.contracts.models.company.CompanySearchQueryResult;
-import pliance.sdk.contracts.models.company.DeleteCompanyCommand;
-import pliance.sdk.contracts.models.company.DeleteCompanyResponse;
-import pliance.sdk.contracts.models.company.RegisterCompanyCommand;
-import pliance.sdk.contracts.models.company.RegisterCompanyResponse;
-import pliance.sdk.contracts.models.company.UnarchiveCompanyCommand;
-import pliance.sdk.contracts.models.company.UnarchiveCompanyResponse;
-import pliance.sdk.contracts.models.company.ViewCompanyQuery;
-import pliance.sdk.contracts.models.company.ViewCompanyQueryResult;
+import pliance.sdk.contracts.*;
 import pliance.sdk.exceptions.PlianceApiException;
 
 public class CompanyTest extends TestBase {
@@ -32,7 +20,9 @@ public class CompanyTest extends TestBase {
 	}
 	
 	public void test_Ping() throws Exception {
-		_client.ping();
+		PingQuery query = new PingQuery();
+		
+		_client.ping(query);
 	}
 
 	public void test_Create() throws Exception {
@@ -74,7 +64,7 @@ public class CompanyTest extends TestBase {
 		
 		Sync();
 		CompanySearchQueryResult result = searchCompany();
-		assertEquals(1, result.data.result.size());		
+		assertEquals(1, result.data.result.length);		
 	}
 
 	private RegisterCompanyResponse createCompany() throws Exception {

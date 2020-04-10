@@ -5,7 +5,7 @@ import java.util.Date;
 import pliance.sdk.contracts.responses.Response;
 import pliance.sdk.contracts.responses.ResponseGeneric;
 
-public class PingResponse extends Response 
+public class ArchivePersonResponse extends Response 
 {
 }
 

@@ -5,7 +5,11 @@ import java.util.Date;
 import pliance.sdk.contracts.responses.Response;
 import pliance.sdk.contracts.responses.ResponseGeneric;
 
-public class PingResponse extends Response 
+public class FeedQueryItem 
 {
+	public Object body;
+	public String checkpoint;
+	public Object metadata;
+	public String type;
 }
 

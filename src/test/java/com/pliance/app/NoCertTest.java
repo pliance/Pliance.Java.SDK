@@ -3,6 +3,7 @@ package com.pliance.app;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 import pliance.sdk.PlianceClientFactory;
+import pliance.sdk.contracts.*;
 
 public class NoCertTest extends TestBase {
 
@@ -19,6 +20,8 @@ public class NoCertTest extends TestBase {
 	
 	public void test_NoCert() throws Exception
 	{
-		_client.ping();
+		PingQuery query = new PingQuery();
+		
+		_client.ping(query);
 	}		
 }

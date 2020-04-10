@@ -5,7 +5,12 @@ import java.util.Date;
 import pliance.sdk.contracts.responses.Response;
 import pliance.sdk.contracts.responses.ResponseGeneric;
 
-public class PingResponse extends Response 
+public class Node 
 {
+	public int id;
+	public boolean isPep;
+	public String name;
+	public String reference;
+	public String type;
 }
 

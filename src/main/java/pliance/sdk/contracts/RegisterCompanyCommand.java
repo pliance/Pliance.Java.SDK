@@ -5,7 +5,11 @@ import java.util.Date;
 import pliance.sdk.contracts.responses.Response;
 import pliance.sdk.contracts.responses.ResponseGeneric;
 
-public class PingResponse extends Response 
+public class RegisterCompanyCommand 
 {
+	public String companyReferenceId;
+	public CompanyIdentity identity;
+	public String name;
+	public RegisterCompanyOptions options;
 }
 
