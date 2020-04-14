@@ -66,7 +66,7 @@ public class PlianceClient implements IPlianceClient {
 		stream.close();
 	}
 
-	// @inject: methods
+    // @inject: methods
 	public ArchiveCompanyResponse archiveCompany(ArchiveCompanyCommand command) throws PlianceApiException
 	{
 		if (command == null)
@@ -93,14 +93,14 @@ public class PlianceClient implements IPlianceClient {
 		});
 	}
 
-	public CompanyGraphBeneficiariesResult beneficiaries(CompanyGraphBeneficiariesQuery query) throws PlianceApiException
+	public CompanyGraphBeneficiariesResult beneficiaries(CompanyGraphBeneficiariesQuery request) throws PlianceApiException
 	{
-		if (query == null)
+		if (request == null)
 		{
-			throw new ArgumentNullException("query");
+			throw new ArgumentNullException("request");
 		}
 
-		return execute("GET", "api/CompanyQuery/Graph/Beneficiaries" + UrlParameterEncoder.encode(query), (client) -> {
+		return execute("GET", "api/CompanyQuery/Graph/Beneficiaries" + UrlParameterEncoder.encode(request), (client) -> {
 			return handleResponse(client, CompanyGraphBeneficiariesResult.class);
 		});
 	}
@@ -155,50 +155,50 @@ public class PlianceClient implements IPlianceClient {
 		});
 	}
 
-	public FeedQueryResult feed(FeedQuery query) throws PlianceApiException
+	public FeedQueryResult feed(FeedQuery request) throws PlianceApiException
 	{
-		if (query == null)
+		if (request == null)
 		{
-			throw new ArgumentNullException("query");
+			throw new ArgumentNullException("request");
 		}
 
-		return execute("GET", "api/FeedQuery/" + UrlParameterEncoder.encode(query), (client) -> {
+		return execute("GET", "api/FeedQuery/" + UrlParameterEncoder.encode(request), (client) -> {
 			return handleResponse(client, FeedQueryResult.class);
 		});
 	}
 
-	public ReportQueryResult getReport(ReportQuery query) throws PlianceApiException
+	public ReportQueryResult getReport(ReportQuery request) throws PlianceApiException
 	{
-		if (query == null)
+		if (request == null)
 		{
-			throw new ArgumentNullException("query");
+			throw new ArgumentNullException("request");
 		}
 
-		return execute("GET", "api/ReportQuery/" + UrlParameterEncoder.encode(query), (client) -> {
+		return execute("GET", "api/ReportQuery/" + UrlParameterEncoder.encode(request), (client) -> {
 			return handleResponse(client, ReportQueryResult.class);
 		});
 	}
 
-	public WebhookQueryResult getWebhook(WebhookQuery query) throws PlianceApiException
+	public WebhookQueryResult getWebhook(WebhookQuery request) throws PlianceApiException
 	{
-		if (query == null)
+		if (request == null)
 		{
-			throw new ArgumentNullException("query");
+			throw new ArgumentNullException("request");
 		}
 
-		return execute("GET", "api/WebhookQuery/" + UrlParameterEncoder.encode(query), (client) -> {
+		return execute("GET", "api/WebhookQuery/" + UrlParameterEncoder.encode(request), (client) -> {
 			return handleResponse(client, WebhookQueryResult.class);
 		});
 	}
 
-	public PingResponse ping(PingQuery query) throws PlianceApiException
+	public PingResponse ping(PingQuery request) throws PlianceApiException
 	{
-		if (query == null)
+		if (request == null)
 		{
-			throw new ArgumentNullException("query");
+			throw new ArgumentNullException("request");
 		}
 
-		return execute("GET", "api/Ping/" + UrlParameterEncoder.encode(query), (client) -> {
+		return execute("GET", "api/Ping/" + UrlParameterEncoder.encode(request), (client) -> {
 			return handleResponse(client, PingResponse.class);
 		});
 	}
@@ -242,26 +242,26 @@ public class PlianceClient implements IPlianceClient {
 		});
 	}
 
-	public CompanySearchQueryResult searchCompany(CompanySearchQuery query) throws PlianceApiException
+	public CompanySearchQueryResult searchCompany(CompanySearchQuery request) throws PlianceApiException
 	{
-		if (query == null)
+		if (request == null)
 		{
-			throw new ArgumentNullException("query");
+			throw new ArgumentNullException("request");
 		}
 
-		return execute("GET", "api/CompanyQuery/Search" + UrlParameterEncoder.encode(query), (client) -> {
+		return execute("GET", "api/CompanyQuery/Search" + UrlParameterEncoder.encode(request), (client) -> {
 			return handleResponse(client, CompanySearchQueryResult.class);
 		});
 	}
 
-	public PersonSearchQueryResult searchPerson(PersonSearchQuery query) throws PlianceApiException
+	public PersonSearchQueryResult searchPerson(PersonSearchQuery request) throws PlianceApiException
 	{
-		if (query == null)
+		if (request == null)
 		{
-			throw new ArgumentNullException("query");
+			throw new ArgumentNullException("request");
 		}
 
-		return execute("GET", "api/PersonQuery/Search" + UrlParameterEncoder.encode(query), (client) -> {
+		return execute("GET", "api/PersonQuery/Search" + UrlParameterEncoder.encode(request), (client) -> {
 			return handleResponse(client, PersonSearchQueryResult.class);
 		});
 	}
@@ -292,65 +292,65 @@ public class PlianceClient implements IPlianceClient {
 		});
 	}
 
-	public ViewCompanyQueryResult viewCompany(ViewCompanyQuery query) throws PlianceApiException
+	public ViewCompanyQueryResult viewCompany(ViewCompanyQuery request) throws PlianceApiException
 	{
-		if (query == null)
+		if (request == null)
 		{
-			throw new ArgumentNullException("query");
+			throw new ArgumentNullException("request");
 		}
 
-		return execute("GET", "api/CompanyQuery/" + UrlParameterEncoder.encode(query), (client) -> {
+		return execute("GET", "api/CompanyQuery/" + UrlParameterEncoder.encode(request), (client) -> {
 			return handleResponse(client, ViewCompanyQueryResult.class);
 		});
 	}
 
-	public ViewPersonQueryResult viewPerson(ViewPersonQuery query) throws PlianceApiException
+	public ViewPersonQueryResult viewPerson(ViewPersonQuery request) throws PlianceApiException
 	{
-		if (query == null)
+		if (request == null)
 		{
-			throw new ArgumentNullException("query");
+			throw new ArgumentNullException("request");
 		}
 
-		return execute("GET", "api/PersonQuery/" + UrlParameterEncoder.encode(query), (client) -> {
+		return execute("GET", "api/PersonQuery/" + UrlParameterEncoder.encode(request), (client) -> {
 			return handleResponse(client, ViewPersonQueryResult.class);
 		});
 	}
 
-	public WatchlistCompanyQueryResult watchlistCompany(WatchlistCompanyQuery query) throws PlianceApiException
+	public WatchlistCompanyQueryResult watchlistCompany(WatchlistCompanyQuery request) throws PlianceApiException
 	{
-		if (query == null)
+		if (request == null)
 		{
-			throw new ArgumentNullException("query");
+			throw new ArgumentNullException("request");
 		}
 
-		return execute("GET", "api/WatchlistQuery/Company" + UrlParameterEncoder.encode(query), (client) -> {
+		return execute("GET", "api/WatchlistQuery/Company" + UrlParameterEncoder.encode(request), (client) -> {
 			return handleResponse(client, WatchlistCompanyQueryResult.class);
 		});
 	}
 
-	public WatchlistQueryResult watchlistPerson(WatchlistQuery query) throws PlianceApiException
+	public WatchlistQueryResult watchlistPerson(WatchlistQuery request) throws PlianceApiException
 	{
-		if (query == null)
+		if (request == null)
 		{
-			throw new ArgumentNullException("query");
+			throw new ArgumentNullException("request");
 		}
 
-		return execute("GET", "api/WatchlistQuery/" + UrlParameterEncoder.encode(query), (client) -> {
+		return execute("GET", "api/WatchlistQuery/" + UrlParameterEncoder.encode(request), (client) -> {
 			return handleResponse(client, WatchlistQueryResult.class);
 		});
 	}
 
-	public WatchlistQueryResult_v2 watchlistPersonV2(WatchlistQuery_v2 query) throws PlianceApiException
+	public WatchlistQueryResult_v2 watchlistPersonV2(WatchlistQuery_v2 request) throws PlianceApiException
 	{
-		if (query == null)
+		if (request == null)
 		{
-			throw new ArgumentNullException("query");
+			throw new ArgumentNullException("request");
 		}
 
-		return execute("GET", "api/WatchlistQuery/v2" + UrlParameterEncoder.encode(query), (client) -> {
+		return execute("GET", "api/WatchlistQuery/v2" + UrlParameterEncoder.encode(request), (client) -> {
 			return handleResponse(client, WatchlistQueryResult_v2.class);
 		});
 	}
 
-// @inject: !methods
+    // @inject: !methods
 }
