@@ -7,7 +7,6 @@ public interface IPlianceClient {
     // @inject: interface
 	ArchiveCompanyResponse archiveCompany(ArchiveCompanyCommand command) throws PlianceApiException;
 	ArchivePersonResponse archivePerson(ArchivePersonCommand command) throws PlianceApiException;
-	CompanyGraphBeneficiariesResult beneficiaries(CompanyGraphBeneficiariesQuery request) throws PlianceApiException;
 	ClassifyCompanyHitResponse classifyCompanyHit(ClassifyCompanyHitCommand command) throws PlianceApiException;
 	ClassifyPersonHitResponse classifyPersonHit(ClassifyPersonHitCommand command) throws PlianceApiException;
 	DeleteCompanyResponse deleteCompany(DeleteCompanyCommand command) throws PlianceApiException;
@@ -27,6 +26,6 @@ public interface IPlianceClient {
 	ViewPersonQueryResult viewPerson(ViewPersonQuery request) throws PlianceApiException;
 	WatchlistCompanyQueryResult watchlistCompany(WatchlistCompanyQuery request) throws PlianceApiException;
 	WatchlistQueryResult watchlistPerson(WatchlistQuery request) throws PlianceApiException;
-	WatchlistQueryResult_v2 watchlistPersonV2(WatchlistQuery_v2 request) throws PlianceApiException;
+	WatchlistQueryResultV2 watchlistPersonV2(WatchlistQueryV2 request) throws PlianceApiException;
     // @inject: !interface
 }

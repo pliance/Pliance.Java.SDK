@@ -6,6 +6,6 @@ import pliance.sdk.contracts.responses.ResponseGeneric;
 
 public class CompanyGraphBeneficiariesQuery 
 {
-	public String companyReferenceId;
+	public String CompanyReferenceId;
 }
 

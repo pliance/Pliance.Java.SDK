@@ -4,7 +4,7 @@ import java.util.Date;
 import pliance.sdk.contracts.responses.Response;
 import pliance.sdk.contracts.responses.ResponseGeneric;
 
-public class PersonHit 
+public class PersonDetailsHitModel 
 {
 	public String aliasId;
 	public ClassificationType classification;
@@ -16,5 +16,7 @@ public class PersonHit
 	public TextMatch[] matchedFirstName;
 	public TextMatch[] matchedLastName;
 	public String matchId;
+	public String referenceId;
+	public double score;
 }
 

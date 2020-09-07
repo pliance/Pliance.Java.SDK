@@ -14,7 +14,7 @@ public class ViewPersonResponseData
 	public String firstName;
 	public Gender gender;
 	public boolean highRiskCountry;
-	public PersonHit[][] hits;
+	public PersonDetailsHitModel[][] hits;
 	public PersonIdentity identity;
 	public boolean isPep;
 	public boolean isRca;

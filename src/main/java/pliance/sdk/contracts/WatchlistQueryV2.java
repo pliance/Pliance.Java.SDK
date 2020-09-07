@@ -4,7 +4,7 @@ import java.util.Date;
 import pliance.sdk.contracts.responses.Response;
 import pliance.sdk.contracts.responses.ResponseGeneric;
 
-public class WatchlistQuery_v2 
+public class WatchlistQueryV2 
 {
 	public String matchId;
 	public String personReferenceId;

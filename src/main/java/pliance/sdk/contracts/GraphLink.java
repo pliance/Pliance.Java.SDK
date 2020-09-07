@@ -4,7 +4,10 @@ import java.util.Date;
 import pliance.sdk.contracts.responses.Response;
 import pliance.sdk.contracts.responses.ResponseGeneric;
 
-public class WatchlistQueryResult_v2 extends ResponseGeneric<ListPersonViewModel> 
+public class GraphLink 
 {
+	public int Source;
+	public int Target;
+	public String Type;
 }
 

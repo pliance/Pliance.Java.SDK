@@ -93,18 +93,6 @@ public class PlianceClient implements IPlianceClient {
 		});
 	}
 
-	public CompanyGraphBeneficiariesResult beneficiaries(CompanyGraphBeneficiariesQuery request) throws PlianceApiException
-	{
-		if (request == null)
-		{
-			throw new ArgumentNullException("request");
-		}
-
-		return execute("GET", "api/CompanyQuery/Graph/Beneficiaries" + UrlParameterEncoder.encode(request), (client) -> {
-			return handleResponse(client, CompanyGraphBeneficiariesResult.class);
-		});
-	}
-
 	public ClassifyCompanyHitResponse classifyCompanyHit(ClassifyCompanyHitCommand command) throws PlianceApiException
 	{
 		if (command == null)
@@ -138,7 +126,7 @@ public class PlianceClient implements IPlianceClient {
 			throw new ArgumentNullException("command");
 		}
 
-		return execute("DELETE", "api/CompanyCommand/" + UrlParameterEncoder.encode(command), (client) -> {
+		return execute("DELETE", "api/CompanyCommand" + UrlParameterEncoder.encode(command), (client) -> {
 			return handleResponse(client, DeleteCompanyResponse.class);
 		});
 	}
@@ -150,7 +138,7 @@ public class PlianceClient implements IPlianceClient {
 			throw new ArgumentNullException("command");
 		}
 
-		return execute("DELETE", "api/PersonCommand/" + UrlParameterEncoder.encode(command), (client) -> {
+		return execute("DELETE", "api/PersonCommand" + UrlParameterEncoder.encode(command), (client) -> {
 			return handleResponse(client, DeletePersonResponse.class);
 		});
 	}
@@ -162,7 +150,7 @@ public class PlianceClient implements IPlianceClient {
 			throw new ArgumentNullException("request");
 		}
 
-		return execute("GET", "api/FeedQuery/" + UrlParameterEncoder.encode(request), (client) -> {
+		return execute("GET", "api/FeedQuery" + UrlParameterEncoder.encode(request), (client) -> {
 			return handleResponse(client, FeedQueryResult.class);
 		});
 	}
@@ -174,7 +162,7 @@ public class PlianceClient implements IPlianceClient {
 			throw new ArgumentNullException("request");
 		}
 
-		return execute("GET", "api/ReportQuery/" + UrlParameterEncoder.encode(request), (client) -> {
+		return execute("GET", "api/ReportQuery" + UrlParameterEncoder.encode(request), (client) -> {
 			return handleResponse(client, ReportQueryResult.class);
 		});
 	}
@@ -186,7 +174,7 @@ public class PlianceClient implements IPlianceClient {
 			throw new ArgumentNullException("request");
 		}
 
-		return execute("GET", "api/WebhookQuery/" + UrlParameterEncoder.encode(request), (client) -> {
+		return execute("GET", "api/WebhookQuery" + UrlParameterEncoder.encode(request), (client) -> {
 			return handleResponse(client, WebhookQueryResult.class);
 		});
 	}
@@ -198,7 +186,7 @@ public class PlianceClient implements IPlianceClient {
 			throw new ArgumentNullException("request");
 		}
 
-		return execute("GET", "api/Ping/" + UrlParameterEncoder.encode(request), (client) -> {
+		return execute("GET", "api/Ping" + UrlParameterEncoder.encode(request), (client) -> {
 			return handleResponse(client, PingResponse.class);
 		});
 	}
@@ -210,7 +198,7 @@ public class PlianceClient implements IPlianceClient {
 			throw new ArgumentNullException("command");
 		}
 
-		return execute("PUT", "api/CompanyCommand/", (client) -> {
+		return execute("PUT", "api/CompanyCommand", (client) -> {
 			writePayload(client, command);
 			return handleResponse(client, RegisterCompanyResponse.class);
 		});
@@ -223,7 +211,7 @@ public class PlianceClient implements IPlianceClient {
 			throw new ArgumentNullException("command");
 		}
 
-		return execute("PUT", "api/PersonCommand/", (client) -> {
+		return execute("PUT", "api/PersonCommand", (client) -> {
 			writePayload(client, command);
 			return handleResponse(client, RegisterPersonResponse.class);
 		});
@@ -236,7 +224,7 @@ public class PlianceClient implements IPlianceClient {
 			throw new ArgumentNullException("command");
 		}
 
-		return execute("PUT", "api/WebhookCommand/", (client) -> {
+		return execute("PUT", "api/WebhookCommand", (client) -> {
 			writePayload(client, command);
 			return handleResponse(client, WebhookUpdateResponse.class);
 		});
@@ -299,7 +287,7 @@ public class PlianceClient implements IPlianceClient {
 			throw new ArgumentNullException("request");
 		}
 
-		return execute("GET", "api/CompanyQuery/" + UrlParameterEncoder.encode(request), (client) -> {
+		return execute("GET", "api/CompanyQuery" + UrlParameterEncoder.encode(request), (client) -> {
 			return handleResponse(client, ViewCompanyQueryResult.class);
 		});
 	}
@@ -311,7 +299,7 @@ public class PlianceClient implements IPlianceClient {
 			throw new ArgumentNullException("request");
 		}
 
-		return execute("GET", "api/PersonQuery/" + UrlParameterEncoder.encode(request), (client) -> {
+		return execute("GET", "api/PersonQuery" + UrlParameterEncoder.encode(request), (client) -> {
 			return handleResponse(client, ViewPersonQueryResult.class);
 		});
 	}
@@ -335,12 +323,12 @@ public class PlianceClient implements IPlianceClient {
 			throw new ArgumentNullException("request");
 		}
 
-		return execute("GET", "api/WatchlistQuery/" + UrlParameterEncoder.encode(request), (client) -> {
+		return execute("GET", "api/WatchlistQuery" + UrlParameterEncoder.encode(request), (client) -> {
 			return handleResponse(client, WatchlistQueryResult.class);
 		});
 	}
 
-	public WatchlistQueryResult_v2 watchlistPersonV2(WatchlistQuery_v2 request) throws PlianceApiException
+	public WatchlistQueryResultV2 watchlistPersonV2(WatchlistQueryV2 request) throws PlianceApiException
 	{
 		if (request == null)
 		{
@@ -348,7 +336,7 @@ public class PlianceClient implements IPlianceClient {
 		}
 
 		return execute("GET", "api/WatchlistQuery/v2" + UrlParameterEncoder.encode(request), (client) -> {
-			return handleResponse(client, WatchlistQueryResult_v2.class);
+			return handleResponse(client, WatchlistQueryResultV2.class);
 		});
 	}
 

@@ -4,12 +4,12 @@ import java.util.Date;
 import pliance.sdk.contracts.responses.Response;
 import pliance.sdk.contracts.responses.ResponseGeneric;
 
-public class Node 
+public class GraphNode 
 {
-	public int id;
-	public boolean isPep;
-	public String name;
-	public String reference;
-	public String type;
+	public int Id;
+	public boolean IsPep;
+	public String Name;
+	public String Reference;
+	public String Type;
 }
 

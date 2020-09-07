@@ -9,5 +9,6 @@ public class RegisterPersonOptions
 	public Fuzziness fuzziness;
 	public boolean omitResult;
 	public Order order;
+	public String[] pepCountries;
 }
 

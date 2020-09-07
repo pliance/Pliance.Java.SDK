@@ -6,7 +6,7 @@ import pliance.sdk.contracts.responses.ResponseGeneric;
 
 public class Graph 
 {
-	public Link[] links;
-	public Node[] nodes;
+	public GraphLink[] Links;
+	public GraphNode[] Nodes;
 }
 

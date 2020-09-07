@@ -12,5 +12,6 @@ public class CompanyHit
 	public TextMatch[] matchedName;
 	public String matchId;
 	public String name;
+	public double score;
 }
 
