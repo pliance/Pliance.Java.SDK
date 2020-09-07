@@ -12,108 +12,105 @@ public class CompanyTest extends TestBase {
 	private String _name;
 	
 	public CompanyTest() throws Exception {
-		_name = "A Company AB";
+		_name = "Korea Daesong Bank";
 	}
 
 	public static Test suite() {
 		return new TestSuite(CompanyTest.class);
 	}
 
-	public void test_Id() throws Exception {
-		System.out.println(_referenceId);
+	public void test_createCompany() throws Exception {
+		RegisterCompanyResponse response = createCompany();
+
+		assertTrue(response.success);
 	}
-	
-	// public void test_Ping() throws Exception {
-	// 	PingQuery query = new PingQuery();
-		
-	// 	_client.ping(query);
-	// }
 
-	// public void test_Create() throws Exception {
-	// 	createCompany();
+	public void test_archiveCompany() throws Exception {
+		createCompany();
+		ArchiveCompanyResponse response = archiveCompany();
 
-	// 	assertNotNull(viewCompany().data);
-	// }
+		assertTrue(response.success);
+	}
 
-	// public void test_Delete() throws Exception {
-	// 	createCompany();
-	// 	deleteCompany();
+	public void test_unarchiveCompany() throws Exception {
+		createCompany();
+		archiveCompany();
+		UnarchiveCompanyCommand command = new UnarchiveCompanyCommand();
+		command.companyReferenceId = _id;
 
-	// 	Sync();
-	// 	assertThrows(PlianceApiException.class, () -> {
-	// 		viewCompany();
-	// 	});
-	// }
+		UnarchiveCompanyResponse response = _client.unarchiveCompany(command);
 
-	// public void test_Archive() throws Exception {
-	// 	createCompany();
-	// 	archiveCompany();
+		assertTrue(response.success);
+	}
 
-	// 	Sync();
-	// 	assertTrue(viewCompany().data.archived);
-	// }
+	public void test_deleteCompany() throws Exception {
+		createCompany();
+		DeleteCompanyCommand command = new DeleteCompanyCommand();
+		command.companyReferenceId = _id;
 
-	// public void test_Unarchive() throws Exception {
-	// 	createCompany();
-	// 	archiveCompany();
-	// 	unarchiveCompany();
+		DeleteCompanyResponse response = _client.deleteCompany(command);
 
-	// 	Sync();
-	// 	assertFalse(viewCompany().data.archived);
-	// }
+		assertTrue(response.success);
+	}
 
-	// public void test_SearchCompany() throws Exception {
-	// 	_name = UUID.randomUUID().toString();
-	// 	createCompany();
-		
-	// 	Sync();
-	// 	CompanySearchQueryResult result = searchCompany();
-	// 	assertEquals(1, result.data.result.length);		
-	// }
+	public void test_viewCompany() throws Exception {
+		createCompany();
+		ViewCompanyQuery command = new ViewCompanyQuery();
+		command.companyReferenceId = _id;
 
-	// private RegisterCompanyResponse createCompany() throws Exception {
-	// 	RegisterCompanyCommand command = new RegisterCompanyCommand();
-	// 	command.companyReferenceId = _referenceId;
-	// 	command.name = _name;
-	// 	command.identity = new CompanyIdentity();
-	// 	command.identity.country = "se";
-	// 	command.identity.identity = _referenceId;
+		ViewCompanyQueryResult response = _client.viewCompany(command);
 
-	// 	return _client.registerCompany(command);
-	// }
+		assertTrue(response.success);
+	}
 
-	// private DeleteCompanyResponse deleteCompany() throws Exception {
-	// 	DeleteCompanyCommand command = new DeleteCompanyCommand();
-	// 	command.companyReferenceId = _referenceId;
+	public void test_searchCompany() throws Exception {
+		createCompany();
+		CompanySearchQuery command = new CompanySearchQuery();
+		command.query = "Daesong";
 
-	// 	return _client.deleteCompany(command);
-	// }
+		CompanySearchQueryResult response = _client.searchCompany(command);
 
-	// private ArchiveCompanyResponse archiveCompany() throws Exception {
-	// 	ArchiveCompanyCommand command = new ArchiveCompanyCommand();
-	// 	command.companyReferenceId = _referenceId;
+		assertTrue(response.success);
+	}
 
-	// 	return _client.archiveCompany(command);
-	// }
+	public void test_classifyCompany() throws Exception {
+		RegisterCompanyResponse company = createCompany();
+		CompanyHit match = company.data.hits[0][0];
+		ClassifyCompanyHitCommand command = new ClassifyCompanyHitCommand();
+		command.aliasId = match.aliasId;
+		command.matchId = match.matchId;
+		command.companyReferenceId = _id;
+		command.classification = ClassificationType.FalsePositive;
 
-	// private UnarchiveCompanyResponse unarchiveCompany() throws Exception {
-	// 	UnarchiveCompanyCommand command = new UnarchiveCompanyCommand();
-	// 	command.companyReferenceId = _referenceId;
+		ClassifyCompanyHitResponse response = _client.classifyCompanyHit(command);
 
-	// 	return _client.unarchiveCompany(command);
-	// }
+		assertTrue(response.success);
+	}
 
-	// private ViewCompanyQueryResult viewCompany() throws Exception {
-	// 	ViewCompanyQuery query = new ViewCompanyQuery();
-	// 	query.companyReferenceId = _referenceId;
+	public void test_WatchlistCompany() throws Exception {
+		RegisterCompanyResponse company = createCompany();
+		CompanyHit match = company.data.hits[0][0];
+		WatchlistCompanyQuery command = new WatchlistCompanyQuery();
+		command.matchId = match.matchId;
+		command.companyReferenceId = _id;
 
-	// 	return _client.viewCompany(query);
-	// }
-	
-	// private CompanySearchQueryResult searchCompany() throws Exception {
-	// 	CompanySearchQuery query = new CompanySearchQuery();
-	// 	query.query = _name;
+		WatchlistCompanyQueryResult response = _client.watchlistCompany(command);
 
-	// 	return _client.searchCompany(query);
-	// }	
+		assertTrue(response.success);
+	}
+
+	private RegisterCompanyResponse createCompany() throws Exception {
+		RegisterCompanyCommand command = new RegisterCompanyCommand();
+		command.companyReferenceId = _id;
+		command.name = _name;
+
+		return _client.registerCompany(command);
+	}
+
+	private ArchiveCompanyResponse archiveCompany() throws Exception {
+		ArchiveCompanyCommand command = new ArchiveCompanyCommand();
+		command.companyReferenceId = _id;
+
+		return _client.archiveCompany(command);
+	}	
 }

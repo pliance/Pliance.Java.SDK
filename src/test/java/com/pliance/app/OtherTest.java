@@ -37,9 +37,36 @@ public class OtherTest extends TestBase {
 	{
 		assertThrows(PlianceApiException.class, () -> {
 			ViewPersonQuery query = new ViewPersonQuery();
-			query.personReferenceId = _referenceId;
+			query.personReferenceId = _id;
 
 			_client.viewPerson(query);
 		});
 	}
+
+	public void test_Feed() throws Exception {
+		FeedQuery command = new FeedQuery();
+
+		FeedQueryResult response = _client.feed(command);
+
+		assertTrue(response.success);
+	}
+
+	public void test_SaveWebhook() throws Exception {
+		WebhookUpdateCommand command = new WebhookUpdateCommand();
+		command.enabled = true;
+		command.url = "https://url";
+		command.secret = "secret";
+
+		WebhookUpdateResponse response = _client.saveWebhook(command);
+
+		assertTrue(response.success);
+	}
+
+	public void test_GetWebhook() throws Exception {
+		WebhookQuery command = new WebhookQuery();
+
+		WebhookQueryResult response = _client.getWebhook(command);
+
+		assertTrue(response.success);
+	}		
 }
