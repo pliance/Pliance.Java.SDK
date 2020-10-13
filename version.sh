@@ -1,3 +1,3 @@
 #!/bin/bash
 
-export VERSION="1.5.0"
+export VERSION="1.6.0"

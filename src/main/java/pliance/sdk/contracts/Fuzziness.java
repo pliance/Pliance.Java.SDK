@@ -9,6 +9,6 @@ public enum Fuzziness
 {
 	@SerializedName("Metaphone") Metaphone,
 	@SerializedName("Simple") Simple,
-	@SerializedName("Diacritics") Diacritics,
+	@SerializedName("Metaphone2") Metaphone2,
 }
 

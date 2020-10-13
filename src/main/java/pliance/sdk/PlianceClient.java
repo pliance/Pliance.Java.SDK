@@ -1,6 +1,8 @@
 package pliance.sdk;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import pliance.sdk.contracts.*;
 import pliance.sdk.contracts.responses.Response;
 import pliance.sdk.exceptions.*;
@@ -19,6 +21,11 @@ public class PlianceClient implements IPlianceClient {
 		_subject = subject;
 		_givenName = givenName;
 		_factory = factory;
+	}
+	
+	private Gson BuildGson()
+	{
+		return new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").setPrettyPrinting().create();
 	}
 
 	private <T> T execute(String method, String path, Func<HttpURLConnection, T, Exception> action)
@@ -47,7 +54,7 @@ public class PlianceClient implements IPlianceClient {
 		}
 
 		String response = convert(client.getInputStream());
-		Gson gson = new Gson();
+		Gson gson = BuildGson();
 		T result = gson.fromJson(response, type);
 
 		if (!result.success) {
@@ -59,7 +66,7 @@ public class PlianceClient implements IPlianceClient {
 
 	private <T> void writePayload(HttpURLConnection client, T json) throws Exception {
 		java.io.OutputStream stream = client.getOutputStream();
-		Gson gson = new Gson();
+		Gson gson = BuildGson();
 
 		stream.write(gson.toJson(json).getBytes("UTF-8"));
 		stream.flush();
