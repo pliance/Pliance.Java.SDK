@@ -4,12 +4,7 @@ import java.util.Date;
 import pliance.sdk.contracts.responses.Response;
 import pliance.sdk.contracts.responses.ResponseGeneric;
 
-public class Node 
+public class WatchlistQueryResultV2 extends ResponseGeneric<ListPersonViewModel> 
 {
-	public int id;
-	public boolean isPep;
-	public String name;
-	public String reference;
-	public String type;
 }
 

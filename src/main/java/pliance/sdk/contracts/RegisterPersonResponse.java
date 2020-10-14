@@ -6,6 +6,6 @@ import pliance.sdk.contracts.responses.ResponseGeneric;
 
 public class RegisterPersonResponse extends ResponseGeneric<ViewPersonResponseData> 
 {
-	public PersonHit[][] hits;
+	public PersonDetailsHitModel[][] hits;
 }
 

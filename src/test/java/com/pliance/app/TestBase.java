@@ -14,13 +14,13 @@ public abstract class TestBase extends TestCase {
 	protected String _issuer;
 	protected String _url;
 	protected KeyStore _certificate;
-	protected String _referenceId;
+	protected String _id;
 
 	protected TestBase() throws Exception {
 		_secret = "2bb80d537b1da3e38bd30361aa855686bde0eacd7162fef6a25fe97bf527a25b";
 		_issuer = "Demo";
 		_url = "https://local.pliance.io/";
-		_referenceId = UUID.randomUUID().toString();
+		_id = UUID.randomUUID().toString();
 		_certificate = KeyStore.getInstance("PKCS12");
 		_certificate.load(new FileInputStream("client.pfx"), "".toCharArray());
 		_factory = createFactory();
