@@ -2,6 +2,7 @@ package com.pliance.app;
 
 import java.io.FileInputStream;
 import java.security.KeyStore;
+import java.security.KeyStoreException;
 import java.util.UUID;
 import junit.framework.TestCase;
 import pliance.sdk.IPlianceClient;
@@ -27,7 +28,7 @@ public abstract class TestBase extends TestCase {
 		_client = _factory.create("Adam", "42");
 	}
 
-	protected PlianceClientFactory createFactory() {
+	protected PlianceClientFactory createFactory() throws Exception {
 		return new PlianceClientFactory(_secret, _issuer, _url, _certificate);
 	}
 	
