@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.nio.charset.StandardCharsets;
 
 public class PlianceClient implements IPlianceClient {
 	private PlianceClientFactory _factory;
@@ -33,12 +34,12 @@ public class PlianceClient implements IPlianceClient {
 		return _factory.execute(method, action, path, _givenName, _subject);
 	}
 
-	private String convert(InputStream inputStream) throws IOException {
+	private String convert(InputStreamReader inputStream) throws IOException {
 
 		StringBuilder stringBuilder = new StringBuilder();
 		String line = null;
 
-		try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream))) {
+		try (BufferedReader bufferedReader = new BufferedReader(inputStream)) {
 			while ((line = bufferedReader.readLine()) != null) {
 				stringBuilder.append(line);
 			}
@@ -53,7 +54,9 @@ public class PlianceClient implements IPlianceClient {
 					"Failed : HTTP error code : " + client.getResponseCode() + ", " + client.getResponseMessage());
 		}
 
-		String response = convert(client.getInputStream());
+		InputStream input = client.getInputStream();
+		java.io.InputStreamReader stream = new java.io.InputStreamReader(input, StandardCharsets.UTF_8);
+		String response = convert(stream);
 		Gson gson = BuildGson();
 		T result = gson.fromJson(response, type);
 
