@@ -4,11 +4,8 @@ import java.util.Date;
 import pliance.sdk.contracts.responses.Response;
 import pliance.sdk.contracts.responses.ResponseGeneric;
 
-public class RegisterCompanyOptions 
+public class GeneralReportQueryResultData 
 {
-	public Fuzziness fuzziness;
-	public boolean omitResult;
-	public boolean omitUbo;
-	public Order order;
+	public ReportPost[] result;
 }
 

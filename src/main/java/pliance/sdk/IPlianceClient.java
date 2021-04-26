@@ -12,7 +12,9 @@ public interface IPlianceClient {
 	DeleteCompanyResponse deleteCompany(DeleteCompanyCommand command) throws PlianceApiException;
 	DeletePersonResponse deletePerson(DeletePersonCommand command) throws PlianceApiException;
 	FeedQueryResult feed(FeedQuery request) throws PlianceApiException;
-	ReportQueryResult getReport(ReportQuery request) throws PlianceApiException;
+	CompanyReportQueryResult getCompanyReport(CompanyReportQuery request) throws PlianceApiException;
+	GeneralReportQueryResult getGeneralReport(GeneralReportQuery request) throws PlianceApiException;
+	PersonReportQueryResult getPersonReport(PersonReportQuery request) throws PlianceApiException;
 	WebhookQueryResult getWebhook(WebhookQuery request) throws PlianceApiException;
 	PingResponse ping(PingQuery request) throws PlianceApiException;
 	RegisterCompanyResponse registerCompany(RegisterCompanyCommand command) throws PlianceApiException;

@@ -4,11 +4,10 @@ import java.util.Date;
 import pliance.sdk.contracts.responses.Response;
 import pliance.sdk.contracts.responses.ResponseGeneric;
 
-public class RegisterCompanyOptions 
+public class ArchiveModel 
 {
-	public Fuzziness fuzziness;
-	public boolean omitResult;
-	public boolean omitUbo;
-	public Order order;
+	public int active;
+	public int activeBillingMonth;
+	public Date month;
 }
 

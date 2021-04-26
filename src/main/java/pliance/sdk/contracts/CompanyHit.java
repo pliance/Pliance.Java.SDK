@@ -9,8 +9,8 @@ public class CompanyHit
 	public String aliasId;
 	public ClassificationType classification;
 	public boolean isSanction;
-	public TextMatch[] matchedName;
 	public String matchId;
+	public TextMatch[] matchedName;
 	public String name;
 	public double score;
 }

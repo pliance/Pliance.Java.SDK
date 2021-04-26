@@ -165,15 +165,39 @@ public class PlianceClient implements IPlianceClient {
 		});
 	}
 
-	public ReportQueryResult getReport(ReportQuery request) throws PlianceApiException
+	public CompanyReportQueryResult getCompanyReport(CompanyReportQuery request) throws PlianceApiException
 	{
 		if (request == null)
 		{
 			throw new ArgumentNullException("request");
 		}
 
-		return execute("GET", "api/ReportQuery" + UrlParameterEncoder.encode(request), (client) -> {
-			return handleResponse(client, ReportQueryResult.class);
+		return execute("GET", "api/ReportQuery/CompanyReport" + UrlParameterEncoder.encode(request), (client) -> {
+			return handleResponse(client, CompanyReportQueryResult.class);
+		});
+	}
+
+	public GeneralReportQueryResult getGeneralReport(GeneralReportQuery request) throws PlianceApiException
+	{
+		if (request == null)
+		{
+			throw new ArgumentNullException("request");
+		}
+
+		return execute("GET", "api/ReportQuery/GeneralReport" + UrlParameterEncoder.encode(request), (client) -> {
+			return handleResponse(client, GeneralReportQueryResult.class);
+		});
+	}
+
+	public PersonReportQueryResult getPersonReport(PersonReportQuery request) throws PlianceApiException
+	{
+		if (request == null)
+		{
+			throw new ArgumentNullException("request");
+		}
+
+		return execute("GET", "api/ReportQuery/PersonReport" + UrlParameterEncoder.encode(request), (client) -> {
+			return handleResponse(client, PersonReportQueryResult.class);
 		});
 	}
 
