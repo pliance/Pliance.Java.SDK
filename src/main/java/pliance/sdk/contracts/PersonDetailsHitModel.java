@@ -13,9 +13,9 @@ public class PersonDetailsHitModel
 	public boolean isRca;
 	public boolean isSanction;
 	public String lastName;
+	public String matchId;
 	public TextMatch[] matchedFirstName;
 	public TextMatch[] matchedLastName;
-	public String matchId;
 	public String referenceId;
 	public double score;
 }

@@ -6,7 +6,7 @@ import pliance.sdk.contracts.responses.ResponseGeneric;
 
 public class CompanySearchQuery 
 {
-	public Filter filter;
+	public CompanyFilter filter;
 	public Page page;
 	public String query;
 }
