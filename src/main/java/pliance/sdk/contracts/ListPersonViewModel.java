@@ -16,6 +16,7 @@ public class ListPersonViewModel
 	public boolean isPep;
 	public boolean isRca;
 	public boolean isSanction;
+	public boolean isSip;
 	public String listId;
 	public String[] lists;
 	public ListPersonNameViewModel[] names;

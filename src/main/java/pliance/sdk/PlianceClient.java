@@ -213,6 +213,18 @@ public class PlianceClient implements IPlianceClient {
 		});
 	}
 
+	public ViewCompanyOwnershipQueryResult ownership(ViewCompanyOwnershipQuery request) throws PlianceApiException
+	{
+		if (request == null)
+		{
+			throw new ArgumentNullException("request");
+		}
+
+		return execute("GET", "api/CompanyQuery/Ownership" + UrlParameterEncoder.encode(request), (client) -> {
+			return handleResponse(client, ViewCompanyOwnershipQueryResult.class);
+		});
+	}
+
 	public PingResponse ping(PingQuery request) throws PlianceApiException
 	{
 		if (request == null)

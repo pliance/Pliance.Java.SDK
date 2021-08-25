@@ -12,6 +12,7 @@ public class PersonDetailsHitModel
 	public boolean isPep;
 	public boolean isRca;
 	public boolean isSanction;
+	public boolean isSip;
 	public String lastName;
 	public String matchId;
 	public TextMatch[] matchedFirstName;

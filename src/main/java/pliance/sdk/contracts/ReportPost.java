@@ -6,7 +6,7 @@ import pliance.sdk.contracts.responses.ResponseGeneric;
 
 public class ReportPost 
 {
-	public String activity;
+	public ActivityType activity;
 	public Date date;
 	public String details;
 	public String identity;

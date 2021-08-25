@@ -5,9 +5,8 @@ import pliance.sdk.contracts.responses.Response;
 import pliance.sdk.contracts.responses.ResponseGeneric;
 import com.google.gson.annotations.SerializedName;
 
-public enum Fuzziness
+public enum ActivityType
 {
-	@SerializedName("Metaphone") Metaphone,
-	@SerializedName("Simple") Simple,
+	@SerializedName("Matched") Matched,
 }
 

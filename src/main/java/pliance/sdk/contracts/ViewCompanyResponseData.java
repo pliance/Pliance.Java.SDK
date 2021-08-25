@@ -7,7 +7,7 @@ import pliance.sdk.contracts.responses.ResponseGeneric;
 public class ViewCompanyResponseData 
 {
 	public boolean archived;
-	public ViewPersonResponseData[] beneficiaries;
+	public ViewCompanyPersonResponse[] beneficiaries;
 	public String companyReferenceId;
 	public String corporateForm;
 	public String description;

@@ -8,7 +8,8 @@ public class RegisterCompanyOptions
 {
 	public Fuzziness fuzziness;
 	public boolean omitResult;
-	public boolean omitUbo;
+	public boolean omitUltimateBenefitOwner;
 	public Order order;
+	public boolean validateCompany;
 }
 

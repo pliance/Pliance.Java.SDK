@@ -10,7 +10,6 @@ public class ViewPersonResponseData
 	public boolean archived;
 	public Birthdate birth;
 	public String birthdate;
-	public EngagementModel[] engagements;
 	public String firstName;
 	public Gender gender;
 	public boolean highRiskCountry;
@@ -19,6 +18,7 @@ public class ViewPersonResponseData
 	public boolean isPep;
 	public boolean isRca;
 	public boolean isSanction;
+	public boolean isSip;
 	public LastChanged lastChanged;
 	public String lastName;
 	public String personReferenceId;

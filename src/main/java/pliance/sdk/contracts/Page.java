@@ -6,7 +6,7 @@ import pliance.sdk.contracts.responses.ResponseGeneric;
 
 public class Page 
 {
-	public Integer no;
-	public Integer size;
+	public int no;
+	public int size;
 }
 
