@@ -22,7 +22,10 @@ public class ListPersonViewModel
 	public ListPersonNameViewModel[] names;
 	public String nationalIdentificationNumber;
 	public String[] nationalities;
+	public String[] notes;
 	public ListRelationViewModel[] relations;
 	public ListRole[] roles;
+	public String[] sources;
+	public WatchlistSource watchlistSource;
 }
 

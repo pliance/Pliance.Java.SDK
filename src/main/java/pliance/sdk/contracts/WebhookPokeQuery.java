@@ -4,7 +4,8 @@ import java.util.Date;
 import pliance.sdk.contracts.responses.Response;
 import pliance.sdk.contracts.responses.ResponseGeneric;
 
-public class ViewCompanyOwnershipQueryResult extends ResponseGeneric<CompanyOwnership> 
+public class WebhookPokeQuery 
 {
+	public WebhookPokeType type;
 }
 

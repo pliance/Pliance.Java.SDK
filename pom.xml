@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.github.pliance</groupId>
   <artifactId>pliance.sdk</artifactId>
-  <version>1.7.0-SNAPSHOT</version>
+  <version>1.8.0-SNAPSHOT</version>
   <name>Pliance.SDK.Java</name>
   <url>https://github.com/pliance/Pliance.Java.SDK</url>
   <description>Pliance Java SDK</description>
@@ -153,17 +153,23 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-gpg-plugin</artifactId>
-        <version>1.5</version>
+        <version>1.6</version>
         <executions>
-          <execution>
-            <id>sign-artifacts</id>
-            <phase>verify</phase>
-            <goals>
-              <goal>sign</goal>
-            </goals>
-          </execution>
+            <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <goals>
+                    <goal>sign</goal>
+                </goals>
+                <configuration>
+                    <gpgArguments>
+                        <arg>--pinentry-mode</arg>
+                        <arg>loopback</arg>
+                    </gpgArguments>
+                </configuration>
+            </execution>
         </executions>
-      </plugin>
+    </plugin>      
     </plugins>
   </build>
 </project>

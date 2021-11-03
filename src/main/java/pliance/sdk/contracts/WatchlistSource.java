@@ -4,9 +4,10 @@ import java.util.Date;
 import pliance.sdk.contracts.responses.Response;
 import pliance.sdk.contracts.responses.ResponseGeneric;
 
-public class Company 
+public class WatchlistSource 
 {
-	public String identity;
-	public String name;
+	public String filename;
+	public String source;
+	public Date updatedAt;
 }
 

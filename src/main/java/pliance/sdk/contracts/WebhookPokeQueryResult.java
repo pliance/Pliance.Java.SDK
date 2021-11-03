@@ -4,9 +4,9 @@ import java.util.Date;
 import pliance.sdk.contracts.responses.Response;
 import pliance.sdk.contracts.responses.ResponseGeneric;
 
-public class LegalPerson 
+public class WebhookPokeQueryResult extends Response 
 {
-	public Object hits;
-	public String name;
+	public String remoteBody;
+	public int remoteStatusCode;
 }
 

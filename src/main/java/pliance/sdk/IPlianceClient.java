@@ -16,8 +16,8 @@ public interface IPlianceClient {
 	GeneralReportQueryResult getGeneralReport(GeneralReportQuery request) throws PlianceApiException;
 	PersonReportQueryResult getPersonReport(PersonReportQuery request) throws PlianceApiException;
 	WebhookQueryResult getWebhook(WebhookQuery request) throws PlianceApiException;
-	ViewCompanyOwnershipQueryResult ownership(ViewCompanyOwnershipQuery request) throws PlianceApiException;
 	PingResponse ping(PingQuery request) throws PlianceApiException;
+	WebhookPokeQueryResult poke(WebhookPokeQuery query) throws PlianceApiException;
 	RegisterCompanyResponse registerCompany(RegisterCompanyCommand command) throws PlianceApiException;
 	RegisterPersonResponse registerPerson(RegisterPersonCommand command) throws PlianceApiException;
 	WebhookUpdateResponse saveWebhook(WebhookUpdateCommand command) throws PlianceApiException;

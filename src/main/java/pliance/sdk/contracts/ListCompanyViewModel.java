@@ -10,5 +10,6 @@ public class ListCompanyViewModel
 	public String listId;
 	public ListCompanyNameViewModel[] names;
 	public String[] sanctionLists;
+	public WatchlistSource watchlistSource;
 }
 
