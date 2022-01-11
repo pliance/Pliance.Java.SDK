@@ -7,5 +7,6 @@ import pliance.sdk.contracts.responses.ResponseGeneric;
 public class CompanyFilter 
 {
 	public Boolean isSanction;
+	public Boolean isUnclassified;
 }
 

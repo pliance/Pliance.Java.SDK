@@ -9,6 +9,7 @@ public interface IPlianceClient {
 	ArchivePersonResponse archivePerson(ArchivePersonCommand command) throws PlianceApiException;
 	ClassifyCompanyHitResponse classifyCompanyHit(ClassifyCompanyHitCommand command) throws PlianceApiException;
 	ClassifyPersonHitResponse classifyPersonHit(ClassifyPersonHitCommand command) throws PlianceApiException;
+	ViewCompanyDataQueryResult companyData(ViewCompanyDataQuery request) throws PlianceApiException;
 	DeleteCompanyResponse deleteCompany(DeleteCompanyCommand command) throws PlianceApiException;
 	DeletePersonResponse deletePerson(DeletePersonCommand command) throws PlianceApiException;
 	FeedQueryResult feed(FeedQuery request) throws PlianceApiException;

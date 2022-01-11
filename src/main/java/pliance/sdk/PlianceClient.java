@@ -129,6 +129,18 @@ public class PlianceClient implements IPlianceClient {
 		});
 	}
 
+	public ViewCompanyDataQueryResult companyData(ViewCompanyDataQuery request) throws PlianceApiException
+	{
+		if (request == null)
+		{
+			throw new ArgumentNullException("request");
+		}
+
+		return execute("GET", "api/CompanyQuery/CompanyData" + UrlParameterEncoder.encode(request), (client) -> {
+			return handleResponse(client, ViewCompanyDataQueryResult.class);
+		});
+	}
+
 	public DeleteCompanyResponse deleteCompany(DeleteCompanyCommand command) throws PlianceApiException
 	{
 		if (command == null)

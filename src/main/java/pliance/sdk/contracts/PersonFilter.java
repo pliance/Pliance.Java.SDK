@@ -4,10 +4,12 @@ import java.util.Date;
 import pliance.sdk.contracts.responses.Response;
 import pliance.sdk.contracts.responses.ResponseGeneric;
 
-public class PersonSearchQuery 
+public class PersonFilter 
 {
-	public PersonFilter filter;
-	public Page page;
-	public String query;
+	public Boolean isPep;
+	public Boolean isRca;
+	public Boolean isSanction;
+	public Boolean isSip;
+	public Boolean isUnclassified;
 }
 

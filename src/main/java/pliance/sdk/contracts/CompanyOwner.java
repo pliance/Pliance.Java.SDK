@@ -4,10 +4,12 @@ import java.util.Date;
 import pliance.sdk.contracts.responses.Response;
 import pliance.sdk.contracts.responses.ResponseGeneric;
 
-public class PersonSearchQuery 
+public class CompanyOwner 
 {
-	public PersonFilter filter;
-	public Page page;
-	public String query;
+	public String name;
+	public String organizationNumber;
+	public double shares;
+	public double stake;
+	public double votes;
 }
 
