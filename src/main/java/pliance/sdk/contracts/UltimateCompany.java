@@ -4,10 +4,10 @@ import java.util.Date;
 import pliance.sdk.contracts.responses.Response;
 import pliance.sdk.contracts.responses.ResponseGeneric;
 
-public class PersonSearchQuery 
+public class UltimateCompany 
 {
-	public PersonFilter filter;
-	public Page page;
-	public String query;
+	public String identity;
+	public boolean isForeign;
+	public String name;
 }
 

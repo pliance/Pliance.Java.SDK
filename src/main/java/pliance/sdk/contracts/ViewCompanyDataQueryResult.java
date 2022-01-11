@@ -4,10 +4,7 @@ import java.util.Date;
 import pliance.sdk.contracts.responses.Response;
 import pliance.sdk.contracts.responses.ResponseGeneric;
 
-public class PersonSearchQuery 
+public class ViewCompanyDataQueryResult extends ResponseGeneric<CompanyData> 
 {
-	public PersonFilter filter;
-	public Page page;
-	public String query;
 }
 
