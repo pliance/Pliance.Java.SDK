@@ -225,6 +225,30 @@ public class PlianceClient implements IPlianceClient {
 		});
 	}
 
+	public ListCompanyQueryResult listCompanies(ListCompanyQuery request) throws PlianceApiException
+	{
+		if (request == null)
+		{
+			throw new ArgumentNullException("request");
+		}
+
+		return execute("GET", "api/CompanyQuery/List" + UrlParameterEncoder.encode(request), (client) -> {
+			return handleResponse(client, ListCompanyQueryResult.class);
+		});
+	}
+
+	public ListPersonQueryResult listPersons(ListPersonQuery request) throws PlianceApiException
+	{
+		if (request == null)
+		{
+			throw new ArgumentNullException("request");
+		}
+
+		return execute("GET", "api/PersonQuery/List" + UrlParameterEncoder.encode(request), (client) -> {
+			return handleResponse(client, ListPersonQueryResult.class);
+		});
+	}
+
 	public PingResponse ping(PingQuery request) throws PlianceApiException
 	{
 		if (request == null)
