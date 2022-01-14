@@ -4,11 +4,9 @@ import java.util.Date;
 import pliance.sdk.contracts.responses.Response;
 import pliance.sdk.contracts.responses.ResponseGeneric;
 
-public class Filter 
+public class ListPersonsModel 
 {
-	public Boolean isPep;
-	public Boolean isRca;
-	public Boolean isSanction;
-	public Boolean isSip;
+	public LastChanged changed;
+	public String[] persons;
 }
 
