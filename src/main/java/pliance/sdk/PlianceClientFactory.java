@@ -39,6 +39,7 @@ public class PlianceClientFactory {
 			HttpURLConnection client = createHttpClient(path);
 
 			client.setRequestProperty("Authorization", "Bearer " + createJwtToken(givenName, subject));
+            client.setRequestProperty("User-Agent", "Pliance.Java.SDK:VERSION");
 			client.setDoInput(true);
 			client.setDoOutput(true);
 			client.setRequestMethod(method);
