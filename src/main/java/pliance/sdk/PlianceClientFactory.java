@@ -39,6 +39,7 @@ public class PlianceClientFactory {
 			HttpURLConnection client = createHttpClient(path);
 
 			client.setRequestProperty("Authorization", "Bearer " + createJwtToken(givenName, subject));
+			client.setRequestProperty("User-Agent", "Pliance.Java.SDK:VERSION");
 			client.setDoInput(true);
 			client.setDoOutput(true);
 			client.setRequestMethod(method);
@@ -52,7 +53,7 @@ public class PlianceClientFactory {
 	private HttpURLConnection createHttpClient(String path) throws Exception {
 		URL url = new URL(_baseUrl + path);
 		String protocol = url.getProtocol();
-		
+
 		if (protocol.equals("https")) {
 			HttpsURLConnection client = (HttpsURLConnection) url.openConnection();
 			client.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
