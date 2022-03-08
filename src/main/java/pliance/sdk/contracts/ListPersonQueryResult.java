@@ -4,7 +4,7 @@ import java.util.Date;
 import pliance.sdk.contracts.responses.Response;
 import pliance.sdk.contracts.responses.ResponseGeneric;
 
-public class ListPersonQueryResult extends ResponseGeneric<ListPersonsModel> 
+public class ListPersonQueryResult extends ResponseGeneric<ListPersonPersons> 
 {
 }
 

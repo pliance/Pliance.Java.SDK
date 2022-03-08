@@ -11,6 +11,7 @@ public class CompanyData
 	public String city;
 	public String country;
 	public String description;
+	public LegalForm legalForm;
 	public String name;
 	public Owners owners;
 	public Company parentCompany;

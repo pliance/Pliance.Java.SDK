@@ -6,5 +6,6 @@ import pliance.sdk.contracts.responses.ResponseGeneric;
 
 public class ListPersonQuery 
 {
+	public Page page;
 }
 

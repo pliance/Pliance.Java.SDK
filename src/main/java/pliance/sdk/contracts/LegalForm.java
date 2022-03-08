@@ -4,8 +4,9 @@ import java.util.Date;
 import pliance.sdk.contracts.responses.Response;
 import pliance.sdk.contracts.responses.ResponseGeneric;
 
-public class ListCompanyQuery 
+public class LegalForm 
 {
-	public Page page;
+	public String description;
+	public int type;
 }
 

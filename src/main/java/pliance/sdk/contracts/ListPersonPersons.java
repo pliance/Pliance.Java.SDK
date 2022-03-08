@@ -4,9 +4,8 @@ import java.util.Date;
 import pliance.sdk.contracts.responses.Response;
 import pliance.sdk.contracts.responses.ResponseGeneric;
 
-public class ListCompaniesModel 
+public class ListPersonPersons 
 {
-	public LastChanged changed;
-	public String[] companies;
+	public String[] persons;
 }
 
