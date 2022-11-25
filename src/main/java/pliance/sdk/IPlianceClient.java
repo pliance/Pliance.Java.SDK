@@ -19,6 +19,7 @@ public interface IPlianceClient {
 	WebhookQueryResult getWebhook(WebhookQuery request) throws PlianceApiException;
 	ListCompanyQueryResult listCompanies(ListCompanyQuery request) throws PlianceApiException;
 	ListPersonQueryResult listPersons(ListPersonQuery request) throws PlianceApiException;
+	WebhookDeliveryFailuresQueryResult listWebhookDeliveryFailures(WebhookDeliveryFailuresQuery query) throws PlianceApiException;
 	PingResponse ping(PingQuery request) throws PlianceApiException;
 	WebhookPokeQueryResult poke(WebhookPokeQuery query) throws PlianceApiException;
 	RegisterCompanyResponse registerCompany(RegisterCompanyCommand command) throws PlianceApiException;

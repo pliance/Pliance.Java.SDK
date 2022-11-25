@@ -7,7 +7,6 @@ import pliance.sdk.contracts.responses.ResponseGeneric;
 public class RegisterCompanyOptions 
 {
 	public Fuzziness fuzziness;
-	public boolean omitResult;
 	public boolean omitUltimateBenefitOwner;
 	public Order order;
 	public boolean validateCompany;

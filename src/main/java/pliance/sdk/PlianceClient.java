@@ -249,6 +249,18 @@ public class PlianceClient implements IPlianceClient {
 		});
 	}
 
+	public WebhookDeliveryFailuresQueryResult listWebhookDeliveryFailures(WebhookDeliveryFailuresQuery query) throws PlianceApiException
+	{
+		if (query == null)
+		{
+			throw new ArgumentNullException("query");
+		}
+
+		return execute("GET", "api/WebhookQuery/DeliveryFailures" + UrlParameterEncoder.encode(query), (client) -> {
+			return handleResponse(client, WebhookDeliveryFailuresQueryResult.class);
+		});
+	}
+
 	public PingResponse ping(PingQuery request) throws PlianceApiException
 	{
 		if (request == null)

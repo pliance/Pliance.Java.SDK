@@ -10,7 +10,10 @@ public enum Role
 	@SerializedName("Chairman") Chairman,
 	@SerializedName("Ceo") Ceo,
 	@SerializedName("BoardMember") BoardMember,
-	@SerializedName("Accountant") Accountant,
+	@SerializedName("LeadAccountant") LeadAccountant,
 	@SerializedName("AlternateMember") AlternateMember,
+	@SerializedName("ExternalSignatory") ExternalSignatory,
+	@SerializedName("Accountant") Accountant,
+	@SerializedName("ExternalCeo") ExternalCeo,
 }
 

@@ -14,9 +14,9 @@ public class PersonDetailsHitModel
 	public boolean isSanction;
 	public boolean isSip;
 	public String lastName;
-	public String matchId;
 	public TextMatch[] matchedFirstName;
 	public TextMatch[] matchedLastName;
+	public String matchId;
 	public String referenceId;
 	public double score;
 }

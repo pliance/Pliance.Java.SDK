@@ -7,6 +7,7 @@ import pliance.sdk.contracts.responses.ResponseGeneric;
 public class ListCompanyViewModel 
 {
 	public boolean isSanction;
+	public boolean isSie;
 	public String listId;
 	public ListCompanyNameViewModel[] names;
 	public String[] sanctionLists;

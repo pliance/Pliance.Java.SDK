@@ -4,10 +4,12 @@ import java.util.Date;
 import pliance.sdk.contracts.responses.Response;
 import pliance.sdk.contracts.responses.ResponseGeneric;
 
-public class RegisterPersonOptions 
+public class WebhookDeliveryFailure 
 {
-	public Fuzziness fuzziness;
-	public Order order;
-	public String[] pepCountries;
+	public String id;
+	public String reason;
+	public String referenceId;
+	public Date timestamp;
+	public String type;
 }
 
