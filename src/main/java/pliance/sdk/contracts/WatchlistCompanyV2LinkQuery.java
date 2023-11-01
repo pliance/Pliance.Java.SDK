@@ -4,10 +4,10 @@ import java.util.Date;
 import pliance.sdk.contracts.responses.Response;
 import pliance.sdk.contracts.responses.ResponseGeneric;
 
-public class CompanyFilter 
+public class WatchlistCompanyV2LinkQuery 
 {
-	public Boolean isSanction;
-	public Boolean isSie;
-	public Boolean isUnclassified;
+	public String companyReferenceId;
+	public String linkId;
+	public String matchId;
 }
 

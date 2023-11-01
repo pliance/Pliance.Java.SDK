@@ -6,6 +6,7 @@ import pliance.sdk.contracts.responses.ResponseGeneric;
 
 public class WebhookPokeQuery 
 {
+	public String referenceId;
 	public WebhookPokeType type;
 }
 

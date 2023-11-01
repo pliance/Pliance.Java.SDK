@@ -3,11 +3,11 @@ package pliance.sdk.contracts;
 import java.util.Date;
 import pliance.sdk.contracts.responses.Response;
 import pliance.sdk.contracts.responses.ResponseGeneric;
+import com.google.gson.annotations.SerializedName;
 
-public class CompanyFilter 
+public enum ListingType
 {
-	public Boolean isSanction;
-	public Boolean isSie;
-	public Boolean isUnclassified;
+	@SerializedName("Listed") Listed,
+	@SerializedName("Unlisted") Unlisted,
 }
 

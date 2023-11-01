@@ -4,13 +4,8 @@ import java.util.Date;
 import pliance.sdk.contracts.responses.Response;
 import pliance.sdk.contracts.responses.ResponseGeneric;
 
-public class WebhookDeliveryFailure 
+public class WebhookDeleteCommand 
 {
 	public String id;
-	public boolean onCreated;
-	public String reason;
-	public String referenceId;
-	public Date timestamp;
-	public String type;
 }
 

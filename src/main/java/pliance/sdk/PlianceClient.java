@@ -90,6 +90,19 @@ public class PlianceClient implements IPlianceClient {
 		});
 	}
 
+	public ArchiveCompanyResponse archiveCompanyV2(ArchiveCompanyCommand command) throws PlianceApiException
+	{
+		if (command == null)
+		{
+			throw new ArgumentNullException("command");
+		}
+
+		return execute("POST", "api/CompanyV2Command/Archive", (client) -> {
+			writePayload(client, command);
+			return handleResponse(client, ArchiveCompanyResponse.class);
+		});
+	}
+
 	public ArchivePersonResponse archivePerson(ArchivePersonCommand command) throws PlianceApiException
 	{
 		if (command == null)
@@ -103,6 +116,19 @@ public class PlianceClient implements IPlianceClient {
 		});
 	}
 
+	public BatchRegisterPersonResponse batchRegisterPerson(BatchRegisterPersonCommand command) throws PlianceApiException
+	{
+		if (command == null)
+		{
+			throw new ArgumentNullException("command");
+		}
+
+		return execute("PUT", "api/PersonCommand/Batch", (client) -> {
+			writePayload(client, command);
+			return handleResponse(client, BatchRegisterPersonResponse.class);
+		});
+	}
+
 	public ClassifyCompanyHitResponse classifyCompanyHit(ClassifyCompanyHitCommand command) throws PlianceApiException
 	{
 		if (command == null)
@@ -113,6 +139,32 @@ public class PlianceClient implements IPlianceClient {
 		return execute("POST", "api/CompanyCommand/Classify", (client) -> {
 			writePayload(client, command);
 			return handleResponse(client, ClassifyCompanyHitResponse.class);
+		});
+	}
+
+	public ClassifyCompanyLinkResponse classifyCompanyV2Link(ClassifyCompanyLinkCommand command) throws PlianceApiException
+	{
+		if (command == null)
+		{
+			throw new ArgumentNullException("command");
+		}
+
+		return execute("POST", "api/CompanyV2Command/ClassifyLink", (client) -> {
+			writePayload(client, command);
+			return handleResponse(client, ClassifyCompanyLinkResponse.class);
+		});
+	}
+
+	public ClassifyCompanyResponse classifyCompanyV2Match(ClassifyCompanyCommand command) throws PlianceApiException
+	{
+		if (command == null)
+		{
+			throw new ArgumentNullException("command");
+		}
+
+		return execute("POST", "api/CompanyV2Command/Classify", (client) -> {
+			writePayload(client, command);
+			return handleResponse(client, ClassifyCompanyResponse.class);
 		});
 	}
 
@@ -153,6 +205,18 @@ public class PlianceClient implements IPlianceClient {
 		});
 	}
 
+	public DeleteCompanyResponse deleteCompanyV2(DeleteCompanyCommand command) throws PlianceApiException
+	{
+		if (command == null)
+		{
+			throw new ArgumentNullException("command");
+		}
+
+		return execute("DELETE", "api/CompanyV2Command" + UrlParameterEncoder.encode(command), (client) -> {
+			return handleResponse(client, DeleteCompanyResponse.class);
+		});
+	}
+
 	public DeletePersonResponse deletePerson(DeletePersonCommand command) throws PlianceApiException
 	{
 		if (command == null)
@@ -165,15 +229,15 @@ public class PlianceClient implements IPlianceClient {
 		});
 	}
 
-	public FeedQueryResult feed(FeedQuery request) throws PlianceApiException
+	public WebhookDeleteResponse deleteWebhookDeliveryFailure(WebhookDeleteCommand command) throws PlianceApiException
 	{
-		if (request == null)
+		if (command == null)
 		{
-			throw new ArgumentNullException("request");
+			throw new ArgumentNullException("command");
 		}
 
-		return execute("GET", "api/FeedQuery" + UrlParameterEncoder.encode(request), (client) -> {
-			return handleResponse(client, FeedQueryResult.class);
+		return execute("DELETE", "api/WebhookCommand" + UrlParameterEncoder.encode(command), (client) -> {
+			return handleResponse(client, WebhookDeleteResponse.class);
 		});
 	}
 
@@ -299,6 +363,19 @@ public class PlianceClient implements IPlianceClient {
 		});
 	}
 
+	public RegisterCompanyV2Response registerCompanyV2(RegisterCompanyV2Command command) throws PlianceApiException
+	{
+		if (command == null)
+		{
+			throw new ArgumentNullException("command");
+		}
+
+		return execute("PUT", "api/CompanyV2Command", (client) -> {
+			writePayload(client, command);
+			return handleResponse(client, RegisterCompanyV2Response.class);
+		});
+	}
+
 	public RegisterPersonResponse registerPerson(RegisterPersonCommand command) throws PlianceApiException
 	{
 		if (command == null)
@@ -362,6 +439,19 @@ public class PlianceClient implements IPlianceClient {
 		});
 	}
 
+	public UnarchiveCompanyResponse unarchiveCompanyV2(UnarchiveCompanyCommand command) throws PlianceApiException
+	{
+		if (command == null)
+		{
+			throw new ArgumentNullException("command");
+		}
+
+		return execute("POST", "api/CompanyV2Command/Unarchive", (client) -> {
+			writePayload(client, command);
+			return handleResponse(client, UnarchiveCompanyResponse.class);
+		});
+	}
+
 	public UnarchivePersonResponse unarchivePerson(UnarchivePersonCommand command) throws PlianceApiException
 	{
 		if (command == null)
@@ -387,6 +477,18 @@ public class PlianceClient implements IPlianceClient {
 		});
 	}
 
+	public ViewCompanyV2Response viewCompanyV2(ViewCompanyQuery query) throws PlianceApiException
+	{
+		if (query == null)
+		{
+			throw new ArgumentNullException("query");
+		}
+
+		return execute("GET", "api/CompanyV2Query" + UrlParameterEncoder.encode(query), (client) -> {
+			return handleResponse(client, ViewCompanyV2Response.class);
+		});
+	}
+
 	public ViewPersonQueryResult viewPerson(ViewPersonQuery request) throws PlianceApiException
 	{
 		if (request == null)
@@ -408,6 +510,30 @@ public class PlianceClient implements IPlianceClient {
 
 		return execute("GET", "api/WatchlistQuery/Company" + UrlParameterEncoder.encode(request), (client) -> {
 			return handleResponse(client, WatchlistCompanyQueryResult.class);
+		});
+	}
+
+	public WatchlistCompanyQueryResult watchlistCompanyV2(WatchlistCompanyV2Query request) throws PlianceApiException
+	{
+		if (request == null)
+		{
+			throw new ArgumentNullException("request");
+		}
+
+		return execute("GET", "api/WatchlistQuery/CompanyV2" + UrlParameterEncoder.encode(request), (client) -> {
+			return handleResponse(client, WatchlistCompanyQueryResult.class);
+		});
+	}
+
+	public WatchlistQueryResultV2 watchlistCompanyV2Link(WatchlistCompanyV2LinkQuery request) throws PlianceApiException
+	{
+		if (request == null)
+		{
+			throw new ArgumentNullException("request");
+		}
+
+		return execute("GET", "api/WatchlistQuery/CompanyV2Link" + UrlParameterEncoder.encode(request), (client) -> {
+			return handleResponse(client, WatchlistQueryResultV2.class);
 		});
 	}
 

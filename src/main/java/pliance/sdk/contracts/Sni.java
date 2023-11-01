@@ -4,10 +4,9 @@ import java.util.Date;
 import pliance.sdk.contracts.responses.Response;
 import pliance.sdk.contracts.responses.ResponseGeneric;
 
-public class CompanyFilter 
+public class Sni 
 {
-	public Boolean isSanction;
-	public Boolean isSie;
-	public Boolean isUnclassified;
+	public String classification;
+	public String classificationCode;
 }
 

@@ -4,15 +4,11 @@ import java.util.Date;
 import pliance.sdk.contracts.responses.Response;
 import pliance.sdk.contracts.responses.ResponseGeneric;
 
-public class CompanySearchResult 
+public class RegisterCompanyV2Command 
 {
-	public boolean archived;
 	public String companyReferenceId;
 	public CompanyIdentity identity;
-	public boolean isPep;
-	public boolean isRca;
-	public boolean isSanction;
-	public boolean isSie;
-	public TextMatch[] name;
+	public String name;
+	public RegisterCompanyOptions options;
 }
 
