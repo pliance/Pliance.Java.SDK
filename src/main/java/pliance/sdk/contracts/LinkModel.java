@@ -10,6 +10,7 @@ public class LinkModel
 	public EntityType entityType;
 	public String firstName;
 	public Gender gender;
+	public boolean highRiskCountry;
 	public String id;
 	public String lastName;
 	public LinkDescriptionModel[] linkDescriptions;

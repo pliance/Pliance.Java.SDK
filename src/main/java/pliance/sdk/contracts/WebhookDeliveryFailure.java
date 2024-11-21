@@ -6,7 +6,9 @@ import pliance.sdk.contracts.responses.ResponseGeneric;
 
 public class WebhookDeliveryFailure 
 {
+	public Object body;
 	public String id;
+	public Object metadata;
 	public boolean onCreated;
 	public String reason;
 	public String referenceId;

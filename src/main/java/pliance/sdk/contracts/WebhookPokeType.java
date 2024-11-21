@@ -17,6 +17,7 @@ public enum WebhookPokeType
 	@SerializedName("CompanyLinkAdded") CompanyLinkAdded,
 	@SerializedName("CompanyLinkRemoved") CompanyLinkRemoved,
 	@SerializedName("CompanyLinkUpdated") CompanyLinkUpdated,
+	@SerializedName("CompanyLinkDescriptionUpdated") CompanyLinkDescriptionUpdated,
 	@SerializedName("CompanyLinkScreeningMatched") CompanyLinkScreeningMatched,
 	@SerializedName("CompanyLinkScreeningMatchRemoved") CompanyLinkScreeningMatchRemoved,
 	@SerializedName("CompanyLinkScreeningMatchedNameChanged") CompanyLinkScreeningMatchedNameChanged,

@@ -10,6 +10,7 @@ public class ViewCompanyPersonResponse
 	public boolean archived;
 	public Birthdate birth;
 	public String birthdate;
+	public String[] checkedWatchLists;
 	public String firstName;
 	public Gender gender;
 	public boolean highRiskCountry;

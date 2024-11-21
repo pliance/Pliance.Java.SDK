@@ -7,6 +7,7 @@ import pliance.sdk.contracts.responses.ResponseGeneric;
 public class ListRelationViewModel 
 {
 	public String firstName;
+	public boolean isActive;
 	public boolean isPep;
 	public boolean isRca;
 	public boolean isSanction;

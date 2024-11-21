@@ -8,6 +8,7 @@ public class ViewCompanyResponseData
 {
 	public boolean archived;
 	public ViewCompanyPersonResponse[] beneficiaries;
+	public String[] checkedWatchLists;
 	public String companyReferenceId;
 	public boolean highRiskCountry;
 	public CompanyHit[][] hits;

@@ -301,6 +301,18 @@ public class PlianceClient implements IPlianceClient {
 		});
 	}
 
+	public ListCompanyQueryResult listCompaniesV2(ListCompanyV2Query query) throws PlianceApiException
+	{
+		if (query == null)
+		{
+			throw new ArgumentNullException("query");
+		}
+
+		return execute("GET", "api/CompanyV2Query/List" + UrlParameterEncoder.encode(query), (client) -> {
+			return handleResponse(client, ListCompanyQueryResult.class);
+		});
+	}
+
 	public ListPersonQueryResult listPersons(ListPersonQuery request) throws PlianceApiException
 	{
 		if (request == null)

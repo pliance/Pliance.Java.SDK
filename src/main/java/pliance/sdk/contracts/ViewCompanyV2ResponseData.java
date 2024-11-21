@@ -8,6 +8,7 @@ public class ViewCompanyV2ResponseData
 {
 	public String address;
 	public boolean archived;
+	public String[] checkedWatchLists;
 	public String city;
 	public String companyReferenceId;
 	public String description;

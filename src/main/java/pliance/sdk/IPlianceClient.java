@@ -23,6 +23,7 @@ public interface IPlianceClient {
 	PersonReportQueryResult getPersonReport(PersonReportQuery request) throws PlianceApiException;
 	WebhookQueryResult getWebhook(WebhookQuery request) throws PlianceApiException;
 	ListCompanyQueryResult listCompanies(ListCompanyQuery request) throws PlianceApiException;
+	ListCompanyQueryResult listCompaniesV2(ListCompanyV2Query query) throws PlianceApiException;
 	ListPersonQueryResult listPersons(ListPersonQuery request) throws PlianceApiException;
 	WebhookDeliveryFailuresQueryResult listWebhookDeliveryFailures(WebhookDeliveryFailuresQuery query) throws PlianceApiException;
 	PingResponse ping(PingQuery request) throws PlianceApiException;
