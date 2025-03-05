@@ -20,6 +20,8 @@ public class PlianceClientFactory {
 	private String _issuer;
 	private String _baseUrl;
 	private KeyStore _certificate;
+	private int _connectionTimeout = 5000;
+	private int _readTimeout = 5000;
 
 	public PlianceClientFactory(String secret, String issuer, String url, KeyStore certificate) {
 		_secret = secret;
@@ -56,6 +58,10 @@ public class PlianceClientFactory {
 
 		if (protocol.equals("https")) {
 			HttpsURLConnection client = (HttpsURLConnection) url.openConnection();
+
+			con.setConnectTimeout(_connectionTimeout);
+			con.setReadTimeout(_readTimeout);
+
 			client.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
 			client.setRequestProperty("Accept", "application/json");
 
@@ -93,5 +99,14 @@ public class PlianceClientFactory {
 				.signWith(signingKey, signatureAlgorithm);
 
 		return builder.compact();
+	}
+
+	public void setReadTimeout(int timeout){
+		_readTimeout = timeout;
+	}
+
+	
+	public void setConnectTimeout(int timeout){
+		_connectionTimeout = timeout;
 	}
 }
