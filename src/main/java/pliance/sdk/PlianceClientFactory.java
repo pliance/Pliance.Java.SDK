@@ -59,9 +59,8 @@ public class PlianceClientFactory {
 		if (protocol.equals("https")) {
 			HttpsURLConnection client = (HttpsURLConnection) url.openConnection();
 
-			con.setConnectTimeout(_connectionTimeout);
-			con.setReadTimeout(_readTimeout);
-
+			client.setConnectTimeout(_connectionTimeout);
+			client.setReadTimeout(_readTimeout);
 			client.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
 			client.setRequestProperty("Accept", "application/json");
 
