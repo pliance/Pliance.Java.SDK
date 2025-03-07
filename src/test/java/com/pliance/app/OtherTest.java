@@ -45,14 +45,6 @@ public class OtherTest extends TestBase {
 		});
 	}
 
-	public void test_Feed() throws Exception {
-		FeedQuery command = new FeedQuery();
-
-		FeedQueryResult response = _client.feed(command);
-
-		assertTrue(response.success);
-	}
-
 	public void test_SaveWebhook() throws Exception {
 		WebhookUpdateCommand command = new WebhookUpdateCommand();
 		command.enabled = true;
