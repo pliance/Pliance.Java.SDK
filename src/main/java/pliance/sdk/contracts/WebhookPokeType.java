@@ -25,5 +25,11 @@ public enum WebhookPokeType
 	@SerializedName("CompanyScreeningMatchRemoved") CompanyScreeningMatchRemoved,
 	@SerializedName("CompanyAddressChanged") CompanyAddressChanged,
 	@SerializedName("CompanySniClassificationChanged") CompanySniClassificationChanged,
+	@SerializedName("CompanyScreeningMatchesAdded") CompanyScreeningMatchesAdded,
+	@SerializedName("CompanyScreeningMatchesRemoved") CompanyScreeningMatchesRemoved,
+	@SerializedName("CompanyLinkScreeningMatchesAdded") CompanyLinkScreeningMatchesAdded,
+	@SerializedName("CompanyLinkScreeningMatchesRemoved") CompanyLinkScreeningMatchesRemoved,
+	@SerializedName("PersonScreeningMatchesAdded") PersonScreeningMatchesAdded,
+	@SerializedName("PersonScreeningMatchesRemoved") PersonScreeningMatchesRemoved,
 }
 

@@ -18,6 +18,6 @@ public class PersonDetailsHitModel
 	public TextMatch[] matchedLastName;
 	public String matchId;
 	public String referenceId;
-	public double score;
+	public float score;
 }
 
