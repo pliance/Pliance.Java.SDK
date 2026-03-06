@@ -8,9 +8,9 @@ import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.KeyManager;
 import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;
-import javax.crypto.spec.SecretKeySpec;
-import java.security.Key;
+import javax.crypto.SecretKey;
 import io.jsonwebtoken.*;
+import io.jsonwebtoken.security.Keys;
 import pliance.sdk.exceptions.PlianceApiException;
 import java.util.Date;
 
@@ -86,16 +86,15 @@ public class PlianceClientFactory {
 	}
 
 	private String createJwtToken(String givenName, String subject) {
-		SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
 		long nowMillis = System.currentTimeMillis();
 		Date now = new Date(nowMillis);
 		byte[] apiKeySecretBytes = _secret.getBytes();
-		Key signingKey = new SecretKeySpec(apiKeySecretBytes, signatureAlgorithm.getJcaName());
+		SecretKey signingKey = new javax.crypto.spec.SecretKeySpec(apiKeySecretBytes, "HmacSHA256");
 		long expMillis = nowMillis + 1000 * 300;
 		Date exp = new Date(expMillis);
-		JwtBuilder builder = Jwts.builder().setAudience("pliance.io").setNotBefore(now).setIssuedAt(now)
-				.setExpiration(exp).setSubject(subject).setIssuer(_issuer).claim("given_name", givenName)
-				.signWith(signingKey, signatureAlgorithm);
+		JwtBuilder builder = Jwts.builder().audience().add("pliance.io").and().notBefore(now).issuedAt(now)
+				.expiration(exp).subject(subject).issuer(_issuer).claim("given_name", givenName)
+				.signWith(signingKey, Jwts.SIG.HS256);
 
 		return builder.compact();
 	}
